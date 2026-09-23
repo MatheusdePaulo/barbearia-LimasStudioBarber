@@ -1,16 +1,58 @@
 {{-- ═══════════ FOOTER ═══════════ --}}
 <footer style="background: #0A0A0A; border-top: 1px solid rgba(201,168,76,0.2);">
 
-    <div style="max-width: 1100px; margin: 0 auto; padding: 32px 24px 24px; display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between;">
+    {{-- RESPONSIVIDADE MOBILE (até 767px): grade 2x2 — logo | endereço em cima, horário | contato embaixo.
+         Fontes em vw (com limites) pra encaixar lado a lado de celulares pequenos (320px) aos grandes.
+         Desktop continua com os estilos inline originais. --}}
+    <style>
+        @media (max-width: 767px) {
+            footer .ft-grid {
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+                gap: 24px 16px !important;
+                align-items: start !important;
+            }
+            footer .ft-col {
+                max-width: none !important;
+                min-width: 0 !important;
+            }
+            footer .ft-logo {
+                align-self: center !important;
+            }
+            footer .ft-logo img {
+                height: clamp(52px, 17vw, 74px) !important;
+                max-width: 100% !important;
+            }
+            footer .ft-col h4 {
+                font-size: clamp(9px, 2.6vw, 11px) !important;
+                letter-spacing: 0.15em !important;
+                margin-bottom: 8px !important;
+            }
+            footer .ft-col p,
+            footer .ft-col a {
+                font-size: clamp(10.5px, 3.1vw, 13px) !important;
+                line-height: 1.55 !important;
+            }
+            footer .ft-col a {
+                gap: 6px !important;
+            }
+            footer .ft-col a svg {
+                width: 13px !important;
+                height: 13px !important;
+            }
+        }
+    </style>
+
+    <div class="ft-grid" style="max-width: 1100px; margin: 0 auto; padding: 32px 24px 24px; display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between;">
 
         {{-- Logo --}}
-        <div style="flex: 1 1 160px; max-width: 200px; display: flex; align-items: center;">
+        <div class="ft-col ft-logo" style="flex: 1 1 160px; max-width: 200px; display: flex; align-items: center;">
             <img src="{{ asset('images/logo-limas02.png') }}" alt="Lima's Studio Barber"
                  style="height: 74px; width: auto; object-fit: contain;">
         </div>
 
         {{-- Endereço --}}
-        <div style="flex: 1 1 200px;">
+        <div class="ft-col" style="flex: 1 1 200px;">
             <h4 style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; margin: 0 0 10px;">
                 Endereço
             </h4>
@@ -21,7 +63,7 @@
         </div>
 
         {{-- Horário --}}
-        <div style="flex: 1 1 180px;">
+        <div class="ft-col" style="flex: 1 1 180px;">
             <h4 style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; margin: 0 0 10px;">
                 Horário
             </h4>
@@ -32,7 +74,7 @@
         </div>
 
         {{-- Contato --}}
-        <div style="flex: 1 1 200px;">
+        <div class="ft-col" style="flex: 1 1 200px;">
             <h4 style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; margin: 0 0 10px;">
                 Contato
             </h4>
