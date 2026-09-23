@@ -43,18 +43,10 @@ class ScheduleOverride extends Model
             );
         }
 
-        // Regras padrão
-        if ($dow === 0 || $dow === 1) return []; // Dom e Seg = fechado
+        // Regras padrão do Lima's: segunda a sábado, 8h às 18h, fechado pro almoço das 12h às 14h
+        if ($dow === 0) return []; // Domingo = fechado
 
-        if ($dow === 6) { // Sábado
-            return static::buildSlots('07:30', null, null, '17:00');
-        }
-
-        if ($dow === 3) { // Quarta
-            return static::buildSlots('08:30', '11:30', '14:00', '17:30');
-        }
-
-        return static::buildSlots('08:30', '11:30', '14:00', '19:00');
+        return static::buildSlots('08:00', '12:00', '14:00', '18:00');
     }
 
     /**
@@ -86,12 +78,14 @@ class ScheduleOverride extends Model
             return $desc . ' ✏️';
         }
 
-        if ($dow === 0 || $dow === 1) return 'Fechado';
-        if ($dow === 6) return '07:30 – 17:00 (sem almoço)';
-        if ($dow === 3) return '08:30 – 17:30 | Almoço 11:30–14:00';
-        return '08:30 – 19:00 | Almoço 11:30–14:00';
+        if ($dow === 0) return 'Fechado';
+        return '08:00 – 18:00 | Almoço 12:00–14:00';
     }
 
+    /**
+     * Slots de 30 min. O fechamento e o início do almoço são o fim do último atendimento
+     * (ex.: fecha 12:00 → último horário 11:30).
+     */
     private static function buildSlots(string $open, ?string $breakStart, ?string $breakEnd, string $close): array
     {
         $slots = [];
@@ -99,21 +93,21 @@ class ScheduleOverride extends Model
         if ($breakStart && $breakEnd) {
             $cur  = Carbon::parse($open);
             $mEnd = Carbon::parse($breakStart);
-            while ($cur->lte($mEnd)) {
+            while ($cur->lt($mEnd)) {
                 $slots[] = $cur->format('H:i');
                 $cur->addMinutes(30);
             }
 
             $cur = Carbon::parse($breakEnd);
             $end = Carbon::parse($close);
-            while ($cur->lte($end)) {
+            while ($cur->lt($end)) {
                 $slots[] = $cur->format('H:i');
                 $cur->addMinutes(30);
             }
         } else {
             $cur = Carbon::parse($open);
             $end = Carbon::parse($close);
-            while ($cur->lte($end)) {
+            while ($cur->lt($end)) {
                 $slots[] = $cur->format('H:i');
                 $cur->addMinutes(30);
             }

@@ -139,7 +139,7 @@
                                 $fechado = empty(\App\Models\ScheduleOverride::getSlotsForDate($dataIteracao->format('Y-m-d')));
                                 $ehHojeNoCalendario = ($dia == $dataBase->day);
                                 $diaSemana = $dataIteracao->dayOfWeek;
-                                $fechadoPermanente = ($diaSemana === 0 || $diaSemana === 1);
+                                $fechadoPermanente = ($diaSemana === 0);
                             @endphp
                             <span @if(!$fechadoPermanente) onclick="window.location.href='?date={{ $dataIteracao->format('Y-m-d') }}'" @endif
                             class="flex items-center justify-center text-[10px] w-7 h-7 rounded-lg transition-all
@@ -161,7 +161,7 @@
                     <div class="bg-zinc-900 border border-zinc-800 p-10 rounded-[2.5rem] text-center">
                         <i class="fas fa-store-slash text-4xl text-zinc-700 mb-4"></i>
                         <h2 class="text-xl font-black italic uppercase text-zinc-500">Sem atividades hoje</h2>
-                        <p class="text-xs text-zinc-600 uppercase font-bold tracking-widest mt-2">A barbearia não abre aos domingos e segundas.</p>
+                        <p class="text-xs text-zinc-600 uppercase font-bold tracking-widest mt-2">A barbearia não abre aos domingos.</p>
                     </div>
                 @endif
                 @if(!$estaFechado)
@@ -366,13 +366,13 @@
                     <div class="space-y-2">
                         <label class="text-[10px] font-black uppercase text-zinc-500 ml-2">Abertura</label>
                         <input type="time" name="open_time" step="1800"
-                               value="{{ substr($scheduleOverride?->open_time ?? '08:30', 0, 5) }}"
+                               value="{{ substr($scheduleOverride?->open_time ?? '08:00', 0, 5) }}"
                                class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none font-mono">
                     </div>
                     <div class="space-y-2">
                         <label class="text-[10px] font-black uppercase text-zinc-500 ml-2">Fechamento</label>
                         <input type="time" name="close_time" step="1800"
-                               value="{{ substr($scheduleOverride?->close_time ?? '19:00', 0, 5) }}"
+                               value="{{ substr($scheduleOverride?->close_time ?? '18:00', 0, 5) }}"
                                class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none font-mono">
                     </div>
                 </div>
@@ -393,7 +393,7 @@
                         <div class="space-y-2">
                             <label class="text-[10px] font-black uppercase text-zinc-500 ml-2">Início Almoço</label>
                             <input type="time" name="break_start" step="1800"
-                                   value="{{ substr($scheduleOverride?->break_start ?? '11:30', 0, 5) }}"
+                                   value="{{ substr($scheduleOverride?->break_start ?? '12:00', 0, 5) }}"
                                    class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none font-mono">
                         </div>
                         <div class="space-y-2">
@@ -447,7 +447,7 @@
             const date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
             const dayOfWeek = date.getDay();
  
-            if (dayOfWeek === 0 || dayOfWeek === 1) {
+            if (dayOfWeek === 0) {
                 formContent.classList.add('hidden');
                 closedMessage.classList.remove('hidden');
                 return;
@@ -468,27 +468,12 @@
             }
             btnSubmit.disabled = false;
  
-            const isSaturday = dayOfWeek === 6;
-            const isWednesday = dayOfWeek === 3;
+            // Segunda a sábado: manhã 08:00-11:30, tarde 14:00-17:30 (fecha 12h-14h pro almoço e às 18h)
             let slots = [];
-
-            if (isSaturday) {
-                // Sábado: 07:30 até 17:00 sem pausa para almoço
-                let c = new Date(0,0,0,7,30);
-                while(c <= new Date(0,0,0,17,0)) { slots.push(c.toTimeString().substring(0,5)); c.setMinutes(c.getMinutes() + 30); }
-            } else if (isWednesday) {
-                // Quarta-feira: encerra às 17:30
-                let m = new Date(0,0,0,8,30);
-                while(m <= new Date(0,0,0,11,30)) { slots.push(m.toTimeString().substring(0,5)); m.setMinutes(m.getMinutes() + 30); }
-                let t = new Date(0,0,0,14,0);
-                while(t <= new Date(0,0,0,17,30)) { slots.push(t.toTimeString().substring(0,5)); t.setMinutes(t.getMinutes() + 30); }
-            } else {
-                // Dias normais: manhã 08:30-11:30, tarde 14:00-19:00
-                let m = new Date(0,0,0,8,30);
-                while(m <= new Date(0,0,0,11,30)) { slots.push(m.toTimeString().substring(0,5)); m.setMinutes(m.getMinutes() + 30); }
-                let t = new Date(0,0,0,14,0);
-                while(t <= new Date(0,0,0,19,0)) { slots.push(t.toTimeString().substring(0,5)); t.setMinutes(t.getMinutes() + 30); }
-            }
+            let m = new Date(0,0,0,8,0);
+            while(m < new Date(0,0,0,12,0)) { slots.push(m.toTimeString().substring(0,5)); m.setMinutes(m.getMinutes() + 30); }
+            let t = new Date(0,0,0,14,0);
+            while(t < new Date(0,0,0,18,0)) { slots.push(t.toTimeString().substring(0,5)); t.setMinutes(t.getMinutes() + 30); }
  
             let blocked = [];
             ocupadosInfo.forEach(o => {
