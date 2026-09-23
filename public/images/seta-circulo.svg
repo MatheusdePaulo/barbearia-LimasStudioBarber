@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+    <!-- Triângulo equilátero apontando para a direita, centrado no círculo de 60px;
+         vértices a 23px do centro (a borda do círculo fica a ~29px) -->
+    <polygon points="53,30 18.5,10.08 18.5,49.92" fill="#C9A84C"/>
+</svg>

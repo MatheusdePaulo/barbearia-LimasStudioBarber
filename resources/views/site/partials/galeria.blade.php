@@ -148,14 +148,20 @@
                     height: 60px !important;
                     border: 1px solid #C9A84C !important;
                     border-radius: 50% !important;
-                    background: transparent !important;
                     display: flex !important;
                     align-items: center !important;
                     justify-content: center !important;
                 }
+                /* O PNG da seta (44x31, achatado e com pontas arredondadas) ficava curto girado.
+                   No mobile a seta é um triângulo equilátero em SVG, pontudo e quase encostando no círculo. */
+                .galeria-arrow {
+                    background: url('{{ asset('images/seta-circulo.svg') }}') center / 100% 100% no-repeat !important;
+                }
+                .galeria-carousel > .galeria-arrow:first-child {
+                    transform: scaleX(-1);
+                }
                 .galeria-arrow img {
-                    width: 34.5px !important;
-                    display: block !important;
+                    display: none !important;
                 }
                 .card-frame--lateral {
                     display: none !important;
