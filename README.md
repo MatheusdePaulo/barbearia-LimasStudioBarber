@@ -68,6 +68,11 @@
 - Controle de validade, limite de usos e ativação/desativação
 - Desconto aplicável no sinal ou no valor total
 
+### ⏰ Gerenciamento de Horários
+- Segunda a sábado: 08:00 — 18:00, com pausa para almoço das 12:00 às 14:00
+- Domingo: fechado
+- Horário especial ou fechamento por dia específico direto pela agenda do painel
+
 ### 📶 QR Code Wi-Fi
 - QR Code no menu mobile com as credenciais da rede Wi-Fi da barbearia
 - Cliente conecta sem precisar digitar senha
