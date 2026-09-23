@@ -89,7 +89,7 @@
             </p>
 
             {{-- Botão --}}
-            <a class="cta-btn" href="{{ route('agendar') }}"
+            <a class="cta-btn" href="{{ route('appointments.create') }}"
                style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; padding: 16px 48px; background: #C9A84C; color: #0A0A0A; border-radius: 8px; text-decoration: none; margin-top: 8px; display: inline-block; transition: all 0.3s ease;"
                onmouseover="this.style.background='#E2C97E'; this.style.transform='scale(1.02)';"
                onmouseout="this.style.background='#C9A84C'; this.style.transform='scale(1)';">

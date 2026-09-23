@@ -147,7 +147,7 @@
 
         {{-- Botões --}}
         <div class="hero-buttons">
-            <a href="{{ route('agendar') }}" class="hero-btn-primary">Agendar agora</a>
+            <a href="{{ route('appointments.create') }}" class="hero-btn-primary">Agendar agora</a>
             <a href="#servicos" class="hero-btn-secondary">Ver serviços</a>
         </div>
 

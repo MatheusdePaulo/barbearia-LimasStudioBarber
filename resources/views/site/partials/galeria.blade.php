@@ -263,7 +263,7 @@
 
         {{-- CTA --}}
         <div style="text-align: center; margin-top: 48px;">
-            <a href="{{ route('agendar') }}"
+            <a href="{{ route('appointments.create') }}"
                style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; padding: 14px 40px; background: transparent; color: #F5F0E8; border: 1px solid rgba(245,240,232,0.4); border-radius: 8px; text-decoration: none; display: inline-block;"
                onmouseover="this.style.background='#C9A84C'; this.style.color='#0A0A0A'; this.style.borderColor='#C9A84C';"
                onmouseout="this.style.background='transparent'; this.style.color='#F5F0E8'; this.style.borderColor='rgba(245,240,232,0.4)';">

@@ -87,7 +87,7 @@
             <a href="#contato"  class="nav-link">Contato</a>
         </div>
 
-        <a href="{{ route('agendar') }}"
+        <a href="{{ route('appointments.create') }}"
            style="flex-shrink: 0; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 22px; background: #C9A84C; color: #0A0A0A; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;"
            onmouseover="this.style.background='#E2C97E'"
            onmouseout="this.style.background='#C9A84C'">
@@ -116,7 +116,7 @@
     <a href="#produtos" class="nav-link" onclick="toggleNavDrawer()">Produtos</a>
     <a href="#galeria"  class="nav-link" onclick="toggleNavDrawer()">Galeria</a>
     <a href="#contato"  class="nav-link" onclick="toggleNavDrawer()">Contato</a>
-    <a href="{{ route('agendar') }}"
+    <a href="{{ route('appointments.create') }}"
        style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; padding: 16px 32px; background: #C9A84C; color: #0A0A0A; border-radius: 8px; text-decoration: none; text-align: center; margin-top: 8px;">
         Agendar agora
     </a>
