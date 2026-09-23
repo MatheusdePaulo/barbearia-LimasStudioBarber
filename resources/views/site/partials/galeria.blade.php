@@ -3,13 +3,13 @@
     <img src="{{ asset('images/Ambiente.png') }}" alt=""
          style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;">
     <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.85) 100%);"></div>
-    <div style="position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px;">
-        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+    <div class="gq-content" style="position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px;">
+        <div class="gq-label-row" style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
             <span style="display: block; width: 40px; height: 1px; background: #F5F0E8; opacity: 0.5;"></span>
             <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.3em; color: rgba(245,240,232,0.8); text-transform: uppercase;">Transformações</span>
             <span style="display: block; width: 40px; height: 1px; background: #F5F0E8; opacity: 0.5;"></span>
         </div>
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 28px; color: #F5F0E8; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1.3; margin: 0; max-width: 600px;">
+        <h2 class="gq-title" style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 28px; color: #F5F0E8; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1.3; margin: 0; max-width: 600px;">
             Veja os resultados reais dos nossos clientes
         </h2>
     </div>
@@ -113,6 +113,62 @@
             .slider-container:active .slider-handle-icon {
                 transform: translate(-50%, -50%) scale(1.1);
             }
+            /* RESPONSIVIDADE MOBILE (até 767px): textos alinhados à esquerda.
+               Desktop continua com os estilos inline originais. */
+            @media (max-width: 767px) {
+                .gq-content {
+                    align-items: flex-start !important;
+                    text-align: left !important;
+                }
+                .gq-label-row {
+                    justify-content: flex-start !important;
+                }
+                .gq-title,
+                .galeria-title {
+                    text-align: left !important;
+                }
+
+                /* Cards: só o central (slider antes/depois, mesmos efeitos do desktop),
+                   setinhas lado a lado abaixo dele */
+                .galeria-carousel {
+                    flex-wrap: wrap !important;
+                    justify-content: center !important;
+                    column-gap: 28px !important;
+                }
+                .galeria-cards {
+                    flex: 0 0 100% !important;
+                    gap: 0 !important;
+                }
+                /* Setas dentro de um círculo transparente com borda dourada de 1px; seta 30px +15% = 34.5px */
+                .galeria-arrow {
+                    order: 1;
+                    margin-top: 20px !important;
+                    padding: 0 !important;
+                    width: 60px !important;
+                    height: 60px !important;
+                    border: 1px solid #C9A84C !important;
+                    border-radius: 50% !important;
+                    background: transparent !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                }
+                .galeria-arrow img {
+                    width: 34.5px !important;
+                    display: block !important;
+                }
+                .card-frame--lateral {
+                    display: none !important;
+                }
+                /* Largura: 90% da área do container (5% a menos de cada lado, centralizado).
+                   Altura: a que o card tinha antes (min(280px, 100vw-130px) em proporção 280x340) com -4%
+                   → 340/280 x 0.96 = 1.1657 */
+                .card-frame--destaque {
+                    width: 90% !important;
+                    height: calc(min(280px, 100vw - 130px) * 1.1657) !important;
+                    margin-top: 0 !important;
+                }
+            }
             .foto-lateral {
                 position: absolute;
                 inset: 0;
@@ -127,21 +183,21 @@
     <div style="max-width: 1100px; margin: 0 auto; padding: 0 24px;">
 
         {{-- Título --}}
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 36px; color: #F5F0E8; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 48px; text-align: center;">
+        <h2 class="galeria-title" style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 36px; color: #F5F0E8; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 48px; text-align: center;">
             Antes e depois
         </h2>
 
-        <div style="display: flex; align-items: center; gap: 0;">
+        <div class="galeria-carousel" style="display: flex; align-items: center; gap: 0;">
 
             {{-- Seta esquerda --}}
-            <button onclick="galeriaNav(-1)"
+            <button class="galeria-arrow" onclick="galeriaNav(-1)"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
                 <img src="{{ asset('images/polygon-produtos.png') }}" alt="anterior"
                      style="width: 44px; height: auto; transform: rotate(90deg); opacity: 0.9;">
             </button>
 
             {{-- Cards --}}
-            <div style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 24px;">
+            <div class="galeria-cards" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 24px;">
 
                 @php
                     $clientes = [
@@ -161,7 +217,7 @@
                     @endphp
 
                     {{-- Container do card --}}
-                    <div class="card-frame" style="flex-shrink: 0; width: {{ $w }}; height: {{ $h }}; margin-top: {{ $mt }};">
+                    <div class="card-frame {{ $isDestaque ? 'card-frame--destaque' : 'card-frame--lateral' }}" style="flex-shrink: 0; width: {{ $w }}; height: {{ $h }}; margin-top: {{ $mt }};">
 
                         @if($isDestaque)
                             {{-- Card destaque: slider interativo --}}
@@ -191,7 +247,7 @@
             </div>
 
             {{-- Seta direita --}}
-            <button onclick="galeriaNav(1)"
+            <button class="galeria-arrow" onclick="galeriaNav(1)"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
                 <img src="{{ asset('images/polygon-produtos.png') }}" alt="próximo"
                      style="width: 44px; height: auto; transform: rotate(-90deg); opacity: 0.9;">
