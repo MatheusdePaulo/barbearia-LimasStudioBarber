@@ -66,8 +66,26 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12 items-start">
 
-                <!-- ===== COLUNA ESQUERDA: DATA + SERVIÇOS ===== -->
+                <!-- ===== COLUNA ESQUERDA: CLIENTE + DATA + SERVIÇOS ===== -->
                 <div class="space-y-10">
+
+                    @auth
+                    <!-- CLIENTE LOGADO -->
+                    <div class="bg-[#141414] border border-zinc-800 p-6 rounded-3xl border-l-[6px] border-l-[#C9A84C] shadow-xl">
+                        <p class="text-zinc-500 text-[10px] uppercase font-black tracking-widest mb-1 opacity-70">Cliente Logado</p>
+                        <h4 class="text-xl font-black text-white uppercase">{{ auth()->user()->name }}</h4>
+                        <p class="text-zinc-400 text-xs mt-1 italic font-medium">WhatsApp: {{ auth()->user()->whatsapp ?? 'Não cadastrado' }}</p>
+                    </div>
+                    @endauth
+
+                    @guest
+                    <!-- AVISO PARA GUEST -->
+                    <div class="bg-[#141414] border border-zinc-800/60 p-5 rounded-3xl border-l-[6px] border-l-zinc-600 shadow-xl">
+                        <p class="text-zinc-500 text-[10px] uppercase font-black tracking-widest mb-1 opacity-70">Agendando como</p>
+                        <h4 class="text-base font-black text-zinc-300 uppercase">Visitante</h4>
+                        <p class="text-zinc-600 text-[10px] mt-1 italic font-medium">Seus dados serão pedidos ao confirmar</p>
+                    </div>
+                    @endguest
 
                     <!-- 1. ESCOLHA A DATA -->
                     <div>
@@ -163,26 +181,8 @@
 
                 </div>
 
-                <!-- ===== COLUNA DIREITA: CLIENTE + HORÁRIO + PAGAMENTO ===== -->
+                <!-- ===== COLUNA DIREITA: HORÁRIO + PAGAMENTO ===== -->
                 <div class="space-y-10">
-
-                    @auth
-                    <!-- CLIENTE LOGADO -->
-                    <div class="bg-[#141414] border border-zinc-800 p-6 rounded-3xl border-l-[6px] border-l-[#C9A84C] shadow-xl">
-                        <p class="text-zinc-500 text-[10px] uppercase font-black tracking-widest mb-1 opacity-70">Cliente Logado</p>
-                        <h4 class="text-xl font-black text-white uppercase">{{ auth()->user()->name }}</h4>
-                        <p class="text-zinc-400 text-xs mt-1 italic font-medium">WhatsApp: {{ auth()->user()->whatsapp ?? 'Não cadastrado' }}</p>
-                    </div>
-                    @endauth
-
-                    @guest
-                    <!-- AVISO PARA GUEST -->
-                    <div class="bg-[#141414] border border-zinc-800/60 p-5 rounded-3xl border-l-[6px] border-l-zinc-600 shadow-xl">
-                        <p class="text-zinc-500 text-[10px] uppercase font-black tracking-widest mb-1 opacity-70">Agendando como</p>
-                        <h4 class="text-base font-black text-zinc-300 uppercase">Visitante</h4>
-                        <p class="text-zinc-600 text-[10px] mt-1 italic font-medium">Seus dados serão pedidos ao confirmar</p>
-                    </div>
-                    @endguest
 
                     <!-- 3. SELECIONE O HORÁRIO -->
                     <div>
