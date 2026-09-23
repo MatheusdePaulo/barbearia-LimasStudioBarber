@@ -1,58 +1,123 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="public/images/logo-limas02.png" alt="Lima's Studio Barber" width="180"/>
 </p>
 
-## About Laravel
+<h1 align="center">Lima's Studio Barber — Plataforma Web para Barbearia</h1>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  Site institucional com agendamento online, painel administrativo e integração com Mercado Pago.
+  <br/>
+  Desenvolvido para a barbearia Lima's Studio Barber, em Cascavel, CE.
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🖥️ Landing Page
 
-## Learning Laravel
+![Lima's Studio Barber - Landing Page](public/images/imagem-readme.png)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ✂️ Serviços
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+![Lima's Studio Barber - Serviços](public/images/imagem-readme01.png)
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 📱 Responsividade
+
+- Todas as seções adaptadas para o mobile sem alterar o layout do desktop
+- Navbar que vira uma bolinha em volta do menu ao rolar a página
+- Menu lateral com links das seções, Wi-Fi da barbearia e atalhos para Instagram e WhatsApp
+- Galeria e blog com carrossel de card único e setas em círculo dourado
+- Rodapé em grade 2x2 (logo e endereço, horário e contato)
+
+---
+
+## ⚙️ Funcionalidades
+
+### 🗓️ Agendamento Online
+- Agendamento sem necessidade de login
+- Seleção de até 3 serviços por agendamento
+- Escolha de data e horário com disponibilidade em tempo real
+- Pagamento de sinal (R$ 5,00) ou valor total via **Pix** integrado ao Mercado Pago
+- Horário reservado por 10 minutos aguardando o pagamento — liberado automaticamente se não for pago
+- Campo de cupom de desconto no agendamento
+
+### 📋 Painel Administrativo
+- **Dashboard** com métricas em tempo real: confirmados, pendentes, cancelados e receita
+- **Agenda** com visualização diária, agendamento avulso (walk-in), controle de status e horário especial por dia
+- **Clientes** com histórico de atendimentos, busca por nome e atalho para WhatsApp
+- **Serviços** com edição de preço, duração e promoções
+- **Produtos** com gestão de estoque e registro de vendas
+- **Relatórios** com faturamento por período, ticket médio e taxa de no-show
+- **Aniversariantes** do dia para ações de marketing
+- **Avaliações** dos clientes com média geral e filtro por nota
+- **Cupons** com cupons manuais e automáticos, validade e limite de usos
+- Acesso restrito ao administrador
+
+### ⭐ Sistema de Avaliações
+- Avaliação com estrelas (1-5) e comentário
+- Geração automática de cupom de desconto após avaliar no Google (`AVA-XXXXX`)
+- Notas 1 e 2 não entram na média, mas aparecem no painel para o administrador
+- Botão de WhatsApp para solicitar avaliações diretamente aos clientes
+
+### 🎟️ Sistema de Cupons
+- Cupons automáticos gerados após avaliação no Google
+- Cupons manuais com código personalizado
+- Controle de validade, limite de usos e ativação/desativação
+- Desconto aplicável no sinal ou no valor total
+
+### 📶 QR Code Wi-Fi
+- QR Code no menu mobile com as credenciais da rede Wi-Fi da barbearia
+- Cliente conecta sem precisar digitar senha
+
+---
+
+## 🛠️ Stack Técnica
+
+| Tecnologia | Uso |
+|-----------|-----|
+| **Figma** | Prototipação do layout |
+| **Laravel 13** | Backend e rotas |
+| **Tailwind CSS 4** | Estilização |
+| **Alpine.js** | Interatividade no frontend |
+| **MySQL** | Banco de dados |
+| **Mercado Pago API** | Geração de Pix e webhooks |
+| **Vite** | Build dos assets |
+
+---
+
+## 🚀 Instalação Local
 
 ```bash
-composer require laravel/boost --dev
+# Clone o repositório
+git clone https://github.com/MatheusdePaulo/barbearia-LimasStudioBarber.git
+cd barbearia-LimasStudioBarber
 
-php artisan boost:install
+# Instale as dependências
+composer install
+npm install
+
+# Configure o ambiente (banco MySQL e credenciais do Mercado Pago no .env)
+cp .env.example .env
+php artisan key:generate
+
+# Rode as migrations
+php artisan migrate
+
+# Crie o usuário administrador
+php artisan tinker --execute "App\Models\User::forceCreate(['name'=>'Admin','email'=>'admin@exemplo.com','password'=>bcrypt('senha'),'is_admin'=>true]);"
+
+# Compile os assets e suba o servidor
+npm run build
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+O painel fica em `/admin` (login em `/login`) e o agendamento em `/agendar`.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 📄 Licença
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT License — © 2026 [Matheus de Paulo](https://matheusdepaulo.com)
