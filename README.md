@@ -2,7 +2,7 @@
   <img src="public/images/logo-limas02.png" alt="Lima's Studio Barber" width="180"/>
 </p>
 
-<h1 align="center">Lima's Studio Barber — Plataforma Web para Barbearia</h1>
+<h1 align="center">Lima's Studio Barber | Plataforma Web para Barbearia</h1>
 
 <p align="center">
   Site institucional com agendamento online, painel administrativo e integração com Mercado Pago.
@@ -41,7 +41,7 @@
 - Seleção de até 3 serviços por agendamento
 - Escolha de data e horário com disponibilidade em tempo real
 - Pagamento de sinal (R$ 5,00) ou valor total via **Pix** integrado ao Mercado Pago
-- Horário reservado por 10 minutos aguardando o pagamento — liberado automaticamente se não for pago
+- Horário reservado por 10 minutos aguardando o pagamento, e liberado automaticamente se não for pago
 - Campo de cupom de desconto no agendamento
 
 ### 📋 Painel Administrativo
@@ -69,7 +69,7 @@
 - Desconto aplicável no sinal ou no valor total
 
 ### ⏰ Gerenciamento de Horários
-- Segunda a sábado: 08:00 — 18:00, com pausa para almoço das 12:00 às 14:00
+- Segunda a sábado: 08:00 às 18:00, com pausa para almoço das 12:00 às 14:00
 - Domingo: fechado
 - Horário especial ou fechamento por dia específico direto pela agenda do painel
 
@@ -125,4 +125,4 @@ O painel fica em `/admin` (login em `/login`) e o agendamento em `/agendar`.
 
 ## 📄 Licença
 
-MIT License — © 2026 [Matheus de Paulo](https://matheusdepaulo.com)
+MIT License © 2026 [Matheus de Paulo](https://matheusdepaulo.com)
