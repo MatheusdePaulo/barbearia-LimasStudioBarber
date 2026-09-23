@@ -1,9 +1,64 @@
 {{-- ═══════════ BLOG — CORTES RECENTES ═══════════ --}}
 <section id="blog" style="background: #0A0A0A; padding: 60px 0 80px;">
 
+    {{-- RESPONSIVIDADE MOBILE (até 767px): textos à esquerda, só o card central e setas abaixo dele
+         (mesmo padrão da galeria). Desktop continua com os estilos inline originais. --}}
+    <style>
+        @media (max-width: 767px) {
+            #blog .blog-head {
+                text-align: left !important;
+                padding: 0 24px !important;
+            }
+            #blog .blog-label-row {
+                justify-content: flex-start !important;
+            }
+
+            #blog .blog-carousel {
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                column-gap: 28px !important;
+            }
+            #blog #blog-track {
+                flex: 0 0 100% !important;
+                gap: 0 !important;
+            }
+            #blog .blog-card--lateral {
+                display: none !important;
+            }
+            #blog .blog-card--centro {
+                margin-top: 0 !important;
+            }
+
+            /* Setas dentro de um círculo transparente com borda dourada de 1px (igual à galeria) */
+            #blog .blog-arrow {
+                order: 1;
+                margin-top: 20px !important;
+                padding: 0 !important;
+                width: 60px !important;
+                height: 60px !important;
+                border: 1px solid #C9A84C !important;
+                border-radius: 50% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            /* O PNG da seta (44x31, achatado e com pontas arredondadas) ficava curto girado.
+               No mobile a seta é um triângulo equilátero em SVG, pontudo e quase encostando no círculo. */
+            #blog .blog-arrow {
+                background: url('{{ asset('images/seta-circulo.svg') }}') center / 100% 100% no-repeat !important;
+            }
+            #blog .blog-carousel > .blog-arrow:first-child {
+                transform: scaleX(-1);
+            }
+            #blog .blog-arrow img {
+                display: none !important;
+            }
+        }
+    </style>
+
     {{-- Título --}}
-    <div style="text-align: center; margin-bottom: 48px;">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 14px;">
+    <div class="blog-head" style="text-align: center; margin-bottom: 48px;">
+        <div class="blog-label-row" style="display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 14px;">
             <span style="display: block; width: 60px; height: 1px; background: #F5F0E8; opacity: 0.5;"></span>
             <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.3em; color: rgba(245,240,232,0.65); text-transform: uppercase;">Nossos Trabalhos</span>
             <span style="display: block; width: 60px; height: 1px; background: #F5F0E8; opacity: 0.5;"></span>
@@ -15,10 +70,10 @@
 
     {{-- Carrossel --}}
     <div style="max-width: 1100px; margin: 0 auto; padding: 0 24px;">
-        <div style="display: flex; align-items: center; gap: 0;">
+        <div class="blog-carousel" style="display: flex; align-items: center; gap: 0;">
 
             {{-- Seta esquerda --}}
-            <button onclick="blogNav(-1)"
+            <button class="blog-arrow" onclick="blogNav(-1)"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
                 <img src="{{ asset('images/polygon-produtos.png') }}" alt="anterior"
                      style="width: 44px; height: auto; transform: rotate(90deg); opacity: 0.9;">
@@ -47,6 +102,7 @@
                             'h'        => '370px',
                             'mt'       => '0px',
                             'flip'     => true,
+                            'centro'   => true,
                         ],
                         [
                             'foto'     => 'images/fulano1-depois.jpg',
@@ -60,7 +116,7 @@
                 @endphp
 
                 @foreach($cortes as $corte)
-                    <div style="flex-shrink: 0; width: {{ $corte['w'] }}; height: {{ $corte['h'] }}; margin-top: {{ $corte['mt'] }}; position: relative;">
+                    <div class="{{ !empty($corte['centro']) ? 'blog-card--centro' : 'blog-card--lateral' }}" style="flex-shrink: 0; width: {{ $corte['w'] }}; height: {{ $corte['h'] }}; margin-top: {{ $corte['mt'] }}; position: relative;">
 
                         {{-- Foto recortada no shape exato da moldura, via mask-image --}}
                         <img src="{{ asset($corte['foto']) }}" alt="Corte"
@@ -85,7 +141,7 @@
             </div>
 
             {{-- Seta direita --}}
-            <button onclick="blogNav(1)"
+            <button class="blog-arrow" onclick="blogNav(1)"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
                 <img src="{{ asset('images/polygon-produtos.png') }}" alt="próximo"
                      style="width: 44px; height: auto; transform: rotate(-90deg); opacity: 0.9;">
