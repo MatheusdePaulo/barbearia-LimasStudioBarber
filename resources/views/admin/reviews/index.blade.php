@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="flex flex-col min-h-screen bg-[#050505]">
+<div class="flex flex-col min-h-screen bg-[#0A0A0A]">
     <div class="p-4 sm:p-8 space-y-6 lg:space-y-8">
 
         {{-- Cabeçalho --}}
@@ -14,12 +14,12 @@
 
         {{-- Cards de resumo --}}
         <div class="grid grid-cols-2 gap-4">
-            <div class="bg-[#121212] border border-zinc-800 rounded-2xl p-6 text-center">
+            <div class="bg-[#141414] border border-zinc-800 rounded-2xl p-6 text-center">
                 <p class="text-[10px] font-black uppercase text-zinc-500 tracking-widest mb-2">Média Geral</p>
-                <p class="text-4xl font-black text-[#D4AF37]">{{ $average ?? '—' }}</p>
+                <p class="text-4xl font-black text-[#C9A84C]">{{ $average ?? '—' }}</p>
                 <p class="text-[10px] text-zinc-600 mt-1 italic">Notas 3, 4 e 5</p>
             </div>
-            <div class="bg-[#121212] border border-zinc-800 rounded-2xl p-6 text-center">
+            <div class="bg-[#141414] border border-zinc-800 rounded-2xl p-6 text-center">
                 <p class="text-[10px] font-black uppercase text-zinc-500 tracking-widest mb-2">Total</p>
                 <p class="text-4xl font-black text-white">{{ $total }}</p>
                 <p class="text-[10px] text-zinc-600 mt-1 italic">avaliações</p>
@@ -27,14 +27,14 @@
         </div>
 
         {{-- Lista de avaliações --}}
-        <div class="bg-[#121212] border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl">
+        <div class="bg-[#141414] border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl">
             <div class="p-4 sm:p-6 space-y-4">
                 @forelse($reviews as $review)
                     @php
                         $isNegative = $review->rating <= 2;
                         $authorName = $review->user?->name ?? $review->client_name ?? 'Cliente';
                         $whatsapp   = $review->user?->whatsapp ?? null;
-                        $waText     = urlencode("Olá {$authorName}! 😊 Obrigado por visitar a Nathan do Corte! Avalie nossa barbearia e ganhe {$reviewCouponPercent}% de desconto no próximo corte 👇 https://nathandocorte.com/avaliar");
+                        $waText     = urlencode("Olá {$authorName}! 😊 Obrigado por visitar o Lima's Studio Barber! Avalie nossa barbearia e ganhe {$reviewCouponPercent}% de desconto no próximo corte 👇 " . url('/avaliar'));
                         $waLink     = $whatsapp ? "https://wa.me/55{$whatsapp}?text={$waText}" : null;
                     @endphp
 
@@ -49,7 +49,7 @@
 
                             <div class="flex gap-1">
                                 @for($i = 1; $i <= 5; $i++)
-                                    <span class="text-sm {{ $i <= $review->rating ? 'text-[#D4AF37]' : 'text-zinc-700' }}">★</span>
+                                    <span class="text-sm {{ $i <= $review->rating ? 'text-[#C9A84C]' : 'text-zinc-700' }}">★</span>
                                 @endfor
                             </div>
 

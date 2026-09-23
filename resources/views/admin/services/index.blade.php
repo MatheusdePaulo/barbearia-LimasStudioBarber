@@ -2,7 +2,7 @@
 
 @section('content')
     {{-- Alpine.js atualizado com os novos campos --}}
-    <div class="p-4 sm:p-8 space-y-6 lg:space-y-8 bg-[#050505] min-h-screen" x-data="{ openModal: false, activeService: {} }">
+    <div class="p-4 sm:p-8 space-y-6 lg:space-y-8 bg-[#0A0A0A] min-h-screen" x-data="{ openModal: false, activeService: {} }">
 
         {{-- TÍTULO RESPONSIVO --}}
         <div class="text-center lg:text-left">
@@ -10,7 +10,7 @@
             <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mt-1">Controle de preços e tempo de execução</p>
         </div>
 
-        <div class="bg-[#121212] border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl mb-10">
+        <div class="bg-[#141414] border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl mb-10">
             <div class="p-4 lg:p-6">
 
                 {{-- TABELA DESKTOP --}}
@@ -31,7 +31,7 @@
                                     <div class="flex items-center gap-2">
                                         {{ $servico->name }}
                                         @if($servico->is_promo)
-                                            <span class="bg-[#D4AF37] text-black text-[8px] px-2 py-0.5 rounded-sm not-italic">PROMO</span>
+                                            <span class="bg-[#C9A84C] text-black text-[8px] px-2 py-0.5 rounded-sm not-italic">PROMO</span>
                                         @endif
                                     </div>
                                 </td>
@@ -40,7 +40,7 @@
                                     @if($servico->is_promo)
                                         <div class="flex flex-col">
                                             <span class="text-[10px] text-zinc-600 line-through">R$ {{ number_format($servico->price, 2, ',', '.') }}</span>
-                                            <span class="text-[#D4AF37] font-black italic text-sm">R$ {{ number_format($servico->promo_price, 2, ',', '.') }}</span>
+                                            <span class="text-[#C9A84C] font-black italic text-sm">R$ {{ number_format($servico->promo_price, 2, ',', '.') }}</span>
                                         </div>
                                     @else
                                         <span class="text-white font-black italic text-sm">R$ {{ number_format($servico->price, 2, ',', '.') }}</span>
@@ -48,7 +48,7 @@
                                 </td>
                                 <td class="py-6 text-right">
                                     <button @click="openModal = true; activeService = { id: '{{ $servico->id }}', name: '{{ $servico->name }}', price: '{{ $servico->price }}', duration: '{{ $servico->duration }}', is_promo: {{ $servico->is_promo ? 'true' : 'false' }}, promo_price: '{{ $servico->promo_price }}' }"
-                                            class="bg-zinc-800 group-hover:bg-[#D4AF37] group-hover:text-black px-6 py-2.5 rounded-xl text-[9px] font-black uppercase transition-all tracking-widest">
+                                            class="bg-zinc-800 group-hover:bg-[#C9A84C] group-hover:text-black px-6 py-2.5 rounded-xl text-[9px] font-black uppercase transition-all tracking-widest">
                                         Ajustar Valores
                                     </button>
                                 </td>
@@ -70,15 +70,15 @@
                                 <div class="text-right">
                                     @if($servico->is_promo)
                                         <span class="text-[9px] text-zinc-600 line-through block uppercase font-bold">R$ {{ number_format($servico->price, 2, ',', '.') }}</span>
-                                        <span class="text-[#D4AF37] font-black italic text-sm">R$ {{ number_format($servico->promo_price, 2, ',', '.') }}</span>
+                                        <span class="text-[#C9A84C] font-black italic text-sm">R$ {{ number_format($servico->promo_price, 2, ',', '.') }}</span>
                                     @else
-                                        <span class="text-[#D4AF37] font-black italic text-sm">R$ {{ number_format($servico->price, 2, ',', '.') }}</span>
+                                        <span class="text-[#C9A84C] font-black italic text-sm">R$ {{ number_format($servico->price, 2, ',', '.') }}</span>
                                     @endif
                                 </div>
                             </div>
 
                             <button @click="openModal = true; activeService = { id: '{{ $servico->id }}', name: '{{ $servico->name }}', price: '{{ $servico->price }}', duration: '{{ $servico->duration }}', is_promo: {{ $servico->is_promo ? 'true' : 'false' }}, promo_price: '{{ $servico->promo_price }}' }"
-                                    class="w-full bg-zinc-800 text-white py-4 rounded-xl text-[10px] font-black uppercase tracking-widest border border-zinc-700 active:bg-[#D4AF37] active:text-black transition-all">
+                                    class="w-full bg-zinc-800 text-white py-4 rounded-xl text-[10px] font-black uppercase tracking-widest border border-zinc-700 active:bg-[#C9A84C] active:text-black transition-all">
                                 <i class="fas fa-sliders-h mr-2"></i> Ajustar Valores
                             </button>
                         </div>
@@ -90,11 +90,11 @@
 
         {{-- MODAL DE AJUSTE --}}
         <div x-show="openModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm" x-cloak>
-            <div class="bg-[#121212] border border-zinc-800 p-6 sm:p-8 rounded-[2.5rem] w-full max-w-md shadow-2xl relative" @click.away="openModal = false">
+            <div class="bg-[#141414] border border-zinc-800 p-6 sm:p-8 rounded-[2.5rem] w-full max-w-md shadow-2xl relative" @click.away="openModal = false">
 
                 <button @click="openModal = false" class="absolute top-6 right-6 text-zinc-500 hover:text-white"><i class="fas fa-times"></i></button>
 
-                <h2 class="text-[#D4AF37] font-black italic uppercase tracking-tighter text-xl mb-8" x-text="activeService.name"></h2>
+                <h2 class="text-[#C9A84C] font-black italic uppercase tracking-tighter text-xl mb-8" x-text="activeService.name"></h2>
 
                 <form :action="`/admin/servicos/${activeService.id}`" method="POST" class="space-y-6">
                     @csrf
@@ -109,7 +109,7 @@
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" name="is_promo" x-model="activeService.is_promo" class="sr-only peer">
                             <div class="w-11 h-6 bg-zinc-700 rounded-full peer 
-                                        peer-checked:bg-[#D4AF37] 
+                                        peer-checked:bg-[#C9A84C] 
                                         after:content-[''] after:absolute after:top-[2px] after:left-[2px] 
                                         after:bg-white after:border-zinc-300 after:border after:rounded-full 
                                         after:h-5 after:w-5 after:transition-all 
@@ -120,23 +120,23 @@
 
                     <div class="space-y-2">
                         <label class="text-[9px] font-black uppercase text-zinc-500 ml-2 tracking-widest italic">Preço Normal (R$)</label>
-                        <input type="number" step="0.01" name="price" x-model="activeService.price" class="w-full bg-zinc-900 border-zinc-800 rounded-2xl py-4 px-5 text-white text-sm focus:border-[#D4AF37] outline-none font-mono">
+                        <input type="number" step="0.01" name="price" x-model="activeService.price" class="w-full bg-zinc-900 border-zinc-800 rounded-2xl py-4 px-5 text-white text-sm focus:border-[#C9A84C] outline-none font-mono">
                     </div>
 
                     {{-- Campo de Preço Promocional (Apenas se o Toggle estiver ativo) --}}
                     <div class="space-y-2" x-show="activeService.is_promo" x-transition>
-                        <label class="text-[9px] font-black uppercase text-[#D4AF37] ml-2 tracking-widest italic">Preço Promocional Site (R$)</label>
-                        <input type="number" step="0.01" name="promo_price" x-model="activeService.promo_price" class="w-full bg-zinc-900 border-[#D4AF37]/50 rounded-2xl py-4 px-5 text-white text-sm focus:border-[#D4AF37] outline-none font-mono shadow-[0_0_15px_rgba(212,175,55,0.05)]">
+                        <label class="text-[9px] font-black uppercase text-[#C9A84C] ml-2 tracking-widest italic">Preço Promocional Site (R$)</label>
+                        <input type="number" step="0.01" name="promo_price" x-model="activeService.promo_price" class="w-full bg-zinc-900 border-[#C9A84C]/50 rounded-2xl py-4 px-5 text-white text-sm focus:border-[#C9A84C] outline-none font-mono shadow-[0_0_15px_rgba(201,168,76,0.05)]">
                     </div>
 
                     <div class="space-y-2">
                         <label class="text-[9px] font-black uppercase text-zinc-500 ml-2 tracking-widest italic">Duração (min)</label>
-                        <input type="number" name="duration" x-model="activeService.duration" class="w-full bg-zinc-900 border-zinc-800 rounded-2xl py-4 px-5 text-white text-sm focus:border-[#D4AF37] outline-none font-mono">
+                        <input type="number" name="duration" x-model="activeService.duration" class="w-full bg-zinc-900 border-zinc-800 rounded-2xl py-4 px-5 text-white text-sm focus:border-[#C9A84C] outline-none font-mono">
                     </div>
 
                     <div class="flex gap-3 pt-4">
                         <button type="button" @click="openModal = false" class="flex-1 bg-zinc-900 text-zinc-500 py-4 rounded-2xl font-black text-[10px] uppercase border border-zinc-800">Cancelar</button>
-                        <button type="submit" class="flex-1 bg-[#D4AF37] text-black py-4 rounded-2xl font-black text-[10px] uppercase shadow-lg shadow-[#D4AF37]/10">Salvar</button>
+                        <button type="submit" class="flex-1 bg-[#C9A84C] text-black py-4 rounded-2xl font-black text-[10px] uppercase shadow-lg shadow-[#C9A84C]/10">Salvar</button>
                     </div>
                 </form>
             </div>

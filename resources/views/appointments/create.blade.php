@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barber Nathan | Agendar Horário</title>
+    <title>Lima's Studio Barber | Agendar Horário</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
+        body { background-color: #0A0A0A; color: white; font-family: 'Inter', sans-serif; }
         [x-cloak] { display: none !important; }
         input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
         .custom-scroll::-webkit-scrollbar { width: 5px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #121212; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #141414; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 10px; }
     </style>
 </head>
 <body class="flex flex-col lg:flex-row min-h-screen overflow-x-hidden"
       x-data="agendamento()"
       x-init="init()">
 
-<header class="lg:hidden bg-[#121212] border-b border-zinc-800 p-5 flex justify-between items-center sticky top-0 z-40">
-    <img src="{{ asset('images/logotipo_nathan.png') }}" alt="Barber Nathan" class="h-12 w-auto">
-    <button @click="mobileMenu = true" class="text-[#D4AF37] p-2">
+<header class="lg:hidden bg-[#141414] border-b border-zinc-800 p-5 flex justify-between items-center sticky top-0 z-40">
+    <img src="{{ asset('images/logo-limas02.png') }}" alt="Lima's Studio Barber" class="h-12 w-auto">
+    <button @click="mobileMenu = true" class="text-[#C9A84C] p-2">
         <i class="fas fa-bars text-3xl"></i>
     </button>
 </header>
 
-<aside class="w-[300px] bg-[#121212] border-r border-zinc-800 p-8 hidden lg:block flex-shrink-0 sticky top-0 h-screen text-center">
+<aside class="w-[300px] bg-[#141414] border-r border-zinc-800 p-8 hidden lg:block flex-shrink-0 sticky top-0 h-screen text-center">
     <div class="mb-10">
-        <img src="{{ asset('images/logotipo_nathan.png') }}" alt="Barber Nathan" class="w-40 h-auto mx-auto">
+        <img src="{{ asset('images/logo-limas02.png') }}" alt="Lima's Studio Barber" class="w-40 h-auto mx-auto">
     </div>
     <nav class="space-y-4">
         <a href="{{ url('/') }}" class="block px-4 py-3 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-xl transition-all italic font-bold text-sm">← Voltar ao Início</a>
@@ -39,9 +39,9 @@
 
 <div x-show="mobileMenu" x-cloak class="fixed inset-0 z-50 lg:hidden">
     <div @click="mobileMenu = false" class="fixed inset-0 bg-black/90 backdrop-blur-md"></div>
-    <nav class="fixed top-0 right-0 bottom-0 w-[300px] bg-[#121212] p-10 shadow-2xl flex flex-col items-center">
+    <nav class="fixed top-0 right-0 bottom-0 w-[300px] bg-[#141414] p-10 shadow-2xl flex flex-col items-center">
         <button @click="mobileMenu = false" class="self-end text-white p-2 mb-10"><i class="fas fa-times text-3xl"></i></button>
-        <img src="{{ asset('images/logotipo_nathan.png') }}" alt="Barber Nathan" class="w-40 h-auto mb-10">
+        <img src="{{ asset('images/logo-limas02.png') }}" alt="Lima's Studio Barber" class="w-40 h-auto mb-10">
         <a href="{{ url('/') }}" class="w-full text-center px-4 py-4 text-zinc-400 border border-zinc-800 rounded-2xl font-black uppercase text-xs">Voltar ao Início</a>
     </nav>
 </div>
@@ -60,7 +60,7 @@
             @endif
 
             <header class="mb-10">
-                <span class="text-[#D4AF37] font-black uppercase tracking-[0.3em] text-[10px]">Confirmar Agendamento</span>
+                <span class="text-[#C9A84C] font-black uppercase tracking-[0.3em] text-[10px]">Confirmar Agendamento</span>
                 <h2 class="text-4xl font-black italic mt-2 uppercase tracking-tight leading-none text-white">Agendamento Geral</h2>
             </header>
 
@@ -74,7 +74,7 @@
                         <label class="block text-zinc-500 text-[11px] font-black uppercase tracking-[0.2em] italic opacity-60 mb-4">1. Escolha a Data</label>
                         <input type="date" name="date" required
                                @change="reloadWithServices($el.value)"
-                               class="w-full bg-[#121212] border border-zinc-800 rounded-2xl p-4.5 focus:border-[#D4AF37] outline-none transition-all text-base font-black text-white uppercase tracking-widest shadow-lg"
+                               class="w-full bg-[#141414] border border-zinc-800 rounded-2xl p-4.5 focus:border-[#C9A84C] outline-none transition-all text-base font-black text-white uppercase tracking-widest shadow-lg"
                                value="{{ $selectedDate }}"
                                min="{{ date('Y-m-d') }}">
                     </div>
@@ -84,16 +84,16 @@
                         <div class="flex items-end justify-between">
                             <label class="block text-zinc-500 text-[11px] font-black uppercase tracking-[0.2em] italic opacity-60">2. Escolha os Serviços</label>
                             <span class="text-[10px] font-black italic transition-colors"
-                                  :class="selectedServices.length >= 3 ? 'text-[#D4AF37]' : 'text-zinc-600'"
+                                  :class="selectedServices.length >= 3 ? 'text-[#C9A84C]' : 'text-zinc-600'"
                                   x-text="selectedServices.length + '/3 selecionados'"></span>
                         </div>
 
                         <div class="space-y-3.5 pr-3 max-h-[550px] overflow-y-auto custom-scroll">
                             @foreach($services as $s)
-                                <label class="relative flex items-center justify-between bg-[#121212] border border-zinc-800/60 p-5 rounded-2xl transition-all duration-300"
+                                <label class="relative flex items-center justify-between bg-[#141414] border border-zinc-800/60 p-5 rounded-2xl transition-all duration-300"
                                        :class="{
-                                           'border-[#D4AF37]/80 bg-[#D4AF37]/5': isSelected({{ $s->id }}),
-                                           'cursor-pointer group hover:border-[#D4AF37]/50': isSelected({{ $s->id }}) || selectedServices.length < 3,
+                                           'border-[#C9A84C]/80 bg-[#C9A84C]/5': isSelected({{ $s->id }}),
+                                           'cursor-pointer group hover:border-[#C9A84C]/50': isSelected({{ $s->id }}) || selectedServices.length < 3,
                                            'opacity-40 cursor-not-allowed': !isSelected({{ $s->id }}) && selectedServices.length >= 3
                                        }">
 
@@ -110,12 +110,12 @@
                                         </div>
                                         <div>
                                             <p class="font-black uppercase text-base tracking-tight transition-colors"
-                                               :class="isSelected({{ $s->id }}) ? 'text-white' : 'text-[#D4AF37] group-hover:text-white'">{{ $s->name }}</p>
+                                               :class="isSelected({{ $s->id }}) ? 'text-white' : 'text-[#C9A84C] group-hover:text-white'">{{ $s->name }}</p>
 
                                             @if($s->is_promo)
                                                 <p class="text-zinc-500 text-xs font-bold mt-1">
                                                     <span class="line-through opacity-50">R$ {{ number_format($s->price, 2, ',', '.') }}</span>
-                                                    <span class="text-[#D4AF37]">R$ {{ number_format($s->promo_price, 2, ',', '.') }}</span>
+                                                    <span class="text-[#C9A84C]">R$ {{ number_format($s->promo_price, 2, ',', '.') }}</span>
                                                     | <span class="italic">{{ $s->duration }}min</span>
                                                 </p>
                                             @else
@@ -126,7 +126,7 @@
 
                                     <!-- Checkbox visual -->
                                     <div class="w-6 h-6 border-2 rounded-md flex items-center justify-center transition-all duration-300 shrink-0"
-                                         :class="isSelected({{ $s->id }}) ? 'border-[#D4AF37] bg-[#D4AF37]' : 'border-zinc-700'">
+                                         :class="isSelected({{ $s->id }}) ? 'border-[#C9A84C] bg-[#C9A84C]' : 'border-zinc-700'">
                                         <i class="fas fa-check text-black text-[10px] transition-opacity"
                                            :class="isSelected({{ $s->id }}) ? 'opacity-100' : 'opacity-0'"></i>
                                     </div>
@@ -136,7 +136,7 @@
 
                         <!-- Resumo dos serviços selecionados -->
                         <div x-show="selectedServices.length > 0" x-cloak
-                             class="bg-[#121212] border border-[#D4AF37]/30 rounded-2xl p-4 space-y-2">
+                             class="bg-[#141414] border border-[#C9A84C]/30 rounded-2xl p-4 space-y-2">
                             <p class="text-[10px] font-black uppercase text-zinc-500 tracking-widest mb-3">Selecionados</p>
                             <template x-for="svc in selectedServices" :key="svc.id">
                                 <div class="flex justify-between items-center text-xs">
@@ -147,7 +147,7 @@
                             <div class="border-t border-zinc-800 pt-2 mt-2 flex justify-between items-center">
                                 <span class="text-[10px] font-black uppercase text-zinc-500">Total</span>
                                 <div class="text-right">
-                                    <span class="text-[#D4AF37] font-black font-mono text-sm" x-text="'R$ ' + totalPrice.toLocaleString('pt-BR', {minimumFractionDigits:2})"></span>
+                                    <span class="text-[#C9A84C] font-black font-mono text-sm" x-text="'R$ ' + totalPrice.toLocaleString('pt-BR', {minimumFractionDigits:2})"></span>
                                     <span class="text-zinc-600 text-[10px] font-bold ml-2" x-text="'| ' + totalDuration + 'min'"></span>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@
 
                     @auth
                     <!-- CLIENTE LOGADO -->
-                    <div class="bg-[#121212] border border-zinc-800 p-6 rounded-3xl border-l-[6px] border-l-[#D4AF37] shadow-xl">
+                    <div class="bg-[#141414] border border-zinc-800 p-6 rounded-3xl border-l-[6px] border-l-[#C9A84C] shadow-xl">
                         <p class="text-zinc-500 text-[10px] uppercase font-black tracking-widest mb-1 opacity-70">Cliente Logado</p>
                         <h4 class="text-xl font-black text-white uppercase">{{ auth()->user()->name }}</h4>
                         <p class="text-zinc-400 text-xs mt-1 italic font-medium">WhatsApp: {{ auth()->user()->whatsapp ?? 'Não cadastrado' }}</p>
@@ -177,7 +177,7 @@
 
                     @guest
                     <!-- AVISO PARA GUEST -->
-                    <div class="bg-[#121212] border border-zinc-800/60 p-5 rounded-3xl border-l-[6px] border-l-zinc-600 shadow-xl">
+                    <div class="bg-[#141414] border border-zinc-800/60 p-5 rounded-3xl border-l-[6px] border-l-zinc-600 shadow-xl">
                         <p class="text-zinc-500 text-[10px] uppercase font-black tracking-widest mb-1 opacity-70">Agendando como</p>
                         <h4 class="text-base font-black text-zinc-300 uppercase">Visitante</h4>
                         <p class="text-zinc-600 text-[10px] mt-1 italic font-medium">Seus dados serão pedidos ao confirmar</p>
@@ -204,7 +204,7 @@
                                 @foreach($slots as $s)
                                     <label class="{{ $s['available'] ? 'cursor-pointer group' : 'cursor-not-allowed opacity-20' }}">
                                         <input type="radio" name="time" value="{{ $s['time'] }}" class="hidden peer" {{ $s['available'] ? 'required' : 'disabled' }}>
-                                        <div class="bg-[#121212] border border-zinc-800/80 py-4 rounded-xl text-center transition-all peer-checked:bg-[#D4AF37] peer-checked:text-black peer-checked:border-[#D4AF37] text-white font-black text-[11px] shadow-sm">{{ $s['time'] }}</div>
+                                        <div class="bg-[#141414] border border-zinc-800/80 py-4 rounded-xl text-center transition-all peer-checked:bg-[#C9A84C] peer-checked:text-black peer-checked:border-[#C9A84C] text-white font-black text-[11px] shadow-sm">{{ $s['time'] }}</div>
                                     </label>
                                 @endforeach
                             </div>
@@ -217,7 +217,7 @@
                         <div class="grid grid-cols-2 gap-4">
                             <label class="cursor-pointer">
                                 <input type="radio" name="payment_type" value="signal" x-model="paymentType" class="hidden peer" checked>
-                                <div class="bg-[#121212] border border-zinc-800 p-5 rounded-2xl transition-all peer-checked:border-[#D4AF37] peer-checked:bg-[#D4AF37]/5 h-full flex flex-col justify-center shadow-md">
+                                <div class="bg-[#141414] border border-zinc-800 p-5 rounded-2xl transition-all peer-checked:border-[#C9A84C] peer-checked:bg-[#C9A84C]/5 h-full flex flex-col justify-center shadow-md">
                                     <p class="text-[10px] font-black uppercase text-zinc-600 mb-1">Pagar Sinal</p>
                                     <p class="font-black text-xl tracking-tight transition-all duration-300"
                                        :class="couponAnimating ? 'text-green-400 scale-110' : 'text-white'">
@@ -230,7 +230,7 @@
                             </label>
                             <label class="cursor-pointer">
                                 <input type="radio" name="payment_type" value="full" x-model="paymentType" class="hidden peer">
-                                <div class="bg-[#121212] border border-zinc-800 p-5 rounded-2xl transition-all peer-checked:border-[#D4AF37] peer-checked:bg-[#D4AF37]/5 h-full flex flex-col justify-center shadow-md">
+                                <div class="bg-[#141414] border border-zinc-800 p-5 rounded-2xl transition-all peer-checked:border-[#C9A84C] peer-checked:bg-[#C9A84C]/5 h-full flex flex-col justify-center shadow-md">
                                     <p class="text-[10px] font-black uppercase text-zinc-600 mb-1">Pagar Inteiro</p>
                                     <p class="font-black text-xl tracking-tight font-mono transition-all duration-300"
                                        :class="couponAnimating ? 'text-green-400 scale-110' : 'text-white'">
@@ -254,7 +254,7 @@
                                    @keydown.enter.prevent="aplicarCupom()"
                                    :disabled="couponValid"
                                    placeholder="EX: AVA-X7K2P"
-                                   class="flex-1 bg-[#121212] border border-zinc-800 rounded-xl py-3 px-4 text-white text-sm uppercase tracking-widest outline-none focus:border-[#D4AF37] placeholder-zinc-700 font-mono disabled:opacity-60">
+                                   class="flex-1 bg-[#141414] border border-zinc-800 rounded-xl py-3 px-4 text-white text-sm uppercase tracking-widest outline-none focus:border-[#C9A84C] placeholder-zinc-700 font-mono disabled:opacity-60">
                             <button type="button"
                                     @click="couponValid ? removerCupom() : aplicarCupom()"
                                     :disabled="!couponCode.trim() && !couponValid"
@@ -273,24 +273,24 @@
                     @auth
                     <button type="submit"
                             :disabled="selectedServices.length === 0"
-                            :class="selectedServices.length === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-[#f3ca4a] hover:-translate-y-0.5'"
-                            class="w-full py-5 bg-[#D4AF37] text-black font-black uppercase rounded-2xl transition-all tracking-[0.25em] text-xs shadow-2xl shadow-[#D4AF37]/10">
+                            :class="selectedServices.length === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-[#E2C97E] hover:-translate-y-0.5'"
+                            class="w-full py-5 bg-[#C9A84C] text-black font-black uppercase rounded-2xl transition-all tracking-[0.25em] text-xs shadow-2xl shadow-[#C9A84C]/10">
                         Confirmar e Gerar Pix
                     </button>
                     @else
                     <button type="button"
                             :disabled="selectedServices.length === 0"
-                            :class="selectedServices.length === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-[#f3ca4a] hover:-translate-y-0.5'"
+                            :class="selectedServices.length === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-[#E2C97E] hover:-translate-y-0.5'"
                             @click="selectedServices.length > 0 && (showGuestModal = true)"
-                            class="w-full py-5 bg-[#D4AF37] text-black font-black uppercase rounded-2xl transition-all tracking-[0.25em] text-xs shadow-2xl shadow-[#D4AF37]/10">
+                            class="w-full py-5 bg-[#C9A84C] text-black font-black uppercase rounded-2xl transition-all tracking-[0.25em] text-xs shadow-2xl shadow-[#C9A84C]/10">
                         Confirmar e Gerar Pix
                     </button>
                     @endauth
 
                     <!-- INFORMAÇÕES DE PAGAMENTO -->
-                    <div class="bg-[#121212] border border-zinc-800 rounded-2xl p-5 shadow-inner">
+                    <div class="bg-[#141414] border border-zinc-800 rounded-2xl p-5 shadow-inner">
                         <div class="flex items-start gap-4">
-                            <i class="fas fa-info-circle text-[#D4AF37] mt-1 text-lg"></i>
+                            <i class="fas fa-info-circle text-[#C9A84C] mt-1 text-lg"></i>
                             <div class="space-y-2 text-left">
                                 <h4 class="text-white font-black uppercase text-[10px] tracking-[0.2em] italic">Informações de Pagamento</h4>
                                 <ul class="text-zinc-400 text-[11px] leading-relaxed font-medium space-y-1.5">
@@ -317,12 +317,12 @@
 
     <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="showGuestModal = false"></div>
 
-    <div class="relative bg-[#121212] border border-zinc-800 rounded-[2.5rem] shadow-2xl w-full max-w-md overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-1.5 bg-[#D4AF37]"></div>
+    <div class="relative bg-[#141414] border border-zinc-800 rounded-[2.5rem] shadow-2xl w-full max-w-md overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1.5 bg-[#C9A84C]"></div>
 
         <div class="p-8 space-y-6">
             <div class="text-center">
-                <p class="text-[9px] font-black uppercase text-[#D4AF37] tracking-widest mb-1">Quase lá!</p>
+                <p class="text-[9px] font-black uppercase text-[#C9A84C] tracking-widest mb-1">Quase lá!</p>
                 <h3 class="text-xl font-black italic text-white uppercase tracking-tight">Seus Dados</h3>
                 <p class="text-zinc-600 text-[10px] font-bold mt-1">Para identificar seu agendamento</p>
             </div>
@@ -330,11 +330,11 @@
             <div class="space-y-4">
                 {{-- NOME --}}
                 <div class="space-y-1">
-                    <label class="text-[9px] font-black uppercase text-[#D4AF37] ml-2 italic tracking-widest">Nome *</label>
+                    <label class="text-[9px] font-black uppercase text-[#C9A84C] ml-2 italic tracking-widest">Nome *</label>
                     <input type="text"
                            x-model="guestName"
                            placeholder="Seu nome completo"
-                           class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3.5 px-5 text-white text-sm focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder-zinc-700">
+                           class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3.5 px-5 text-white text-sm focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C]/20 outline-none transition-all placeholder-zinc-700">
                     <p x-show="guestNameError" x-cloak class="text-red-400 text-[10px] font-bold ml-2 mt-1">Informe seu nome</p>
                 </div>
 
@@ -345,7 +345,7 @@
                            x-model="guestWhatsapp"
                            x-mask="(99) 99999-9999"
                            placeholder="(85) 90000-0000"
-                           class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3.5 px-5 text-white text-sm focus:border-[#D4AF37] focus:ring-0 outline-none transition-all placeholder-zinc-700">
+                           class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3.5 px-5 text-white text-sm focus:border-[#C9A84C] focus:ring-0 outline-none transition-all placeholder-zinc-700">
                 </div>
 
                 {{-- NASCIMENTO --}}
@@ -354,21 +354,21 @@
                     <input type="date"
                            x-model="guestBirthday"
                            style="color-scheme: dark;"
-                           class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3.5 px-5 text-white text-sm focus:border-[#D4AF37] focus:ring-0 outline-none transition-all">
+                           class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3.5 px-5 text-white text-sm focus:border-[#C9A84C] focus:ring-0 outline-none transition-all">
                 </div>
 
                 {{-- LEMBRAR DADOS --}}
                 <label class="flex items-center gap-3 cursor-pointer select-none">
                     <input type="checkbox"
                            x-model="rememberGuest"
-                           class="rounded border-zinc-700 bg-zinc-900 text-[#D4AF37] focus:ring-0 shadow-none w-4 h-4">
+                           class="rounded border-zinc-700 bg-zinc-900 text-[#C9A84C] focus:ring-0 shadow-none w-4 h-4">
                     <span class="text-[10px] font-black text-zinc-500 uppercase italic tracking-widest">Lembrar meus dados</span>
                 </label>
             </div>
 
             <button type="button"
                     @click="submitGuestForm()"
-                    class="w-full py-4 bg-[#D4AF37] hover:bg-[#f3ca4a] text-black font-black uppercase rounded-2xl transition-all tracking-[0.25em] text-[11px] shadow-2xl shadow-[#D4AF37]/10 active:scale-[0.98]">
+                    class="w-full py-4 bg-[#C9A84C] hover:bg-[#E2C97E] text-black font-black uppercase rounded-2xl transition-all tracking-[0.25em] text-[11px] shadow-2xl shadow-[#C9A84C]/10 active:scale-[0.98]">
                 Confirmar e Gerar Pix
             </button>
         </div>
@@ -412,7 +412,7 @@ function agendamento() {
 
             // Recupera dados salvos no localStorage
             try {
-                const saved = JSON.parse(localStorage.getItem('barber_nathan_guest') || '{}');
+                const saved = JSON.parse(localStorage.getItem('limas_guest') || '{}');
                 if (saved.name)     this.guestName     = saved.name;
                 if (saved.whatsapp) this.guestWhatsapp = saved.whatsapp;
                 if (saved.birthday) this.guestBirthday = saved.birthday;
@@ -510,7 +510,7 @@ function agendamento() {
                 if (this.guestName.trim())     toSave.name     = this.guestName.trim();
                 if (this.guestWhatsapp.trim()) toSave.whatsapp = this.guestWhatsapp.trim();
                 if (this.guestBirthday)         toSave.birthday = this.guestBirthday;
-                localStorage.setItem('barber_nathan_guest', JSON.stringify(toSave));
+                localStorage.setItem('limas_guest', JSON.stringify(toSave));
             }
 
             const form = document.getElementById('formAgendamento');

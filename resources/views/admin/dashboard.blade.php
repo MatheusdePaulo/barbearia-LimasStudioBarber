@@ -11,10 +11,10 @@
             <div class="text-right">
                 {{-- Busca o nome dinamicamente do banco de dados --}}
                 <p class="text-xs font-black uppercase tracking-widest text-white leading-none mb-1">{{ auth()->user()->name }}</p>
-                <p class="text-[9px] text-[#D4AF37] font-bold uppercase tracking-widest leading-none">Administrador</p>
+                <p class="text-[9px] text-[#C9A84C] font-bold uppercase tracking-widest leading-none">Administrador</p>
             </div>
             {{-- Atualiza também o avatar para usar o nome dinâmico --}}
-            <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=D4AF37&color=000&bold=true" class="w-10 h-10 rounded-xl border border-zinc-800 shadow-xl">
+            <img src="{{ asset('images/Logo-Limas.png') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-10 h-10 rounded-xl border border-zinc-800 shadow-xl">
         </div>
     </header>
 
@@ -24,7 +24,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 order-1">
 
-                <div class="bg-[#121212] p-6 rounded-3xl border border-zinc-800 shadow-xl border-l-4 border-l-green-600 group hover:border-green-500/30 transition-all">
+                <div class="bg-[#141414] p-6 rounded-3xl border border-zinc-800 shadow-xl border-l-4 border-l-green-600 group hover:border-green-500/30 transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-10 h-10 bg-green-500/10 rounded-xl flex items-center justify-center text-green-500 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
                             <i class="fas fa-check-circle"></i>
@@ -35,18 +35,18 @@
                     <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mt-1">Confirmados</p>
                 </div>
 
-                <div class="bg-[#121212] p-6 rounded-3xl border border-zinc-800 shadow-xl border-l-4 border-l-[#D4AF37] group hover:border-[#D4AF37]/30 transition-all">
+                <div class="bg-[#141414] p-6 rounded-3xl border border-zinc-800 shadow-xl border-l-4 border-l-[#C9A84C] group hover:border-[#C9A84C]/30 transition-all">
                     <div class="flex items-center justify-between mb-4">
-                        <div class="w-10 h-10 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center text-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                        <div class="w-10 h-10 bg-[#C9A84C]/10 rounded-xl flex items-center justify-center text-[#C9A84C] shadow-[0_0_15px_rgba(201,168,76,0.1)]">
                             <i class="fas fa-clock"></i>
                         </div>
-                        <span class="text-[10px] font-black text-[#D4AF37] uppercase">Aguardando</span>
+                        <span class="text-[10px] font-black text-[#C9A84C] uppercase">Aguardando</span>
                     </div>
-                    <h3 class="text-2xl font-black italic text-[#D4AF37]">{{ str_pad($stats['pendentes'], 2, '0', STR_PAD_LEFT) }}</h3>
+                    <h3 class="text-2xl font-black italic text-[#C9A84C]">{{ str_pad($stats['pendentes'], 2, '0', STR_PAD_LEFT) }}</h3>
                     <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mt-1">Pendentes</p>
                 </div>
 
-                <div class="bg-[#121212] p-6 rounded-3xl border border-zinc-800 shadow-xl border-l-4 border-l-red-600 sm:col-span-2 lg:col-span-1 group hover:border-red-500/30 transition-all">
+                <div class="bg-[#141414] p-6 rounded-3xl border border-zinc-800 shadow-xl border-l-4 border-l-red-600 sm:col-span-2 lg:col-span-1 group hover:border-red-500/30 transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-10 h-10 bg-red-500/10 rounded-xl flex items-center justify-center text-red-500 shadow-[0_0_15px_rgba(239,68,68,0.1)]">
                             <i class="fas fa-times-circle"></i>
@@ -58,10 +58,10 @@
                 </div>
             </div>
 
-            <div class="bg-[#121212] border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl order-3">
+            <div class="bg-[#141414] border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl order-3">
                 <div class="p-6 border-b border-zinc-800 flex justify-between items-center bg-zinc-900/30">
                     <h3 class="font-black italic uppercase tracking-widest text-xs text-white">Próximas Reservas</h3>
-                    <a href="{{ route('admin.agenda') }}" class="text-[10px] font-black text-[#D4AF37] uppercase hover:underline">Ver Todos</a>
+                    <a href="{{ route('admin.agenda') }}" class="text-[10px] font-black text-[#C9A84C] uppercase hover:underline">Ver Todos</a>
                 </div>
                 <div class="overflow-x-auto">
                     <div class="inline-block min-w-full align-middle p-6">
@@ -83,7 +83,7 @@
                                     <td class="py-4 text-zinc-400 uppercase text-[10px] font-bold tracking-tighter whitespace-nowrap">{{ $reserva->service->name ?? 'Serviço' }}</td>
                                     <td class="py-4 font-mono text-[11px]">{{ $reserva->time }}</td>
                                     <td class="py-4 text-right whitespace-nowrap">
-                                        <span class="px-3 py-1 rounded-lg text-[9px] font-black uppercase {{ $reserva->status == 'confirmed' ? 'bg-green-500/10 text-green-500' : 'bg-[#D4AF37]/10 text-[#D4AF37]' }}">
+                                        <span class="px-3 py-1 rounded-lg text-[9px] font-black uppercase {{ $reserva->status == 'confirmed' ? 'bg-green-500/10 text-green-500' : 'bg-[#C9A84C]/10 text-[#C9A84C]' }}">
                                             {{ $reserva->status == 'confirmed' ? 'Confirmado' : 'Pendente' }}
                                         </span>
                                     </td>
@@ -98,7 +98,7 @@
             </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 pb-8 order-4">
-                <div class="bg-[#121212] p-6 lg:p-8 rounded-3xl border border-zinc-800 shadow-xl">
+                <div class="bg-[#141414] p-6 lg:p-8 rounded-3xl border border-zinc-800 shadow-xl">
                     <div class="flex justify-between items-center mb-8">
                         <h4 class="text-white font-black italic uppercase text-xs tracking-widest">Total de Visitantes</h4>
                     </div>
@@ -107,7 +107,7 @@
                     </div>
                 </div>
 
-                <div class="bg-[#121212] p-6 lg:p-8 rounded-3xl border border-zinc-800 shadow-xl">
+                <div class="bg-[#141414] p-6 lg:p-8 rounded-3xl border border-zinc-800 shadow-xl">
                     <div class="flex justify-between items-center mb-8">
                         <h4 class="text-white font-black italic uppercase text-xs tracking-widest">Receita</h4>
                     </div>
@@ -117,7 +117,7 @@
                             <h3 class="text-3xl font-black italic text-white mb-2">R$ {{ number_format($receitaServicos + $receitaProdutos, 2, ',', '.') }}</h3>
                             <div class="mt-6 space-y-3 inline-block sm:block text-left">
                                 <div class="flex items-center gap-3 text-[10px] font-bold uppercase text-zinc-400 tracking-tighter">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-[#D4AF37]"></span> Serviços (R$ {{ number_format($receitaServicos, 2, ',', '.') }})
+                                    <span class="w-2.5 h-2.5 rounded-full bg-[#C9A84C]"></span> Serviços (R$ {{ number_format($receitaServicos, 2, ',', '.') }})
                                 </div>
                                 <div class="flex items-center gap-3 text-[10px] font-bold uppercase text-zinc-400 tracking-tighter">
                                     <span class="w-2.5 h-2.5 rounded-full bg-zinc-700"></span> Produtos (R$ {{ number_format($receitaProdutos, 2, ',', '.') }})
@@ -142,7 +142,7 @@
         </div>
 
         <div class="hidden lg:flex w-80 bg-[#0A0A0A] border-l border-zinc-800 p-6 flex-col gap-8">
-            <div class="bg-[#121212] p-6 rounded-3xl border border-zinc-800 shadow-xl">
+            <div class="bg-[#141414] p-6 rounded-3xl border border-zinc-800 shadow-xl">
                 <div class="flex items-center justify-between mb-6">
                     <h4 class="font-black italic uppercase text-[11px] text-white tracking-widest">
                         {{ now()->translatedFormat('F, Y') }}
@@ -156,7 +156,7 @@
                     @endphp
                     @for ($i = 0; $i < $primeiroDiaSemana; $i++) <span></span> @endfor
                     @for ($i = 1; $i <= $ultimoDia; $i++)
-                        <span class="flex items-center justify-center text-[10px] w-7 h-7 rounded-lg {{ $i == $hojeDia ? 'bg-[#D4AF37] text-black font-black shadow-[0_0_15_rgba(212,175,55,0.5)]' : 'text-zinc-500' }}">
+                        <span class="flex items-center justify-center text-[10px] w-7 h-7 rounded-lg {{ $i == $hojeDia ? 'bg-[#C9A84C] text-black font-black shadow-[0_0_15_rgba(201,168,76,0.5)]' : 'text-zinc-500' }}">
                             {{ $i }}
                         </span>
                     @endfor
@@ -165,15 +165,15 @@
 
             <div class="space-y-6">
                 <h4 class="font-black italic uppercase text-[10px] text-zinc-500 tracking-[0.2em] ml-2">Barbeiros</h4>
-                <div class="flex items-center justify-between bg-[#121212] p-4 rounded-2xl border border-zinc-800">
+                <div class="flex items-center justify-between bg-[#141414] p-4 rounded-2xl border border-zinc-800">
                     <div class="flex items-center gap-3">
-                        <img src="https://ui-avatars.com/api/?name=Nathan+do+Corte&background=18181b&color=D4AF37&bold=true" class="w-10 h-10 rounded-xl border border-zinc-800">
+                        <img src="{{ asset('images/Logo-Limas.png') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-10 h-10 rounded-xl border border-zinc-800">
                         <div>
-                            <p class="text-[10px] font-black uppercase text-white leading-none tracking-tighter">Nathan do Corte</p>
+                            <p class="text-[10px] font-black uppercase text-white leading-none tracking-tighter">Lima's Studio Barber</p>
                             <p class="text-[8px] text-zinc-600 uppercase mt-1 font-bold">Barbeiro Mestre</p>
                         </div>
                     </div>
-                    <div class="text-[#D4AF37] text-[10px] font-black italic">5.0</div>
+                    <div class="text-[#C9A84C] text-[10px] font-black italic">5.0</div>
                 </div>
             </div>
         </div>
@@ -188,8 +188,8 @@
                 labels: @json($labels),
                 datasets: [{
                     data: @json($visitorsData),
-                    borderColor: '#D4AF37',
-                    backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                    borderColor: '#C9A84C',
+                    backgroundColor: 'rgba(201,168,76, 0.1)',
                     fill: true,
                     tension: 0.4,
                     borderWidth: 3,
@@ -211,7 +211,7 @@
                 labels: ['Serviços', 'Produtos'],
                 datasets: [{
                     data: [{{ $receitaServicos }}, {{ $receitaProdutos }}],
-                    backgroundColor: ['#D4AF37', '#3f3f46'],
+                    backgroundColor: ['#C9A84C', '#3f3f46'],
                     borderWidth: 0
                 }]
             },

@@ -3,27 +3,27 @@
 @section('content')
 
     <style>
-        /* Scroll Customizado Elite Barber Nathan */
+        /* Scroll Customizado Lima's Studio Barber */
         .custom-scroll-agenda::-webkit-scrollbar { width: 4px; height: 4px; }
         .custom-scroll-agenda::-webkit-scrollbar-track { background: #0A0A0A; }
-        .custom-scroll-agenda::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+        .custom-scroll-agenda::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 10px; }
  
         @media (min-width: 1024px) {
             .table-viewport { max-height: 420px; overflow-y: auto; position: relative; }
-            .sticky-header th { position: sticky; top: 0; background-color: #121212; z-index: 20; }
+            .sticky-header th { position: sticky; top: 0; background-color: #141414; z-index: 20; }
             .main-container { height: 100vh; overflow: hidden; }
         }
  
         .btn-agendamento-elite {
-            background-color: #D4AF37; color: #000; border: 2px solid #fff;
+            background-color: #C9A84C; color: #000; border: 2px solid #fff;
             border-radius: 1.2rem; position: relative; font-weight: 900;
             letter-spacing: 0.1em; transition: all 0.3s ease; cursor: pointer;
         }
-        .btn-agendamento-elite:hover:not(:disabled) { transform: scale(1.02); box-shadow: 0 0 20px rgba(212,175,55,0.4); }
+        .btn-agendamento-elite:hover:not(:disabled) { transform: scale(1.02); box-shadow: 0 0 20px rgba(201,168,76,0.4); }
         .btn-agendamento-elite:disabled { opacity: 0.5; cursor: not-allowed; grayscale: 1; }
  
         .plus-icon-circle {
-            background: #000; color: #D4AF37; width: 22px; height: 22px;
+            background: #000; color: #C9A84C; width: 22px; height: 22px;
             display: flex; align-items: center; justify-content: center;
             border-radius: 50%; font-size: 12px; position: absolute; left: 15px;
         }
@@ -34,7 +34,7 @@
         .day-closed { color: #3f3f46 !important; text-decoration: line-through; cursor: not-allowed !important; }
     </style>
  
-    <div class="flex flex-col main-container bg-[#050505] text-white">
+    <div class="flex flex-col main-container bg-[#0A0A0A] text-white">
         @if(session('success'))
             <div class="bg-green-500/20 border-b border-green-500 text-green-500 px-6 py-3 text-xs font-black uppercase italic tracking-widest animate-pulse">
                 <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
@@ -48,15 +48,15 @@
  
         <header class="h-auto lg:h-20 border-b border-zinc-800 flex flex-col lg:flex-row items-center justify-between px-6 lg:px-10 py-4 lg:py-0 bg-[#0A0A0A]/50 backdrop-blur-xl shrink-0 gap-4">
             <div class="flex items-center gap-4 bg-zinc-900 px-4 py-2 rounded-xl border border-zinc-800 w-full lg:w-auto">
-                <i class="fas fa-calendar-alt text-[#D4AF37]"></i>
+                <i class="fas fa-calendar-alt text-[#C9A84C]"></i>
                 <span class="italic font-black uppercase text-xs tracking-widest">Controle Operacional</span>
             </div>
             <div class="flex items-center gap-4 border-l-0 lg:border-l border-zinc-800 pl-0 lg:pl-6 w-full lg:w-auto justify-end">
                 <div class="text-right">
                     <p class="text-xs font-black uppercase tracking-widest text-white leading-none mb-1">{{ auth()->user()->name }}</p>
-                    <p class="text-[9px] text-[#D4AF37] font-bold uppercase tracking-widest leading-none">Administrador</p>
+                    <p class="text-[9px] text-[#C9A84C] font-bold uppercase tracking-widest leading-none">Administrador</p>
                 </div>
-                <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=D4AF37&color=000&bold=true" class="w-10 h-10 rounded-xl border border-zinc-800 shadow-xl">
+                <img src="{{ asset('images/Logo-Limas.png') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-10 h-10 rounded-xl border border-zinc-800 shadow-xl">
             </div>
         </header>
  
@@ -71,17 +71,17 @@
                 </button>
 
                 {{-- PAINEL DE HORÁRIO DO DIA --}}
-                <div class="bg-[#121212] p-5 rounded-[2rem] border border-zinc-800 space-y-3">
+                <div class="bg-[#141414] p-5 rounded-[2rem] border border-zinc-800 space-y-3">
                     <div class="flex items-center justify-between">
                         <p class="text-[9px] font-black uppercase tracking-widest text-zinc-500">Horário do Dia</p>
                         @if($scheduleOverride)
-                            <span class="text-[8px] font-black uppercase bg-[#D4AF37]/20 text-[#D4AF37] px-2 py-0.5 rounded-full">Customizado</span>
+                            <span class="text-[8px] font-black uppercase bg-[#C9A84C]/20 text-[#C9A84C] px-2 py-0.5 rounded-full">Customizado</span>
                         @endif
                     </div>
                     <p class="text-xs font-bold text-white leading-relaxed">{{ $scheduleDescription }}</p>
                     <div class="flex gap-2 pt-1">
                         <button onclick="document.getElementById('modalHorario').showModal()"
-                                class="flex-1 py-2.5 bg-zinc-800 border border-zinc-700 text-zinc-300 rounded-xl text-[9px] font-black uppercase hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all">
+                                class="flex-1 py-2.5 bg-zinc-800 border border-zinc-700 text-zinc-300 rounded-xl text-[9px] font-black uppercase hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all">
                             <i class="fas fa-pen mr-1"></i> Editar
                         </button>
                         @if($scheduleOverride)
@@ -98,7 +98,7 @@
                     </div>
                 </div>
  
-                <div class="bg-[#121212] p-6 rounded-[2.5rem] border border-zinc-800 shadow-xl">
+                <div class="bg-[#141414] p-6 rounded-[2.5rem] border border-zinc-800 shadow-xl">
                     @php
                         $calBase       = \Carbon\Carbon::parse($dataSelecionada);
                         $mesAnterior   = $calBase->copy()->subMonth()->format('Y-m-d');
@@ -106,14 +106,14 @@
                     @endphp
                     <div class="flex items-center justify-between mb-6">
                         <a href="?date={{ $mesAnterior }}"
-                           class="w-7 h-7 flex items-center justify-center rounded-lg text-zinc-500 hover:bg-zinc-800 hover:text-[#D4AF37] transition-all">
+                           class="w-7 h-7 flex items-center justify-center rounded-lg text-zinc-500 hover:bg-zinc-800 hover:text-[#C9A84C] transition-all">
                             <i class="fas fa-chevron-left text-[10px]"></i>
                         </a>
                         <span class="font-black italic uppercase text-[11px] tracking-widest text-zinc-400">
                             {{ $calBase->translatedFormat('F, Y') }}
                         </span>
                         <a href="?date={{ $proximoMes }}"
-                           class="w-7 h-7 flex items-center justify-center rounded-lg text-zinc-500 hover:bg-zinc-800 hover:text-[#D4AF37] transition-all">
+                           class="w-7 h-7 flex items-center justify-center rounded-lg text-zinc-500 hover:bg-zinc-800 hover:text-[#C9A84C] transition-all">
                             <i class="fas fa-chevron-right text-[10px]"></i>
                         </a>
                     </div>
@@ -145,7 +145,7 @@
                             class="flex items-center justify-center text-[10px] w-7 h-7 rounded-lg transition-all
                                   {{ $fechadoPermanente ? 'day-closed opacity-20' : 'cursor-pointer hover:bg-zinc-800' }}
                                   {{ ($fechado && !$fechadoPermanente) ? 'text-red-500/60 line-through' : '' }}
-                                  {{ $ehHojeNoCalendario ? 'bg-[#D4AF37] text-black font-black shadow-lg' : ($fechadoPermanente ? '' : 'text-zinc-600') }}">
+                                  {{ $ehHojeNoCalendario ? 'bg-[#C9A84C] text-black font-black shadow-lg' : ($fechadoPermanente ? '' : 'text-zinc-600') }}">
                                 {{ $dia }}
                             </span>
                         @endfor
@@ -156,7 +156,7 @@
                 </div>
             </div>
  
-            <div class="flex-1 p-4 lg:p-10 space-y-8 bg-[#050505] overflow-y-auto custom-scroll-agenda">
+            <div class="flex-1 p-4 lg:p-10 space-y-8 bg-[#0A0A0A] overflow-y-auto custom-scroll-agenda">
                 @if($estaFechado)
                     <div class="bg-zinc-900 border border-zinc-800 p-10 rounded-[2.5rem] text-center">
                         <i class="fas fa-store-slash text-4xl text-zinc-700 mb-4"></i>
@@ -166,17 +166,17 @@
                 @endif
                 @if(!$estaFechado)
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-                        <div class="bg-[#121212] p-6 rounded-3xl border border-zinc-800 shadow-xl">
+                        <div class="bg-[#141414] p-6 rounded-3xl border border-zinc-800 shadow-xl">
                             <p class="text-zinc-500 text-[9px] font-black uppercase italic mb-1">Agendamentos do Dia</p>
                             <h3 class="text-3xl font-black italic">{{ str_pad(count($reservas), 2, '0', STR_PAD_LEFT) }}</h3>
                         </div>
-                        <div class="bg-[#121212] p-6 rounded-3xl border border-zinc-800 border-l-2 border-[#D4AF37] shadow-xl">
-                            <p class="text-[#D4AF37] text-[9px] font-black uppercase italic mb-1">Receita Prevista (Dia)</p>
+                        <div class="bg-[#141414] p-6 rounded-3xl border border-zinc-800 border-l-2 border-[#C9A84C] shadow-xl">
+                            <p class="text-[#C9A84C] text-[9px] font-black uppercase italic mb-1">Receita Prevista (Dia)</p>
                             <h3 class="text-2xl font-black italic font-mono">R$ {{ number_format($faturamentoDia, 2, ',', '.') }}</h3>
                         </div>
                     </div>
  
-                    <div class="bg-[#121212] border border-zinc-800 rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col mb-10">
+                    <div class="bg-[#141414] border border-zinc-800 rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col mb-10">
                         <div class="px-6 lg:px-10 py-6 border-b border-zinc-800 bg-zinc-900/10 flex justify-between items-center">
                             <h3 class="font-black italic uppercase tracking-[0.2em] text-[10px] text-white">Reservas Confirmadas</h3>
                             <div class="text-[9px] font-black text-zinc-600 uppercase">{{ count($reservas) }} Registros</div>
@@ -186,7 +186,7 @@
                             <table class="w-full text-left border-collapse min-w-[750px]">
                                 <thead class="sticky-header">
                                 <tr class="text-zinc-600 uppercase tracking-[0.2em] text-[9px]">
-                                    <th class="py-6 px-6 lg:px-10 font-black text-[#D4AF37]">Horário</th>
+                                    <th class="py-6 px-6 lg:px-10 font-black text-[#C9A84C]">Horário</th>
                                     <th class="py-6 font-black uppercase">Cliente</th>
                                     <th class="py-6 font-black text-center uppercase">Serviço</th>
                                     <th class="py-6 font-black text-center uppercase">Valores</th>
@@ -196,7 +196,7 @@
                                 <tbody class="text-zinc-300 text-[11px]">
                                 @forelse($reservas as $reserva)
                                     <tr class="border-b border-zinc-800/30 hover:bg-zinc-900/10 transition-all {{ in_array($reserva->status, ['finished', 'canceled', 'expired']) ? 'row-finished' : '' }}">
-                                        <td class="py-6 px-6 lg:px-10 font-mono text-[#D4AF37] font-black italic text-xs">{{ $reserva->time }}</td>
+                                        <td class="py-6 px-6 lg:px-10 font-mono text-[#C9A84C] font-black italic text-xs">{{ $reserva->time }}</td>
                                         <td class="py-6 font-black uppercase italic">{{ $reserva->user->name ?? $reserva->client_name }}</td>
                                         <td class="py-6 text-center text-zinc-500 font-bold uppercase tracking-tighter whitespace-nowrap">{{ $reserva->service_label }}</td>
  
@@ -242,7 +242,7 @@
                                                 @if($reserva->status == 'confirmed' || $reserva->status == 'pending')
                                                     @php
                                                         $telefoneReserva = preg_replace('/[^0-9]/', '', $reserva->user->whatsapp ?? '');
-                                                        $msgLembrete = "Olá, " . ($reserva->user->name ?? $reserva->client_name) . "! 💈 Lembrete da Barber Nathan: seu horário para " . $reserva->service->name . " está confirmado para hoje às " . $reserva->time . ". Te esperamos!";
+                                                        $msgLembrete = "Olá, " . ($reserva->user->name ?? $reserva->client_name) . "! 💈 Lembrete do Lima's Studio Barber: seu horário para " . $reserva->service->name . " está confirmado para hoje às " . $reserva->time . ". Te esperamos!";
                                                         $urlLembrete = "https://wa.me/55" . $telefoneReserva . "?text=" . urlencode($msgLembrete);
                                                     @endphp
  
@@ -288,24 +288,24 @@
  
     <dialog id="modalAvulso" class="bg-[#0A0A0A] border border-zinc-800 rounded-[2.5rem] p-0 text-white w-[95%] max-w-lg shadow-[0_0_100px_rgba(0,0,0,1)] outline-none backdrop:bg-black/90">
         <div class="px-8 py-6 border-b border-zinc-800 bg-zinc-900/50 flex justify-between items-center">
-            <h3 class="text-xl font-black italic uppercase tracking-widest text-[#D4AF37]">Novo Agendamento</h3>
+            <h3 class="text-xl font-black italic uppercase tracking-widest text-[#C9A84C]">Novo Agendamento</h3>
             <button type="button" onclick="document.getElementById('modalAvulso').close()" class="text-zinc-600 hover:text-white"><i class="fas fa-times"></i></button>
         </div>
         <form action="{{ route('admin.appointments.avulso') }}" method="POST" class="p-6 lg:p-8 space-y-6">
             @csrf
             <div class="space-y-2">
                 <label class="text-[10px] font-black uppercase text-zinc-500 ml-2">Data</label>
-                <input type="date" name="date" id="inputDate" value="{{ $dataSelecionada }}" required class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#D4AF37] outline-none">
+                <input type="date" name="date" id="inputDate" value="{{ $dataSelecionada }}" required class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none">
             </div>
             <div id="formContent">
                 <div class="space-y-2 mb-6">
                     <label class="text-[10px] font-black uppercase text-zinc-500 ml-2">Cliente</label>
-                    <input type="text" name="client_name" placeholder="Ex: Cliente Avulso" required class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#D4AF37] outline-none italic font-bold uppercase">
+                    <input type="text" name="client_name" placeholder="Ex: Cliente Avulso" required class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none italic font-bold uppercase">
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="space-y-2">
                         <label class="text-[10px] font-black uppercase text-zinc-500 ml-2">Serviço</label>
-                        <select name="service_id" id="serviceSelect" required class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#D4AF37] outline-none">
+                        <select name="service_id" id="serviceSelect" required class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none">
                             @foreach(\App\Models\Service::all() as $s)
                                 <option value="{{ $s->id }}" data-duration="{{ $s->is_combo ? 60 : 30 }}">
                                     {{ $s->name }} ({{ $s->is_combo ? '1h' : '30min' }})
@@ -315,12 +315,12 @@
                     </div>
                     <div class="space-y-2">
                         <label class="text-[10px] font-black uppercase text-zinc-500 ml-2">Horário</label>
-                        <select name="time" id="timeSelect" required class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#D4AF37] outline-none font-mono"></select>
+                        <select name="time" id="timeSelect" required class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none font-mono"></select>
                     </div>
                 </div>
                 <div class="pt-8 flex gap-4">
                     <button type="button" onclick="document.getElementById('modalAvulso').close()" class="flex-1 bg-zinc-900 text-zinc-500 py-4 rounded-2xl font-black uppercase text-[10px]">Voltar</button>
-                    <button type="submit" id="btnSubmitAvulso" class="flex-[2] bg-[#D4AF37] text-black py-4 rounded-2xl font-black uppercase italic tracking-widest text-[11px] shadow-lg">Finalizar</button>
+                    <button type="submit" id="btnSubmitAvulso" class="flex-[2] bg-[#C9A84C] text-black py-4 rounded-2xl font-black uppercase italic tracking-widest text-[11px] shadow-lg">Finalizar</button>
                 </div>
             </div>
             <div id="closedMessage" class="hidden text-center py-10">
@@ -334,7 +334,7 @@
     <dialog id="modalHorario" class="bg-[#0A0A0A] border border-zinc-800 rounded-[2.5rem] p-0 text-white w-[95%] max-w-lg shadow-[0_0_100px_rgba(0,0,0,1)] outline-none backdrop:bg-black/90">
         <div class="px-8 py-6 border-b border-zinc-800 bg-zinc-900/50 flex justify-between items-center">
             <div>
-                <h3 class="text-xl font-black italic uppercase tracking-widest text-[#D4AF37]">Horário do Dia</h3>
+                <h3 class="text-xl font-black italic uppercase tracking-widest text-[#C9A84C]">Horário do Dia</h3>
                 <p class="text-[10px] text-zinc-500 font-bold mt-0.5">{{ \Carbon\Carbon::parse($dataSelecionada)->translatedFormat('l, d \d\e F') }}</p>
             </div>
             <button type="button" onclick="document.getElementById('modalHorario').close()" class="text-zinc-600 hover:text-white"><i class="fas fa-times"></i></button>
@@ -367,13 +367,13 @@
                         <label class="text-[10px] font-black uppercase text-zinc-500 ml-2">Abertura</label>
                         <input type="time" name="open_time" step="1800"
                                value="{{ substr($scheduleOverride?->open_time ?? '08:30', 0, 5) }}"
-                               class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#D4AF37] outline-none font-mono">
+                               class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none font-mono">
                     </div>
                     <div class="space-y-2">
                         <label class="text-[10px] font-black uppercase text-zinc-500 ml-2">Fechamento</label>
                         <input type="time" name="close_time" step="1800"
                                value="{{ substr($scheduleOverride?->close_time ?? '19:00', 0, 5) }}"
-                               class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#D4AF37] outline-none font-mono">
+                               class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none font-mono">
                     </div>
                 </div>
 
@@ -381,7 +381,7 @@
                 <div class="space-y-3">
                     <label class="flex items-center gap-3 cursor-pointer">
                         <div class="w-8 h-5 rounded-full relative flex-shrink-0 transition-all"
-                             :class="hasBreak ? 'bg-[#D4AF37]' : 'bg-zinc-700'"
+                             :class="hasBreak ? 'bg-[#C9A84C]' : 'bg-zinc-700'"
                              @click="hasBreak = !hasBreak">
                             <div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all"
                                  :class="hasBreak ? 'left-3.5' : 'left-0.5'"></div>
@@ -394,13 +394,13 @@
                             <label class="text-[10px] font-black uppercase text-zinc-500 ml-2">Início Almoço</label>
                             <input type="time" name="break_start" step="1800"
                                    value="{{ substr($scheduleOverride?->break_start ?? '11:30', 0, 5) }}"
-                                   class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#D4AF37] outline-none font-mono">
+                                   class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none font-mono">
                         </div>
                         <div class="space-y-2">
                             <label class="text-[10px] font-black uppercase text-zinc-500 ml-2">Retorno Almoço</label>
                             <input type="time" name="break_end" step="1800"
                                    value="{{ substr($scheduleOverride?->break_end ?? '14:00', 0, 5) }}"
-                                   class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#D4AF37] outline-none font-mono">
+                                   class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none font-mono">
                         </div>
                     </div>
                 </div>
@@ -411,7 +411,7 @@
                     <input type="text" name="notes" maxlength="120"
                            value="{{ $scheduleOverride?->notes }}"
                            placeholder="Ex: Feriado, saída mais cedo..."
-                           class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#D4AF37] outline-none italic">
+                           class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm text-white focus:border-[#C9A84C] outline-none italic">
                 </div>
             </div>
 
@@ -419,7 +419,7 @@
                 <button type="button" onclick="document.getElementById('modalHorario').close()"
                         class="flex-1 bg-zinc-900 text-zinc-500 py-4 rounded-2xl font-black uppercase text-[10px]">Cancelar</button>
                 <button type="submit"
-                        class="flex-[2] bg-[#D4AF37] text-black py-4 rounded-2xl font-black uppercase italic tracking-widest text-[11px] shadow-lg">
+                        class="flex-[2] bg-[#C9A84C] text-black py-4 rounded-2xl font-black uppercase italic tracking-widest text-[11px] shadow-lg">
                     <i class="fas fa-save mr-2"></i> Salvar Horário
                 </button>
             </div>

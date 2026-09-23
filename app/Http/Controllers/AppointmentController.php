@@ -212,7 +212,7 @@ class AppointmentController extends Controller
             $payerEmail = $user?->email ?? null;
             if (! $payerEmail || ! filter_var($payerEmail, FILTER_VALIDATE_EMAIL)) {
                 $identifier = $user?->whatsapp ?? $user?->id ?? Str::slug($displayName) . '_' . time();
-                $payerEmail = 'cliente_' . preg_replace('/[^0-9a-z_]/', '', (string) $identifier) . '@nathandocorte.com';
+                $payerEmail = 'cliente_' . preg_replace('/[^0-9a-z_]/', '', (string) $identifier) . '@limasstudiobarber.com';
             }
 
             MercadoPagoConfig::setAccessToken(config('services.mercadopago.token'));
@@ -221,7 +221,7 @@ class AppointmentController extends Controller
             $serviceLabel = $services->pluck('name')->join(', ');
             $payment = $client->create([
                 'transaction_amount' => $amount,
-                'description'        => "Reserva Barber Nathan: {$serviceLabel}",
+                'description'        => "Reserva Lima's Studio Barber: {$serviceLabel}",
                 'payment_method_id'  => 'pix',
                 'payer'              => [
                     'email'      => $payerEmail,

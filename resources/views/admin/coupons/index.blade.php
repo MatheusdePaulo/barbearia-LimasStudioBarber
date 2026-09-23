@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="flex flex-col min-h-screen bg-[#050505]"
+<div class="flex flex-col min-h-screen bg-[#0A0A0A]"
      x-data="{ openCreate: false, openEdit: false, editCoupon: null }">
 
     <div class="p-4 sm:p-8 space-y-6 lg:space-y-8">
@@ -13,7 +13,7 @@
                 <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mt-1">{{ $coupons->count() }} cupom{{ $coupons->count() !== 1 ? 'ns' : '' }} cadastrado{{ $coupons->count() !== 1 ? 's' : '' }}</p>
             </div>
             <button @click="openCreate = true"
-                    class="bg-[#D4AF37] text-black px-6 py-3 rounded-xl text-[10px] font-black uppercase shadow-lg shadow-[#D4AF37]/10 flex items-center gap-2 hover:scale-105 transition-all">
+                    class="bg-[#C9A84C] text-black px-6 py-3 rounded-xl text-[10px] font-black uppercase shadow-lg shadow-[#C9A84C]/10 flex items-center gap-2 hover:scale-105 transition-all">
                 <i class="fas fa-plus"></i> Novo Cupom
             </button>
         </div>
@@ -26,7 +26,7 @@
         @endif
 
         {{-- Tabela de cupons --}}
-        <div class="bg-[#121212] border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl">
+        <div class="bg-[#141414] border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
                     <thead>
@@ -53,11 +53,11 @@
                                 };
                             @endphp
                             <tr class="hover:bg-zinc-800/20 transition-colors">
-                                <td class="px-6 py-4 font-mono font-black text-[#D4AF37] text-sm tracking-widest">{{ $coupon->code }}</td>
+                                <td class="px-6 py-4 font-mono font-black text-[#C9A84C] text-sm tracking-widest">{{ $coupon->code }}</td>
                                 <td class="px-6 py-4 font-black text-white">{{ $coupon->discount_percent }}%</td>
                                 <td class="px-6 py-4">
                                     <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full border
-                                        {{ $coupon->type === 'review' ? 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/30' : 'bg-zinc-800 text-zinc-400 border-zinc-700' }}">
+                                        {{ $coupon->type === 'review' ? 'bg-[#C9A84C]/10 text-[#C9A84C] border-[#C9A84C]/30' : 'bg-zinc-800 text-zinc-400 border-zinc-700' }}">
                                         {{ $coupon->type === 'review' ? 'Avaliação' : 'Manual' }}
                                     </span>
                                 </td>
@@ -126,11 +126,11 @@
          class="fixed inset-0 z-50 flex items-center justify-center p-4"
          @keydown.escape.window="openCreate = false">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="openCreate = false"></div>
-        <div class="relative bg-[#121212] border border-zinc-800 rounded-[2.5rem] shadow-2xl w-full max-w-md overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1.5 bg-[#D4AF37]"></div>
+        <div class="relative bg-[#141414] border border-zinc-800 rounded-[2.5rem] shadow-2xl w-full max-w-md overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-[#C9A84C]"></div>
             <div class="p-8 space-y-5">
                 <div>
-                    <p class="text-[9px] font-black uppercase text-[#D4AF37] tracking-widest mb-1">Novo Cupom</p>
+                    <p class="text-[9px] font-black uppercase text-[#C9A84C] tracking-widest mb-1">Novo Cupom</p>
                     <h3 class="text-xl font-black italic text-white uppercase tracking-tight">Criar Cupom Manual</h3>
                 </div>
 
@@ -139,24 +139,24 @@
                     <div class="space-y-1">
                         <label class="text-[9px] font-black uppercase text-zinc-500 ml-2 italic tracking-widest">Código <span class="text-zinc-700">(deixe em branco para gerar)</span></label>
                         <input type="text" name="code" placeholder="EX: PROMO10"
-                               class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm uppercase font-mono outline-none focus:border-[#D4AF37] placeholder-zinc-700">
+                               class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm uppercase font-mono outline-none focus:border-[#C9A84C] placeholder-zinc-700">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="space-y-1">
                             <label class="text-[9px] font-black uppercase text-zinc-500 ml-2 italic tracking-widest">Desconto %</label>
                             <input type="number" name="discount_percent" min="1" max="100" value="10" required
-                                   class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#D4AF37]">
+                                   class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#C9A84C]">
                         </div>
                         <div class="space-y-1">
                             <label class="text-[9px] font-black uppercase text-zinc-500 ml-2 italic tracking-widest">Máx. Usos <span class="text-zinc-700">(0=∞)</span></label>
                             <input type="number" name="max_uses" min="0" value="1" required
-                                   class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#D4AF37]">
+                                   class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#C9A84C]">
                         </div>
                     </div>
                     <div class="space-y-1">
                         <label class="text-[9px] font-black uppercase text-zinc-500 ml-2 italic tracking-widest">Validade <span class="text-zinc-700">(opcional)</span></label>
                         <input type="date" name="expires_at" style="color-scheme: dark;"
-                               class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#D4AF37]">
+                               class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#C9A84C]">
                     </div>
                     <div class="flex gap-3 pt-2">
                         <button type="button" @click="openCreate = false"
@@ -164,7 +164,7 @@
                             Cancelar
                         </button>
                         <button type="submit"
-                                class="flex-1 py-3 bg-[#D4AF37] hover:bg-[#f3ca4a] text-black font-black uppercase rounded-2xl text-[11px] tracking-widest transition-all">
+                                class="flex-1 py-3 bg-[#C9A84C] hover:bg-[#E2C97E] text-black font-black uppercase rounded-2xl text-[11px] tracking-widest transition-all">
                             Criar Cupom
                         </button>
                     </div>
@@ -178,11 +178,11 @@
          class="fixed inset-0 z-50 flex items-center justify-center p-4"
          @keydown.escape.window="openEdit = false">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="openEdit = false"></div>
-        <div class="relative bg-[#121212] border border-zinc-800 rounded-[2.5rem] shadow-2xl w-full max-w-md overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1.5 bg-[#D4AF37]"></div>
+        <div class="relative bg-[#141414] border border-zinc-800 rounded-[2.5rem] shadow-2xl w-full max-w-md overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-[#C9A84C]"></div>
             <div class="p-8 space-y-5" x-show="editCoupon">
                 <div>
-                    <p class="text-[9px] font-black uppercase text-[#D4AF37] tracking-widest mb-1">Editar</p>
+                    <p class="text-[9px] font-black uppercase text-[#C9A84C] tracking-widest mb-1">Editar</p>
                     <h3 class="text-xl font-black italic text-white uppercase tracking-tight" x-text="'Cupom ' + (editCoupon?.code ?? '')"></h3>
                 </div>
 
@@ -194,20 +194,20 @@
                                 <label class="text-[9px] font-black uppercase text-zinc-500 ml-2 italic tracking-widest">Desconto %</label>
                                 <input type="number" name="discount_percent" min="1" max="100"
                                        :value="editCoupon.discount_percent"
-                                       class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#D4AF37]">
+                                       class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#C9A84C]">
                             </div>
                             <div class="space-y-1">
                                 <label class="text-[9px] font-black uppercase text-zinc-500 ml-2 italic tracking-widest">Máx. Usos</label>
                                 <input type="number" name="max_uses" min="0"
                                        :value="editCoupon.max_uses"
-                                       class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#D4AF37]">
+                                       class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#C9A84C]">
                             </div>
                         </div>
                         <div class="space-y-1">
                             <label class="text-[9px] font-black uppercase text-zinc-500 ml-2 italic tracking-widest">Validade</label>
                             <input type="date" name="expires_at" style="color-scheme: dark;"
                                    :value="editCoupon.expires_at ? editCoupon.expires_at.substring(0, 10) : ''"
-                                   class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#D4AF37]">
+                                   class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3 px-4 text-white text-sm outline-none focus:border-[#C9A84C]">
                         </div>
                         <div class="flex gap-3 pt-2">
                             <button type="button" @click="openEdit = false"
@@ -215,7 +215,7 @@
                                 Cancelar
                             </button>
                             <button type="submit"
-                                    class="flex-1 py-3 bg-[#D4AF37] hover:bg-[#f3ca4a] text-black font-black uppercase rounded-2xl text-[11px] tracking-widest transition-all">
+                                    class="flex-1 py-3 bg-[#C9A84C] hover:bg-[#E2C97E] text-black font-black uppercase rounded-2xl text-[11px] tracking-widest transition-all">
                                 Salvar
                             </button>
                         </div>

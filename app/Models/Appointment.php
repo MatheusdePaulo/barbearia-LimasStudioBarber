@@ -66,7 +66,7 @@ class Appointment extends Model
     {
         $phone = preg_replace('/\D/', '', $this->user?->whatsapp ?? '');
         $label = $this->service_label;
-        $text = "Olá {$this->user?->name}, aqui é do Barber Nathan! Passando para lembrar do seu horário de {$label} hoje às {$this->time}. Confirmado?";
+        $text = "Olá {$this->user?->name}, aqui é do Lima's Studio Barber! Passando para lembrar do seu horário de {$label} hoje às {$this->time}. Confirmado?";
         return "https://wa.me/55{$phone}?text=" . urlencode($text);
     }
 }

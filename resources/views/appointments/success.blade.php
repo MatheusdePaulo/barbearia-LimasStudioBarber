@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagamento | Barber Nathan</title>
+    <title>Pagamento | Lima's Studio Barber</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-[#050505] text-white flex items-center justify-center min-h-screen p-6">
+<body class="bg-[#0A0A0A] text-white flex items-center justify-center min-h-screen p-6">
 
 <div x-data="pagamento()" x-init="init()"
-     class="max-w-md w-full p-8 bg-[#121212] border border-zinc-800 rounded-3xl text-center shadow-2xl transition-all duration-500">
+     class="max-w-md w-full p-8 bg-[#141414] border border-zinc-800 rounded-3xl text-center shadow-2xl transition-all duration-500">
 
     <!-- ÍCONE DINÂMICO -->
     <div class="mb-6 flex justify-center">
@@ -56,12 +56,12 @@
                 <span class="text-[11px] font-black uppercase tracking-widest text-zinc-500">Tempo restante para pagar</span>
             </div>
             <div class="text-4xl font-black font-mono tracking-widest"
-                 :class="countdown <= 60 ? 'text-red-500 animate-pulse' : 'text-[#D4AF37]'"
+                 :class="countdown <= 60 ? 'text-red-500 animate-pulse' : 'text-[#C9A84C]'"
                  x-text="formatCountdown(countdown)">
             </div>
             <div class="mt-3 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
                 <div class="h-full rounded-full transition-all duration-1000"
-                     :class="countdown <= 60 ? 'bg-red-500' : 'bg-[#D4AF37]'"
+                     :class="countdown <= 60 ? 'bg-red-500' : 'bg-[#C9A84C]'"
                      :style="'width: ' + Math.round((countdown / totalSeconds) * 100) + '%'">
                 </div>
             </div>
@@ -74,7 +74,7 @@
         <div class="space-y-3">
             <div class="flex justify-between items-center">
                 <span class="text-zinc-400 text-sm">Serviço:</span>
-                <span class="font-bold text-[#D4AF37]">{{ $appointment->service_label }}</span>
+                <span class="font-bold text-[#C9A84C]">{{ $appointment->service_label }}</span>
             </div>
             <div class="flex justify-between items-center">
                 <span class="text-zinc-400 text-sm">Data:</span>
@@ -86,7 +86,7 @@
             </div>
             <div class="flex justify-between items-center border-t border-zinc-800 pt-3 mt-1">
                 <span class="text-zinc-400 text-sm">Valor do PIX:</span>
-                <span class="font-black text-[#D4AF37] text-lg">R$ {{ number_format($appointment->deposit_amount, 2, ',', '.') }}</span>
+                <span class="font-black text-[#C9A84C] text-lg">R$ {{ number_format($appointment->deposit_amount, 2, ',', '.') }}</span>
             </div>
         </div>
     </div>
@@ -111,7 +111,7 @@
     <!-- PIX (só quando pending) -->
     <template x-if="status === 'pending'">
         <div class="border-t border-zinc-800 pt-6 mb-6">
-            <h4 class="text-[#D4AF37] font-bold text-xs uppercase mb-4 tracking-widest italic">Pague via PIX</h4>
+            <h4 class="text-[#C9A84C] font-bold text-xs uppercase mb-4 tracking-widest italic">Pague via PIX</h4>
 
             <div class="bg-white p-3 rounded-xl inline-block mb-5 shadow-lg">
                 @if(isset($appointment->pix_qr_64))
@@ -125,7 +125,7 @@
                 <input type="text" readonly value="{{ $appointment->pix_code ?? 'Erro ao gerar código' }}"
                        id="pixCode" class="w-full bg-black border border-zinc-800 text-zinc-500 text-[10px] p-4 pr-12 rounded-xl outline-none">
                 <button @click="navigator.clipboard.writeText(document.getElementById('pixCode').value); copied = true; setTimeout(() => copied = false, 2000)"
-                        type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-[#D4AF37]">
+                        type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-[#C9A84C]">
                     <i class="fas" :class="copied ? 'fa-check text-green-500' : 'fa-copy'"></i>
                 </button>
             </div>
@@ -146,7 +146,7 @@
                         <button type="button"
                                 @click="reviewRating = star"
                                 class="text-3xl transition-transform hover:scale-110 active:scale-95"
-                                :class="star <= reviewRating ? 'text-[#D4AF37]' : 'text-zinc-700'">
+                                :class="star <= reviewRating ? 'text-[#C9A84C]' : 'text-zinc-700'">
                             ★
                         </button>
                     </template>
@@ -156,7 +156,7 @@
                 <textarea x-model="reviewComment"
                           placeholder="Deixe um comentário (opcional)..."
                           rows="3"
-                          class="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-white text-sm resize-none outline-none focus:border-[#D4AF37] placeholder-zinc-700"></textarea>
+                          class="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-white text-sm resize-none outline-none focus:border-[#C9A84C] placeholder-zinc-700"></textarea>
 
                 <p x-show="reviewError" x-cloak class="text-red-400 text-[10px] font-bold">Selecione uma nota antes de enviar.</p>
 
@@ -174,11 +174,11 @@
                 </div>
 
                 @if($reviewCouponActive)
-                <div x-show="!couponCode" class="bg-[#121212] border border-[#D4AF37]/30 rounded-2xl p-5 text-center space-y-3">
+                <div x-show="!couponCode" class="bg-[#141414] border border-[#C9A84C]/30 rounded-2xl p-5 text-center space-y-3">
                     <p class="text-zinc-300 text-sm leading-relaxed">
-                        Avalie também no <strong class="text-white">Google</strong> e ganhe <strong class="text-[#D4AF37]">{{ $reviewCouponPercent }}% de desconto</strong> no seu próximo corte 👇
+                        Avalie também no <strong class="text-white">Google</strong> e ganhe <strong class="text-[#C9A84C]">{{ $reviewCouponPercent }}% de desconto</strong> no seu próximo corte 👇
                     </p>
-                    <a href="https://www.google.com/search?q=nathan+do+corte+cascavel+ce#lrd=0x7b897004e3287eb:0x656e79c155a6c506,1,"
+                    <a href="https://www.google.com/search?q=lima%27s+studio+barber+cascavel+ce"
                        target="_blank"
                        @click="requestCoupon()"
                        class="inline-flex items-center gap-2 bg-white text-[#1A1C1E] font-black uppercase text-[11px] tracking-widest px-6 py-3 rounded-xl hover:bg-zinc-100 transition-all shadow-lg">
@@ -187,10 +187,10 @@
                 </div>
 
                 <!-- Cupom gerado -->
-                <div x-show="couponCode" x-cloak class="bg-[#D4AF37]/10 border border-[#D4AF37]/40 rounded-2xl p-5 text-center space-y-3">
+                <div x-show="couponCode" x-cloak class="bg-[#C9A84C]/10 border border-[#C9A84C]/40 rounded-2xl p-5 text-center space-y-3">
                     <p class="text-[10px] font-black uppercase text-zinc-500 tracking-widest">Seu cupom de desconto</p>
                     <div class="flex items-center justify-center gap-3">
-                        <span x-text="couponCode" class="text-[#D4AF37] font-black text-2xl tracking-widest font-mono"></span>
+                        <span x-text="couponCode" class="text-[#C9A84C] font-black text-2xl tracking-widest font-mono"></span>
                         <button type="button"
                                 @click="copyCoupon()"
                                 class="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-white font-black text-[10px] uppercase rounded-lg transition-all">
@@ -204,7 +204,7 @@
 
             <!-- Botão Voltar -->
             <a href="{{ url('/') }}"
-               class="block w-full py-4 bg-[#D4AF37] text-black font-black uppercase rounded-xl hover:bg-[#f3ca4a] transition-all tracking-widest text-center">
+               class="block w-full py-4 bg-[#C9A84C] text-black font-black uppercase rounded-xl hover:bg-[#E2C97E] transition-all tracking-widest text-center">
                 Voltar ao Início
             </a>
         </div>

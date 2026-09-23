@@ -256,7 +256,7 @@ class AdminController extends Controller
         $settings = Setting::pluck('value', 'key');
 
         $barbearia = [
-            'nome' => $settings['unit_name'] ?? 'Barber Nathan',
+            'nome' => $settings['unit_name'] ?? "Lima's Studio Barber",
             'whatsapp' => $settings['unit_whatsapp'] ?? '(85) 90000-0000',
             'email' => auth()->user()->email
         ];

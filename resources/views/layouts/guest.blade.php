@@ -16,7 +16,7 @@
     <!-- Font Awesome para os ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-[#050505] antialiased">
+<body class="bg-[#0A0A0A] antialiased">
 {{-- Removemos as classes de centralização e fundo cinza daqui --}}
 {{-- para que as views de login/register controlem o próprio layout --}}
 <div class="min-h-screen">

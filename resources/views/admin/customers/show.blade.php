@@ -5,8 +5,8 @@
 
         <!-- Header com botão de voltar -->
         <div class="flex items-center justify-between">
-            <a href="{{ route('admin.customers') }}" class="flex items-center gap-2 text-zinc-500 hover:text-[#D4AF37] transition-all group">
-                <div class="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:border-[#D4AF37]/50">
+            <a href="{{ route('admin.customers') }}" class="flex items-center gap-2 text-zinc-500 hover:text-[#C9A84C] transition-all group">
+                <div class="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:border-[#C9A84C]/50">
                     <i class="fas fa-arrow-left text-[10px]"></i>
                 </div>
                 <span class="text-[10px] font-black uppercase tracking-[0.2em]">Voltar para lista</span>
@@ -14,19 +14,19 @@
         </div>
 
         <!-- Card de Perfil Principal -->
-        <div class="bg-[#121212] border border-zinc-800 rounded-[2.5rem] p-8 relative overflow-hidden">
+        <div class="bg-[#141414] border border-zinc-800 rounded-[2.5rem] p-8 relative overflow-hidden">
             <div class="absolute top-0 right-0 p-8 opacity-5">
                 <i class="fas fa-user text-9xl"></i>
             </div>
 
             <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
-                <div class="w-24 h-24 rounded-full bg-zinc-900 border-2 border-[#D4AF37] shadow-[0_0_30px_rgba(212,175,55,0.15)] flex items-center justify-center text-3xl font-black text-[#D4AF37]">
+                <div class="w-24 h-24 rounded-full bg-zinc-900 border-2 border-[#C9A84C] shadow-[0_0_30px_rgba(201,168,76,0.15)] flex items-center justify-center text-3xl font-black text-[#C9A84C]">
                     {{ strtoupper(substr($customer->name, 0, 2)) }}
                 </div>
                 <div class="text-center md:text-left">
                     <h1 class="text-4xl font-black italic text-white uppercase tracking-tighter">{{ $customer->name }}</h1>
                     <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-2">
-                    <span class="text-[#D4AF37] font-mono text-sm flex items-center gap-2">
+                    <span class="text-[#C9A84C] font-mono text-sm flex items-center gap-2">
                         <i class="fab fa-whatsapp"></i> {{ $customer->whatsapp }}
                     </span>
                         <span class="text-zinc-500 font-mono text-sm flex items-center gap-2">
@@ -39,9 +39,9 @@
 
         <!-- Grid de Status Rápidos -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="bg-gradient-to-br from-[#121212] to-zinc-900 border border-zinc-800 p-6 rounded-3xl">
+            <div class="bg-gradient-to-br from-[#141414] to-zinc-900 border border-zinc-800 p-6 rounded-3xl">
                 <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
+                    <div class="w-10 h-10 rounded-xl bg-[#C9A84C]/10 flex items-center justify-center text-[#C9A84C]">
                         <i class="fas fa-cut"></i>
                     </div>
                     <div>
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="bg-gradient-to-br from-[#121212] to-zinc-900 border border-zinc-800 p-6 rounded-3xl">
+            <div class="bg-gradient-to-br from-[#141414] to-zinc-900 border border-zinc-800 p-6 rounded-3xl">
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center text-red-500">
                         <i class="fas fa-calendar-times"></i>
@@ -65,7 +65,7 @@
         </div>
 
         <!-- Tabela de Histórico Refinada -->
-        <div class="bg-[#121212] border border-zinc-800 rounded-[2rem] overflow-hidden shadow-2xl">
+        <div class="bg-[#141414] border border-zinc-800 rounded-[2rem] overflow-hidden shadow-2xl">
             <div class="px-8 py-6 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/30">
                 <h3 class="text-white font-black uppercase italic text-sm tracking-widest">Histórico de Atendimentos</h3>
                 <i class="fas fa-history text-zinc-700"></i>

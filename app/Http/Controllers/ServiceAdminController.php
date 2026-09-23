@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ServiceAdminController extends Controller
 {
     /**
-     * Lista os serviços existentes para o Nathan gerenciar os valores e promoções.
+     * Lista os serviços existentes para o Lima's gerenciar os valores e promoções.
      */
     public function index()
     {

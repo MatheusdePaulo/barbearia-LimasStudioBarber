@@ -3,37 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Barber Nathan</title>
+    <title>Admin | Lima's Studio Barber</title>
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
-        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
+        body { background-color: #0A0A0A; color: white; font-family: 'Inter', sans-serif; }
         .custom-scroll::-webkit-scrollbar { width: 4px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 10px; }
 
         /* Controle de visibilidade via JS para o mobile */
         #sidebar.active { transform: translateX(0); }
         #sidebar-overlay.active { display: block; }
     </style>
 </head>
-<body class="flex h-screen bg-[#050505] overflow-hidden">
+<body class="flex h-screen bg-[#0A0A0A] overflow-hidden">
 
 {{-- Variáveis de Estilo --}}
 @php
-    $activeClass = 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/20 font-black italic shadow-[inset_0_0_10px_rgba(212,175,55,0.05)]';
+    $activeClass = 'bg-[#C9A84C]/10 text-[#C9A84C] border-[#C9A84C]/20 font-black italic shadow-[inset_0_0_10px_rgba(201,168,76,0.05)]';
     $defaultClass = 'text-zinc-400 hover:bg-zinc-800 hover:text-white border-transparent';
 @endphp
 
 <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/80 z-40 hidden lg:hidden transition-all duration-300"></div>
 
-<aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-[#121212] border-r border-zinc-800 flex flex-col shrink-0 z-50
+<aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-[#141414] border-r border-zinc-800 flex flex-col shrink-0 z-50
     -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 ease-in-out">
 
     <div class="p-8 flex justify-center items-center border-b border-zinc-800/50 h-[150px] relative">
-        <img src="{{ asset('images/logotipo_nathan.png') }}"
-             alt="Barber Nathan"
+        <img src="{{ asset('images/logo-limas02.png') }}"
+             alt="Lima's Studio Barber"
              class="max-h-[100px] w-auto object-contain">
 
         <button onclick="toggleSidebar()" class="absolute top-4 right-4 text-zinc-500 lg:hidden p-2">
@@ -75,14 +75,14 @@
         </a>
 
         <div class="pt-6">
-            <p class="text-[10px] uppercase font-black text-[#D4AF37] tracking-[0.2em] mb-4 ml-4">Marketing</p>
+            <p class="text-[10px] uppercase font-black text-[#C9A84C] tracking-[0.2em] mb-4 ml-4">Marketing</p>
 
             <a href="{{ route('admin.birthdays') }}" class="flex items-center justify-between px-4 py-3 rounded-xl border transition-all {{ Route::is('admin.birthdays') ? $activeClass : $defaultClass }}">
                 <div class="flex items-center gap-3 font-bold uppercase text-[11px]">
                     <i class="fas fa-birthday-cake w-5"></i> Aniversariantes
                 </div>
                 @if(isset($aniversariantesHoje) && $aniversariantesHoje > 0)
-                    <span class="bg-[#D4AF37] text-black text-[10px] font-black px-2 py-0.5 rounded-full shadow-[0_0_8px_rgba(212,175,55,0.4)]">
+                    <span class="bg-[#C9A84C] text-black text-[10px] font-black px-2 py-0.5 rounded-full shadow-[0_0_8px_rgba(201,168,76,0.4)]">
                         {{ $aniversariantesHoje }}
                     </span>
                 @endif
@@ -101,7 +101,7 @@
     {{-- BASE DO MENU: CONFIGURAÇÕES E SAIR --}}
     <div class="mt-auto pt-6 border-t border-zinc-800/50">
         {{-- CONFIGURAÇÕES --}}
-        <a href="{{ route('admin.settings') }}" class="flex items-center gap-3 px-10 py-4 font-bold uppercase text-[11px] transition-all {{ Route::is('admin.settings') ? 'text-[#D4AF37] italic' : 'text-zinc-500 hover:text-white' }}">
+        <a href="{{ route('admin.settings') }}" class="flex items-center gap-3 px-10 py-4 font-bold uppercase text-[11px] transition-all {{ Route::is('admin.settings') ? 'text-[#C9A84C] italic' : 'text-zinc-500 hover:text-white' }}">
             <i class="fas fa-cog w-5"></i> Configurações
         </a>
 
@@ -120,15 +120,15 @@
     </div>
 </aside>
 
-<main class="flex-1 flex flex-col min-w-0 bg-[#050505] relative overflow-hidden">
+<main class="flex-1 flex flex-col min-w-0 bg-[#0A0A0A] relative overflow-hidden">
 
     <header class="lg:hidden h-16 bg-[#0A0A0A] border-b border-zinc-800 flex items-center justify-between px-6 shrink-0 z-30">
-        <button onclick="toggleSidebar()" class="text-[#D4AF37] p-2 -ml-2">
+        <button onclick="toggleSidebar()" class="text-[#C9A84C] p-2 -ml-2">
             <i class="fas fa-bars text-xl"></i>
         </button>
-        <span class="text-[10px] font-black uppercase text-white tracking-widest italic">Barber Nathan</span>
+        <span class="text-[10px] font-black uppercase text-white tracking-widest italic">Lima's Studio Barber</span>
         <div class="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 overflow-hidden">
-            <img src="https://ui-avatars.com/api/?name=Matheus+de+Paulo&background=D4AF37&color=000&bold=true" class="w-full h-full">
+            <img src="{{ asset('images/Logo-Limas.png') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-full h-full">
         </div>
     </header>
 
