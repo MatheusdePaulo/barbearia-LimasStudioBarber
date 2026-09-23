@@ -35,12 +35,26 @@
         .nav-logo { display: none; }
         #navbar.drawer-open .nav-logo { display: flex; }
         #nav-icon-menu, #nav-icon-close { width: 28.6px; height: 28.6px; }
+
+        /* Ao rolar: em vez da pílula quase da largura da tela (só com o hambúrguer dentro),
+           vira uma bolinha só em volta do hambúrguer, no canto direito.
+           Com o menu aberto volta a pílula normal (pra caber a logo). */
+        #navbar.nav-scrolled:not(.drawer-open) {
+            left: auto !important;
+            right: 20px !important;
+            transform: none !important;
+            width: 58.8px !important;
+            height: 58.8px !important;
+            padding: 0 !important;
+            justify-content: center !important;
+        }
     }
 </style>
 
 <nav id="navbar"
      x-data="{ open: false, scrolled: false }"
      x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 40 })"
+     :class="{ 'nav-scrolled': scrolled }"
      style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 76px; background: #0A0A0A; border-bottom: 1px solid rgba(201,168,76,0.2); display: flex; align-items: center; justify-content: space-between; padding: 0 48px; transition: all 0.35s cubic-bezier(0.4,0,0.2,1);"
      :style="scrolled
         ? 'position: fixed; top: 14px; left: 50%; right: auto; transform: translateX(-50%); width: min(1080px, calc(100% - 48px)); height: 68px; background: #0A0A0A; border: 1px solid rgba(201,168,76,0.35); border-radius: 999px; box-shadow: 0 12px 34px rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 100; transition: all 0.35s cubic-bezier(0.4,0,0.2,1);'
