@@ -12,7 +12,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Libera o webhook do Mercado Pago do CSRF
+        $middleware->validateCsrfTokens(except: [
+            'webhooks/mercadopago',
+        ]);
+
+        // Apelido do middleware do painel admin (is_admin)
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
