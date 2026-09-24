@@ -20,7 +20,7 @@
 
 ## ✂️ Serviços
 
-![Lima's Studio Barber - Serviços](public/images/imagem-readme01.png)
+![Lima's Studio Barber - Serviços](public/images/imagem-readme02.png)
 
 ---
 
