@@ -24,16 +24,6 @@
 
 ---
 
-## 📱 Responsividade
-
-- Todas as seções adaptadas para o mobile sem alterar o layout do desktop
-- Navbar que vira uma bolinha em volta do menu ao rolar a página
-- Menu lateral com links das seções, Wi-Fi da barbearia e atalhos para Instagram e WhatsApp
-- Galeria e blog com carrossel de card único e setas em círculo dourado
-- Rodapé em grade 2x2 (logo e endereço, horário e contato)
-
----
-
 ## ⚙️ Funcionalidades
 
 ### 🗓️ Agendamento Online
