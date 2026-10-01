@@ -135,6 +135,17 @@
         }
     }
 
+    /* Desktop: card cresce ao passar o mouse (a estrelinha do Combo cresce junto, por estar no mesmo wrapper) */
+    @media (min-width: 1025px) and (hover: hover) {
+        #servicos .servico-card-wrap {
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #servicos .servico-card-wrap:hover {
+            transform: scale(1.08);
+            z-index: 5;
+        }
+    }
+
     /* Desktop estreito / com zoom (1025px - 1700px): o padding-left 140px do título + margin-left -200px
        da coluna dos cards, com tudo em px fixo, punham os cards por cima do título abaixo de ~1670px.
        Aqui os mesmos tamanhos viram vw (base 1700px), então em 1700px fica igual ao desktop
