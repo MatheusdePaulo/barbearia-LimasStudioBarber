@@ -115,6 +115,51 @@
             padding: 0 14px !important;
         }
     }
+
+    /* Tablet (768px - 1024px): o padding de 80px do painel + cards fixos em px passavam da largura
+       e empurravam a seta da direita pra fora do retângulo. Aqui tudo encolhe em vw. */
+    @media (min-width: 768px) and (max-width: 1024px) {
+
+        #produtos .lp-panel {
+            padding: 72px 3vw 48px !important;
+        }
+
+        #produtos .lp-arrow {
+            padding: 0 1vw !important;
+        }
+        #produtos .lp-arrow svg {
+            width: 5vw !important;
+            height: 5.7vw !important;
+        }
+
+        #produtos .lp-cards {
+            gap: 2vw !important;
+            min-width: 0 !important;
+        }
+
+        #produtos .lp-card--lateral {
+            width: 18vw !important;
+            margin-top: 7vw !important;
+        }
+        #produtos .lp-card--lateral .lp-card-img {
+            height: 22.5vw !important;
+        }
+        #produtos .lp-card--destaque {
+            width: 20.5vw !important;
+            margin-top: -5vw !important;
+        }
+        #produtos .lp-card--destaque .lp-card-img {
+            height: 24.8vw !important;
+        }
+
+        #produtos .lp-card-text {
+            bottom: 2.4vw !important;
+            padding: 0 1.4vw !important;
+        }
+        #produtos .lp-card-text p:nth-child(1) { font-size: 1.25vw !important; }
+        #produtos .lp-card-text p:nth-child(2) { font-size: 1.1vw !important; }
+        #produtos .lp-card-text p:nth-child(3) { font-size: 2vw !important; }
+    }
 </style>
 
 <section id="produtos" style="background: #0A0A0A; padding: 100px 0 80px; position: relative;">
