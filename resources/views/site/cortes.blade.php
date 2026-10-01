@@ -3,7 +3,7 @@
 @section('title', "Nossos Cortes | Lima's Studio Barber")
 
 @php
-    // Tipos de corte. "foco" é o object-position da foto (nas barbas desce pra mostrar o queixo);
+    // Tipos de corte. "foco" é o object-position da foto (qual parte aparece quando ela é cortada pra caber no quadro);
     // "flip" espelha a foto. As fotos são as dos clientes que já estão no site.
     $secoes = [
         [
@@ -12,17 +12,17 @@
             'titulo'  => 'Cortes de Cabelo',
             'servico' => 'cabelo',
             'itens'   => [
-                ['nome' => 'Corte na Tesoura', 'foto' => 'images/barbeiro-trabalhando2.jpg', 'foco' => 'center 30%',
+                ['nome' => 'Corte na Tesoura', 'foto' => 'images/barbeiro-trabalhando2.jpg', 'foco' => 'center 35%',
                  'texto' => 'Feito todo na tesoura, mecha por mecha, sem máquina. Deixa o cabelo com caimento natural e textura, ideal pra quem gosta de um visual mais comprido e bem acabado.'],
-                ['nome' => 'Degradê', 'foto' => 'images/fulano6-depois.jpg', 'foco' => 'center 25%',
+                ['nome' => 'Degradê', 'foto' => 'images/fulano6-depois.jpg', 'foco' => '60% center',
                  'texto' => 'As laterais vão do quase zero ao comprimento do topo numa transição suave, sem marcas. Pode ser baixo, médio ou alto, de acordo com o seu estilo.'],
-                ['nome' => 'Corte Social', 'foto' => 'images/fulano4-depois.jpg', 'foco' => 'center 25%',
+                ['nome' => 'Corte Social', 'foto' => 'images/fulano4-depois.jpg', 'foco' => 'center 45%',
                  'texto' => 'Clássico e discreto: laterais curtas, topo um pouco mais cheio e acabamento alinhado. Funciona no trabalho, em eventos e no dia a dia.'],
-                ['nome' => 'Corte Italiano', 'foto' => 'images/fulano5-depois.jpg', 'foco' => 'center 25%', 'flip' => true,
+                ['nome' => 'Corte Italiano', 'foto' => 'images/fulano5-depois.jpg', 'foco' => '55% center', 'flip' => true,
                  'texto' => 'Volume no topo penteado para trás, com movimento e acabamento natural nas laterais. Elegância de estilo clássico que nunca sai de moda.'],
-                ['nome' => 'Risca Lateral', 'foto' => 'images/fulano3-depois.jpg', 'foco' => 'center 25%',
+                ['nome' => 'Risca Lateral', 'foto' => 'images/fulano3-depois.jpg', 'foco' => 'center 40%',
                  'texto' => 'Uma risca marcada na navalha separa o penteado, combinada com degradê nas laterais. Acabamento preciso que dá personalidade ao corte.'],
-                ['nome' => 'Topete', 'foto' => 'images/fulano2-depois.jpg', 'foco' => 'center 25%',
+                ['nome' => 'Topete', 'foto' => 'images/fulano2-depois.jpg', 'foco' => 'center 60%',
                  'texto' => 'Topo com volume penteado pra cima e laterais curtas. Valoriza o rosto e fica ótimo com pomada ou cera.'],
             ],
         ],
@@ -32,13 +32,13 @@
             'titulo'  => 'Estilos de Barba',
             'servico' => 'barba',
             'itens'   => [
-                ['nome' => 'Barba Desenhada', 'foto' => 'images/fulano1-depois.jpg', 'foco' => 'center 70%',
+                ['nome' => 'Barba Desenhada', 'foto' => 'images/fulano1-depois.jpg', 'foco' => 'center 50%',
                  'texto' => 'Contornos marcados na navalha nas bochechas e no pescoço, com a barba aparada no volume certo. Visual alinhado e imponente.'],
-                ['nome' => 'Barba Cheia', 'foto' => 'images/fulano6-depois.jpg', 'foco' => 'center 75%',
+                ['nome' => 'Barba Cheia', 'foto' => 'images/fulano6-depois.jpg', 'foco' => '60% center',
                  'texto' => 'Pra quem deixa crescer: aparamos o volume, tiramos as pontas e acertamos o desenho, mantendo a barba cheia e saudável.'],
-                ['nome' => 'Cavanhaque', 'foto' => 'images/fulano4-depois.jpg', 'foco' => 'center 75%',
+                ['nome' => 'Cavanhaque', 'foto' => 'images/fulano4-depois.jpg', 'foco' => 'center 60%',
                  'texto' => 'Bigode e queixo em destaque, com as laterais bem baixas. Um estilo marcante que muda a expressão do rosto.'],
-                ['nome' => 'Barba Rente', 'foto' => 'images/fulano3-depois.jpg', 'foco' => 'center 70%',
+                ['nome' => 'Barba Rente', 'foto' => 'images/fulano3-depois.jpg', 'foco' => 'center 55%',
                  'texto' => 'Barba curta e uniforme, feita na máquina com acabamento na navalha. Prática pra quem quer um visual limpo sem tirar tudo.'],
             ],
         ],
@@ -48,7 +48,7 @@
             'titulo'  => 'Combo',
             'servico' => 'combo',
             'itens'   => [
-                ['nome' => 'Cabelo + Barba', 'foto' => 'images/barbeiro-trabalhando.png', 'foco' => 'center 30%',
+                ['nome' => 'Cabelo + Barba', 'foto' => 'images/barbeiro-trabalhando.png', 'foco' => 'center 40%',
                  'texto' => 'O cuidado completo numa visita só: qualquer corte de cabelo junto com o estilo de barba que você escolher, pensados pra combinar entre si.'],
             ],
         ],
@@ -177,10 +177,12 @@
         .corte-item--invertido {
             flex-direction: row-reverse;
         }
+        /* Quadro em pé (4:5), igual às fotos, que são todas em retrato: assim quase não precisa cortar
+           (num quadro deitado o cover cortava muito em cima e embaixo e dava zoom alto) */
         .corte-foto {
             position: relative;
-            flex: 0 0 52%;
-            height: 460px;
+            flex: 0 0 40%;
+            aspect-ratio: 4 / 5;
         }
         /* Brilho dourado bem suave atrás da foto */
         .corte-foto::before {
@@ -197,13 +199,19 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            opacity: 0.75;
-            /* um pouco mais escura e menos saturada pra paredes claras do fundo não "acenderem" a borda */
-            filter: saturate(0.85) brightness(0.9) contrast(1.05);
-            /* degradê longo e gradual: só o centro fica opaco e a foto vai sumindo bem antes da borda,
-               sem formar uma oval marcada */
-            -webkit-mask-image: radial-gradient(ellipse 50% 50% at center, #000 0%, rgba(0,0,0,0.9) 25%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.2) 72%, transparent 92%);
-            mask-image: radial-gradient(ellipse 50% 50% at center, #000 0%, rgba(0,0,0,0.9) 25%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.2) 72%, transparent 92%);
+            opacity: 0.85;
+            filter: saturate(0.9);
+            /* A foto fica uniforme (sem centro mais claro que o resto) e só a faixa da borda some no preto.
+               Duas máscaras lineares (horizontal x vertical) em vez de radial: o fade acompanha o retângulo
+               da foto, então não forma uma oval escura nas pontas. */
+            -webkit-mask-image:
+                linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%),
+                linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
+            -webkit-mask-composite: source-in;
+            mask-image:
+                linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%),
+                linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
+            mask-composite: intersect;
         }
         .corte-texto {
             flex: 1;
@@ -260,7 +268,6 @@
         @media (max-width: 1024px) {
             .cortes-titulo { font-size: 44px; }
             .corte-item { gap: 32px; }
-            .corte-foto { height: 380px; }
             .corte-nome { font-size: 34px; }
         }
 
@@ -285,8 +292,7 @@
             }
             .corte-foto {
                 flex: none;
-                height: 340px;
-                margin: 0 -24px;
+                width: 100%;
             }
             .corte-texto { max-width: none; margin-top: -30px; position: relative; }
             .corte-nome { font-size: 30px; }
