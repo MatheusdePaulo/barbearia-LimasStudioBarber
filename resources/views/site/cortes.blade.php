@@ -4,6 +4,7 @@
 
 @php
     // Tipos de corte. "foco" é o object-position da foto (qual parte aparece quando ela é cortada pra caber no quadro);
+    // "rosto" é onde fica o centro do rosto dentro do quadro (x% y%), pro destaque de luz;
     // "flip" espelha a foto. As fotos são as dos clientes que já estão no site.
     $secoes = [
         [
@@ -12,17 +13,17 @@
             'titulo'  => 'Cortes de Cabelo',
             'servico' => 'cabelo',
             'itens'   => [
-                ['nome' => 'Corte na Tesoura', 'foto' => 'images/barbeiro-trabalhando2.jpg', 'foco' => 'center 35%',
+                ['nome' => 'Corte na Tesoura', 'rosto' => '61% 42%', 'foto' => 'images/barbeiro-trabalhando2.jpg', 'foco' => 'center 35%',
                  'texto' => 'Feito todo na tesoura, mecha por mecha, sem máquina. Deixa o cabelo com caimento natural e textura, ideal pra quem gosta de um visual mais comprido e bem acabado.'],
-                ['nome' => 'Degradê', 'foto' => 'images/fulano6-depois.jpg', 'foco' => '60% center',
+                ['nome' => 'Degradê', 'rosto' => '44% 44%', 'foto' => 'images/fulano6-depois.jpg', 'foco' => '60% center',
                  'texto' => 'As laterais vão do quase zero ao comprimento do topo numa transição suave, sem marcas. Pode ser baixo, médio ou alto, de acordo com o seu estilo.'],
-                ['nome' => 'Corte Social', 'foto' => 'images/fulano4-depois.jpg', 'foco' => 'center 45%',
+                ['nome' => 'Corte Social', 'rosto' => '46% 45%', 'foto' => 'images/fulano4-depois.jpg', 'foco' => 'center 45%',
                  'texto' => 'Clássico e discreto: laterais curtas, topo um pouco mais cheio e acabamento alinhado. Funciona no trabalho, em eventos e no dia a dia.'],
-                ['nome' => 'Corte Italiano', 'foto' => 'images/fulano5-depois.jpg', 'foco' => '55% center', 'flip' => true,
+                ['nome' => 'Corte Italiano', 'rosto' => '47% 45%', 'foto' => 'images/fulano5-depois.jpg', 'foco' => '55% center', 'flip' => true,
                  'texto' => 'Volume no topo penteado para trás, com movimento e acabamento natural nas laterais. Elegância de estilo clássico que nunca sai de moda.'],
-                ['nome' => 'Risca Lateral', 'foto' => 'images/fulano3-depois.jpg', 'foco' => 'center 40%',
+                ['nome' => 'Risca Lateral', 'rosto' => '40% 46%', 'foto' => 'images/fulano3-depois.jpg', 'foco' => 'center 40%',
                  'texto' => 'Uma risca marcada na navalha separa o penteado, combinada com degradê nas laterais. Acabamento preciso que dá personalidade ao corte.'],
-                ['nome' => 'Topete', 'foto' => 'images/fulano2-depois.jpg', 'foco' => 'center 60%',
+                ['nome' => 'Topete', 'rosto' => '45% 52%', 'foto' => 'images/fulano2-depois.jpg', 'foco' => 'center 60%',
                  'texto' => 'Topo com volume penteado pra cima e laterais curtas. Valoriza o rosto e fica ótimo com pomada ou cera.'],
             ],
         ],
@@ -32,13 +33,13 @@
             'titulo'  => 'Estilos de Barba',
             'servico' => 'barba',
             'itens'   => [
-                ['nome' => 'Barba Desenhada', 'foto' => 'images/fulano1-depois.jpg', 'foco' => 'center 50%',
+                ['nome' => 'Barba Desenhada', 'rosto' => '44% 53%', 'foto' => 'images/fulano1-depois.jpg', 'foco' => 'center 50%',
                  'texto' => 'Contornos marcados na navalha nas bochechas e no pescoço, com a barba aparada no volume certo. Visual alinhado e imponente.'],
-                ['nome' => 'Barba Cheia', 'foto' => 'images/fulano6-depois.jpg', 'foco' => '60% center',
+                ['nome' => 'Barba Cheia', 'rosto' => '41% 47%', 'foto' => 'images/fulano6-depois.jpg', 'foco' => '60% center',
                  'texto' => 'Pra quem deixa crescer: aparamos o volume, tiramos as pontas e acertamos o desenho, mantendo a barba cheia e saudável.'],
-                ['nome' => 'Cavanhaque', 'foto' => 'images/fulano4-depois.jpg', 'foco' => 'center 60%',
+                ['nome' => 'Cavanhaque', 'rosto' => '46% 47%', 'foto' => 'images/fulano4-depois.jpg', 'foco' => 'center 60%',
                  'texto' => 'Bigode e queixo em destaque, com as laterais bem baixas. Um estilo marcante que muda a expressão do rosto.'],
-                ['nome' => 'Barba Rente', 'foto' => 'images/fulano3-depois.jpg', 'foco' => 'center 55%',
+                ['nome' => 'Barba Rente', 'rosto' => '36% 41%', 'foto' => 'images/fulano3-depois.jpg', 'foco' => 'center 55%',
                  'texto' => 'Barba curta e uniforme, feita na máquina com acabamento na navalha. Prática pra quem quer um visual limpo sem tirar tudo.'],
             ],
         ],
@@ -48,7 +49,7 @@
             'titulo'  => 'Combo',
             'servico' => 'combo',
             'itens'   => [
-                ['nome' => 'Cabelo + Barba', 'foto' => 'images/barbeiro-trabalhando.png', 'foco' => 'center 40%',
+                ['nome' => 'Cabelo + Barba', 'rosto' => '64% 26%', 'foto' => 'images/barbeiro-trabalhando.png', 'foco' => 'center 40%',
                  'texto' => 'O cuidado completo numa visita só: qualquer corte de cabelo junto com o estilo de barba que você escolher, pensados pra combinar entre si.'],
             ],
         ],
@@ -192,18 +193,24 @@
             background: radial-gradient(ellipse at center, rgba(201,168,76,0.14) 0%, transparent 70%);
             pointer-events: none;
         }
-        /* Bordas da foto somem no fundo preto: máscara radial (opaco no meio, transparente nas bordas) */
-        .corte-foto img {
-            position: relative;
+        /* Duas camadas da mesma foto:
+           - base: a foto inteira bem transparente, com as bordas sumindo no preto (se mistura com o site);
+           - rosto: a mesma foto nítida, visível só numa elipse em volta do rosto (--rosto = centro do rosto),
+             que vai se misturando com a base. Dá o efeito de holofote no rosto.
+           A máscara fica no wrapper e o espelhamento (flip) só na <img>, senão a máscara espelha junto. */
+        .corte-foto-camada {
+            position: absolute;
+            inset: 0;
+        }
+        .corte-foto-camada img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            opacity: 0.85;
             filter: saturate(0.9);
-            /* A foto fica uniforme (sem centro mais claro que o resto) e só a faixa da borda some no preto.
-               Duas máscaras lineares (horizontal x vertical) em vez de radial: o fade acompanha o retângulo
-               da foto, então não forma uma oval escura nas pontas. */
+        }
+        .corte-foto-base {
+            opacity: 0.4;
             -webkit-mask-image:
                 linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%),
                 linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
@@ -212,6 +219,11 @@
                 linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%),
                 linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
             mask-composite: intersect;
+        }
+        .corte-foto-rosto {
+            opacity: 0.95;
+            -webkit-mask-image: radial-gradient(ellipse 34% 28% at var(--rosto), #000 30%, rgba(0,0,0,0.6) 60%, transparent 100%);
+            mask-image: radial-gradient(ellipse 34% 28% at var(--rosto), #000 30%, rgba(0,0,0,0.6) 60%, transparent 100%);
         }
         .corte-texto {
             flex: 1;
@@ -329,9 +341,13 @@
                     @foreach($secao['itens'] as $item)
                         @php $numero++; @endphp
                         <article class="corte-item {{ $numero % 2 === 0 ? 'corte-item--invertido' : '' }}">
-                            <div class="corte-foto">
-                                <img src="{{ asset($item['foto']) }}" alt="{{ $item['nome'] }}" loading="lazy"
-                                     style="object-position: {{ $item['foco'] }};{{ !empty($item['flip']) ? ' transform: scaleX(-1);' : '' }}">
+                            <div class="corte-foto" style="--rosto: {{ $item['rosto'] }};">
+                                @foreach(['base', 'rosto'] as $camada)
+                                    <div class="corte-foto-camada corte-foto-{{ $camada }}">
+                                        <img src="{{ asset($item['foto']) }}" alt="{{ $camada === 'rosto' ? $item['nome'] : '' }}" loading="lazy"
+                                             style="object-position: {{ $item['foco'] }};{{ !empty($item['flip']) ? ' transform: scaleX(-1);' : '' }}">
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="corte-texto">
                                 <span class="corte-num">{{ str_pad($numero, 2, '0', STR_PAD_LEFT) }}</span>
