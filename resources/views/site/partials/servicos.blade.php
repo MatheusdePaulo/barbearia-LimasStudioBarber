@@ -141,20 +141,49 @@
         .enos-photo { left: 20px !important; height: 380px !important; }
         .enos-glow  { left: -20px !important; }
 
-        #servicos h2 { font-size: 38px !important; }
+        /* Tudo em vw: título e cards encolhem junto com a tela e não se sobrepõem mais.
+           O padding-left 140px e o margin-left -200px do desktop é que jogavam os cards por cima do título. */
+        #servicos > div:first-of-type {
+            padding: 0 3vw !important;
+            gap: 3vw !important;
+        }
+        #servicos > div:first-of-type > div:first-child {
+            padding-left: 0 !important;
+        }
+        #servicos h2 {
+            font-size: 3.4vw !important;
+        }
+        #servicos > div:first-of-type > div:last-child {
+            margin-left: 0 !important;
+            min-width: 0 !important;
+        }
+        #servicos > div:first-of-type > div:last-child > div:first-child {
+            gap: 2.5vw !important;
+        }
 
         #servicos .servico-card-wrap a {
-            width: 180px !important;
-            height: 180px !important;
+            width: 15vw !important;
+            height: 15vw !important;
+        }
+        .servico-card__label {
+            font-size: 1.1vw !important;
+            bottom: 1.8vw !important;
+        }
+        .servico-card__badge {
+            width: 2.8vw !important;
+            height: 2.8vw !important;
+            top: -1.3vw !important;
+        }
+        .servico-card__badge svg {
+            width: 1.4vw !important;
+            height: 1.4vw !important;
         }
 
-        #servicos > div:first-of-type {
-            padding: 0 24px 0 16px !important;
-            gap: 32px !important;
+        #servicos .frase-servicos-desktop {
+            font-size: 3.2vw !important;
         }
-
-        #servicos p[style*="Cormorant"] {
-            font-size: 28px !important;
+        .tesoura-linha {
+            width: 38vw !important;
         }
     }
 </style>
