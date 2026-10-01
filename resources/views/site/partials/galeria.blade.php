@@ -222,6 +222,15 @@
                     height: 32.8vw !important;
                 }
             }
+            /* Fade ao trocar de foto no carrossel (galeriaNav) */
+            .slider-antes,
+            .slider-depois,
+            .foto-lateral {
+                transition: opacity 0.25s ease;
+            }
+            .galeria-trocando {
+                opacity: 0;
+            }
             .foto-lateral {
                 position: absolute;
                 inset: 0;
@@ -275,9 +284,9 @@
                         @if($isDestaque)
                             {{-- Card destaque: slider interativo --}}
                             <div class="slider-container" id="slider-{{ $id }}">
-                                <img class="slider-antes" draggable="false"
+                                <img class="slider-antes" data-galeria-antes draggable="false"
                                      src="{{ asset('images/fulano'.$id.'-antes.jpg') }}" alt="Antes">
-                                <img class="slider-depois" draggable="false"
+                                <img class="slider-depois" data-galeria-depois draggable="false"
                                      src="{{ asset('images/fulano'.$id.'-depois.jpg') }}" alt="Depois"
                                      id="slider-depois-{{ $id }}">
                                 <div class="slider-handle" id="slider-handle-{{ $id }}">
@@ -286,7 +295,7 @@
                             </div>
                         @else
                             {{-- Card lateral: foto com shape --}}
-                            <img class="foto-lateral"
+                            <img class="foto-lateral" data-galeria-slot="{{ $loop->first ? 'anterior' : 'proximo' }}"
                                  src="{{ asset('images/fulano'.$id.'-depois.jpg') }}" alt="Resultado">
                         @endif
 
@@ -322,6 +331,12 @@
 
 </section>
 
+@php
+    $galeriaItens = collect([1, 3, 2])->map(fn ($id) => [
+        'antes'  => asset('images/fulano'.$id.'-antes.jpg'),
+        'depois' => asset('images/fulano'.$id.'-depois.jpg'),
+    ]);
+@endphp
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -355,8 +370,41 @@
             });
         });
 
+        // Carrossel: as setas giram a lista de clientes. O card do meio (slider antes/depois) mostra o
+        // cliente atual e os laterais mostram o "depois" do anterior e do próximo. Começa no cliente 3,
+        // que é o que já aparece no meio ao carregar a página.
+        const galeriaItens = {{ Js::from($galeriaItens) }};
+        let galeriaAtual = 1;
+
+        // pré-carrega todas as fotos pra troca não piscar
+        galeriaItens.forEach(item => { new Image().src = item.antes; new Image().src = item.depois; });
+
         function galeriaNav(dir) {
-            console.log('Galeria nav:', dir);
+            const total = galeriaItens.length;
+            galeriaAtual = (galeriaAtual + dir + total) % total;
+            const atual    = galeriaItens[galeriaAtual];
+            const anterior = galeriaItens[(galeriaAtual - 1 + total) % total];
+            const proximo  = galeriaItens[(galeriaAtual + 1) % total];
+
+            const card    = document.querySelector('#galeria .slider-container');
+            const antes   = card.querySelector('[data-galeria-antes]');
+            const depois  = card.querySelector('[data-galeria-depois]');
+            const handle  = card.querySelector('.slider-handle');
+            const latAnt  = document.querySelector('#galeria [data-galeria-slot="anterior"]');
+            const latProx = document.querySelector('#galeria [data-galeria-slot="proximo"]');
+            const imgs = [antes, depois, latAnt, latProx];
+
+            imgs.forEach(img => img.classList.add('galeria-trocando'));
+            setTimeout(() => {
+                antes.src   = atual.antes;
+                depois.src  = atual.depois;
+                latAnt.src  = anterior.depois;
+                latProx.src = proximo.depois;
+                // volta o slider pro estado inicial (só o "antes" visível)
+                depois.style.clipPath = '';
+                handle.style.left = '';
+                imgs.forEach(img => img.classList.remove('galeria-trocando'));
+            }, 250);
         }
     </script>
 @endpush
