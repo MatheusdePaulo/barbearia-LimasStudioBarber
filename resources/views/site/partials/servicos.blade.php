@@ -135,6 +135,60 @@
         }
     }
 
+    /* Desktop estreito / com zoom (1025px - 1700px): o padding-left 140px do título + margin-left -200px
+       da coluna dos cards, com tudo em px fixo, punham os cards por cima do título abaixo de ~1670px.
+       Aqui os mesmos tamanhos viram vw (base 1700px), então em 1700px fica igual ao desktop
+       e abaixo disso tudo encolhe junto, sem sobrepor. */
+    @media (min-width: 1025px) and (max-width: 1700px) {
+        #servicos > div:first-of-type {
+            padding: 0 2.35vw 0 16px !important;
+            gap: 3.5vw !important;
+        }
+        #servicos > div:first-of-type > div:first-child {
+            padding-left: 8.2vw !important;
+        }
+        #servicos h2 {
+            font-size: 3.06vw !important;
+        }
+        #servicos > div:first-of-type > div:last-child {
+            margin-left: 0 !important;
+            min-width: 0 !important;
+        }
+        #servicos > div:first-of-type > div:last-child > div:first-child {
+            gap: 3.06vw !important;
+        }
+        #servicos .servico-card-wrap a {
+            width: 14vw !important;
+            height: 14vw !important;
+        }
+        .servico-card__label {
+            font-size: clamp(10px, 0.76vw, 13px) !important;
+            bottom: 1.4vw !important;
+        }
+        #servicos .frase-servicos-desktop {
+            font-size: 2.35vw !important;
+        }
+        .tesoura-linha {
+            width: 28.2vw !important;
+        }
+
+        /* Foto do Enos + glow na mesma base de 1700px, senão a foto fixa em 540px sobe por cima do título */
+        .enos-photo {
+            left: 2.94vw !important;
+            bottom: -3.47vw !important;
+            height: 27vw !important;
+        }
+        .enos-photo__img {
+            height: 31.76vw !important;
+        }
+        .enos-glow {
+            left: -2.94vw !important;
+            width: 35.3vw !important;
+            height: 24.7vw !important;
+            bottom: -12.35vw !important;
+        }
+    }
+
     /* Tablet (768px - 1024px) */
     @media (min-width: 769px) and (max-width: 1024px) {
 
