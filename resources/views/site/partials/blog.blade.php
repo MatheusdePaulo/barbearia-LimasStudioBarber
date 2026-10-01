@@ -1,4 +1,28 @@
 {{-- ═══════════ BLOG — CORTES RECENTES ═══════════ --}}
+@php
+    // Fotos do carrossel, na ordem em que giram. Começa no fulano5 no meio (o que já aparece ao carregar),
+    // com o fulano4 à esquerda e o fulano1 à direita. "flip" espelha a foto (o fulano5 olha pro outro lado).
+    // "nome" e "texto" aparecem na parte de baixo do card.
+    $blogItens = collect([
+        ['foto' => 'images/fulano4-depois.jpg', 'nome' => 'Degradê Social',
+         'texto' => 'Laterais em degradê suave e topo mais cheio. Discreto e alinhado para o dia a dia.'],
+        ['foto' => 'images/fulano5-depois.jpg', 'flip' => true, 'nome' => 'Corte Italiano',
+         'texto' => 'Volume no topo penteado para trás, com acabamento natural. Elegância clássica com movimento.'],
+        ['foto' => 'images/fulano1-depois.jpg', 'nome' => 'Barba Desenhada',
+         'texto' => 'Laterais baixas e barba alinhada com contorno marcado. Visual maduro e imponente.'],
+        ['foto' => 'images/fulano6-depois.jpg', 'nome' => 'Low Fade',
+         'texto' => 'Degradê baixo, rente à orelha, com topo médio. Moderno sem perder a sobriedade.'],
+        ['foto' => 'images/fulano2-depois.jpg', 'nome' => 'Topete Clássico',
+         'texto' => 'Topo com volume penteado para cima e laterais curtas. Um clássico que valoriza o rosto.'],
+        ['foto' => 'images/fulano3-depois.jpg', 'nome' => 'Risca Lateral',
+         'texto' => 'Risca marcada na navalha com degradê nas laterais. Acabamento preciso e estiloso.'],
+    ])->map(fn ($item) => [
+        'foto'  => asset($item['foto']),
+        'flip'  => $item['flip'] ?? false,
+        'nome'  => $item['nome'],
+        'texto' => $item['texto'],
+    ]);
+@endphp
 <section id="blog" style="background: #0A0A0A; padding: 60px 0 80px;">
 
     {{-- RESPONSIVIDADE MOBILE (até 767px): textos à esquerda, só o card central e setas abaixo dele
@@ -12,7 +36,61 @@
             opacity: 0;
         }
 
+        /* Nome do corte + explicação na parte de baixo do card. O degradê escuro usa a mesma máscara da foto,
+           então fica só dentro da moldura. Tamanhos em clamp pra caber nos cards menores do tablet. */
+        #blog .blog-card-info {
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            padding: 0 9% 9%;
+            background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.6) 28%, transparent 50%);
+            -webkit-mask-size: 100% 100%;
+            -webkit-mask-repeat: no-repeat;
+            mask-size: 100% 100%;
+            mask-repeat: no-repeat;
+        }
+        #blog .blog-card-nome {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: clamp(14px, 1.4vw, 20px);
+            line-height: 1.1;
+            color: #C9A84C;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin: 0 0 6px;
+        }
+        /* Cards laterais são mais estreitos: nome menor pra caber numa linha só */
+        #blog .blog-card--lateral .blog-card-nome {
+            font-size: clamp(12px, 1.1vw, 16px);
+            letter-spacing: 0.03em;
+        }
+        #blog .blog-card-texto {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: clamp(9px, 0.78vw, 11px);
+            line-height: 1.45;
+            color: rgba(245,240,232,0.85);
+            margin: 0;
+            /* no máximo 3 linhas */
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        #blog .blog-card-info p {
+            transition: opacity 0.25s ease;
+        }
+
         @media (max-width: 767px) {
+            #blog .blog-card-nome  { font-size: 20px; }
+            #blog .blog-card-texto { font-size: 11px; }
+
             #blog .blog-head {
                 text-align: left !important;
                 padding: 0 24px !important;
@@ -161,6 +239,13 @@
                                 mask-size: 100% 100%;
                                 mask-repeat: no-repeat;">
 
+                        {{-- Nome do corte + explicação --}}
+                        <div class="blog-card-info" data-blog-info="{{ ['anterior', 'atual', 'proximo'][$i] }}"
+                             style="-webkit-mask-image: url('{{ asset($corte['mask']) }}'); mask-image: url('{{ asset($corte['mask']) }}');">
+                            <p class="blog-card-nome">{{ $blogItens[$i]['nome'] }}</p>
+                            <p class="blog-card-texto">{{ $blogItens[$i]['texto'] }}</p>
+                        </div>
+
                         {{-- Moldura do Figma por cima --}}
                         <img src="{{ asset($corte['moldura']) }}" alt=""
                              style="position: absolute; inset: 0; width: 100%; height: 100%;
@@ -183,18 +268,6 @@
 
 </section>
 
-@php
-    // Fotos do carrossel, na ordem em que giram. Começa no fulano5 no meio (o que já aparece ao carregar),
-    // com o fulano4 à esquerda e o fulano1 à direita. "flip" espelha a foto (o fulano5 olha pro outro lado).
-    $blogItens = collect([
-        ['foto' => 'images/fulano4-depois.jpg'],
-        ['foto' => 'images/fulano5-depois.jpg', 'flip' => true],
-        ['foto' => 'images/fulano1-depois.jpg'],
-        ['foto' => 'images/fulano6-depois.jpg'],
-        ['foto' => 'images/fulano2-depois.jpg'],
-        ['foto' => 'images/fulano3-depois.jpg'],
-    ])->map(fn ($item) => ['foto' => asset($item['foto']), 'flip' => $item['flip'] ?? false]);
-@endphp
 @push('scripts')
     <script>
         const blogItens = {{ Js::from($blogItens) }};
@@ -212,8 +285,11 @@
                 proximo:  blogItens[(blogAtual + 1) % total],
             };
 
-            const imgs = document.querySelectorAll('#blog [data-blog-slot]');
+            const imgs  = document.querySelectorAll('#blog [data-blog-slot]');
+            const infos = document.querySelectorAll('#blog [data-blog-info]');
+            const textos = document.querySelectorAll('#blog [data-blog-info] p');
             imgs.forEach(img => img.classList.add('blog-trocando'));
+            textos.forEach(p => p.classList.add('blog-trocando'));
             setTimeout(() => {
                 imgs.forEach(img => {
                     const item = slots[img.dataset.blogSlot];
@@ -221,6 +297,12 @@
                     img.style.transform = item.flip ? 'scaleX(-1)' : '';
                     img.classList.remove('blog-trocando');
                 });
+                infos.forEach(info => {
+                    const item = slots[info.dataset.blogInfo];
+                    info.querySelector('.blog-card-nome').textContent  = item.nome;
+                    info.querySelector('.blog-card-texto').textContent = item.texto;
+                });
+                textos.forEach(p => p.classList.remove('blog-trocando'));
             }, 250);
         }
 
