@@ -142,17 +142,17 @@
            e o glow acompanha (centro continua na divisória #servicos/#sobre) */
         .enos-photo {
             left: 2vw !important;
-            bottom: -4vw !important;
-            height: 27vw !important;
+            bottom: -4.6vw !important;
+            height: 31.05vw !important;
         }
         .enos-photo__img {
-            height: 31.8vw !important;
+            height: 36.57vw !important;
         }
         .enos-glow {
             left: -4vw !important;
-            width: 36vw !important;
-            height: 25vw !important;
-            bottom: -12.5vw !important;
+            width: 41.4vw !important;
+            height: 28.75vw !important;
+            bottom: -14.375vw !important;
         }
 
         /* Tudo em vw: título e cards encolhem junto com a tela e não se sobrepõem mais.
