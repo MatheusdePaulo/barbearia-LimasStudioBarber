@@ -4,6 +4,14 @@
     {{-- RESPONSIVIDADE MOBILE (até 767px): textos à esquerda, só o card central e setas abaixo dele
          (mesmo padrão da galeria). Desktop continua com os estilos inline originais. --}}
     <style>
+        /* Fade ao trocar de foto no carrossel (blogNav) */
+        #blog [data-blog-slot] {
+            transition: opacity 0.25s ease;
+        }
+        #blog .blog-trocando {
+            opacity: 0;
+        }
+
         @media (max-width: 767px) {
             #blog .blog-head {
                 text-align: left !important;
@@ -138,11 +146,11 @@
                     ];
                 @endphp
 
-                @foreach($cortes as $corte)
+                @foreach($cortes as $i => $corte)
                     <div class="{{ !empty($corte['centro']) ? 'blog-card--centro' : 'blog-card--lateral' }}" style="flex-shrink: 0; width: {{ $corte['w'] }}; height: {{ $corte['h'] }}; margin-top: {{ $corte['mt'] }}; position: relative;">
 
                         {{-- Foto recortada no shape exato da moldura, via mask-image --}}
-                        <img src="{{ asset($corte['foto']) }}" alt="Corte"
+                        <img src="{{ asset($corte['foto']) }}" alt="Corte" data-blog-slot="{{ ['anterior', 'atual', 'proximo'][$i] }}"
                              style="position: absolute; inset: 0; width: 100%; height: 100%;
                                 object-fit: cover; object-position: center top;
                                 {{ !empty($corte['flip']) ? 'transform: scaleX(-1);' : '' }}
@@ -175,11 +183,58 @@
 
 </section>
 
+@php
+    // Fotos do carrossel, na ordem em que giram. Começa no fulano5 no meio (o que já aparece ao carregar),
+    // com o fulano4 à esquerda e o fulano1 à direita. "flip" espelha a foto (o fulano5 olha pro outro lado).
+    $blogItens = collect([
+        ['foto' => 'images/fulano4-depois.jpg'],
+        ['foto' => 'images/fulano5-depois.jpg', 'flip' => true],
+        ['foto' => 'images/fulano1-depois.jpg'],
+        ['foto' => 'images/fulano6-depois.jpg'],
+        ['foto' => 'images/fulano2-depois.jpg'],
+        ['foto' => 'images/fulano3-depois.jpg'],
+    ])->map(fn ($item) => ['foto' => asset($item['foto']), 'flip' => $item['flip'] ?? false]);
+@endphp
 @push('scripts')
     <script>
+        const blogItens = {{ Js::from($blogItens) }};
+        let blogAtual = 1;
+
+        // pré-carrega todas as fotos pra troca não piscar
+        blogItens.forEach(item => { new Image().src = item.foto; });
+
         function blogNav(dir) {
-            console.log('Blog nav:', dir);
-            // Implementar com dados reais do banco futuramente
+            const total = blogItens.length;
+            blogAtual = (blogAtual + dir + total) % total;
+            const slots = {
+                anterior: blogItens[(blogAtual - 1 + total) % total],
+                atual:    blogItens[blogAtual],
+                proximo:  blogItens[(blogAtual + 1) % total],
+            };
+
+            const imgs = document.querySelectorAll('#blog [data-blog-slot]');
+            imgs.forEach(img => img.classList.add('blog-trocando'));
+            setTimeout(() => {
+                imgs.forEach(img => {
+                    const item = slots[img.dataset.blogSlot];
+                    img.src = item.foto;
+                    img.style.transform = item.flip ? 'scaleX(-1)' : '';
+                    img.classList.remove('blog-trocando');
+                });
+            }, 250);
         }
+
+        // No celular dá pra arrastar o card pro lado, além das setas
+        document.addEventListener('DOMContentLoaded', function () {
+            const track = document.getElementById('blog-track');
+            let inicioX = null;
+            track.addEventListener('touchstart', e => { inicioX = e.touches[0].clientX; }, { passive: true });
+            track.addEventListener('touchend', e => {
+                if (inicioX === null) return;
+                const dx = e.changedTouches[0].clientX - inicioX;
+                if (Math.abs(dx) > 40) blogNav(dx < 0 ? 1 : -1);
+                inicioX = null;
+            });
+        });
     </script>
 @endpush
