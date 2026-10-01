@@ -166,13 +166,38 @@
                 .card-frame--lateral {
                     display: none !important;
                 }
-                /* Largura: 90% da área do container (5% a menos de cada lado, centralizado).
-                   Altura: a que o card tinha antes (min(280px, 100vw-130px) em proporção 280x340) com -4%
-                   → 340/280 x 0.96 = 1.1657 */
+                /* Card do antes/depois com o mesmo retângulo do card central do blog (mesmo tamanho 270x370,
+                   mesma moldura dourada). A foto é recortada pela máscara da moldura do blog, igual lá,
+                   em vez do clip-path diagonal do desktop. */
                 .card-frame--destaque {
-                    width: 90% !important;
-                    height: calc(min(280px, 100vw - 130px) * 1.1657) !important;
+                    width: 270px !important;
+                    height: 370px !important;
                     margin-top: 0 !important;
+                    clip-path: none !important;
+                    overflow: visible !important;
+                }
+                .card-frame--destaque .card-frame__borda {
+                    display: none !important;
+                }
+                .card-frame--destaque .slider-container {
+                    -webkit-mask-image: url('{{ asset('images/rectangle-centro-blog-mask.png') }}');
+                    -webkit-mask-size: 100% 100%;
+                    -webkit-mask-repeat: no-repeat;
+                    mask-image: url('{{ asset('images/rectangle-centro-blog-mask.png') }}');
+                    mask-size: 100% 100%;
+                    mask-repeat: no-repeat;
+                }
+                .card-frame--destaque::after {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    background: url('{{ asset('images/Rectangle-centro-blog.png') }}') center / 100% 100% no-repeat;
+                    pointer-events: none;
+                    z-index: 15;
+                }
+                /* A moldura do blog é mais grossa: o grip começa mais pra dentro pra não ficar escondido nela */
+                .card-frame--destaque .slider-handle {
+                    left: 14%;
                 }
             }
             /* TABLET (768px - 1024px): cards e setas fixos em px (~984px no total) vazavam da tela.
@@ -266,7 +291,7 @@
                         @endif
 
                         {{-- Borda do Figma sobreposta (por cima da foto) --}}
-                        <img src="{{ asset('images/retangulo-galeria.png') }}" alt=""
+                        <img class="card-frame__borda" src="{{ asset('images/retangulo-galeria.png') }}" alt=""
                              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; pointer-events: none; z-index: 5;">
 
                     </div>
@@ -312,8 +337,10 @@
                     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                     const rawPct = ((clientX - rect.left) / rect.width) * 100;
                     // reserva margem nas pontas (raio do círculo do grip ~6% da largura do card)
-                    // para o ícone nunca ficar cortado na borda
-                    const pct = Math.max(7, Math.min(93, rawPct));
+                    // para o ícone nunca ficar cortado na borda;
+                    // no mobile a moldura (a do blog) é mais grossa, então a margem é maior
+                    const margem = window.matchMedia('(max-width: 767px)').matches ? 14 : 7;
+                    const pct = Math.max(margem, Math.min(100 - margem, rawPct));
                     depois.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
                     handle.style.left = pct + '%';
                 }
