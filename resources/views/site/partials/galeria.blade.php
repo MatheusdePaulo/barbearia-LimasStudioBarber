@@ -111,23 +111,33 @@
                 transition: transform 0.15s ease;
             }
             /* Dica quase transparente avisando que dá pra arrastar; some depois que a pessoa arrasta */
+            /* "Arraste" no meio do card, pulsando. O pulso fica no <span> de dentro pra não brigar
+               com o fade de sumir (.slider-dica--oculta), que é no wrapper. */
             .slider-dica {
                 position: absolute;
                 left: 0;
                 right: 0;
-                /* no topo: embaixo o card do desktop tem o recorte diagonal, que cortaria o texto */
-                top: 5%;
+                top: 50%;
+                transform: translateY(-50%);
                 z-index: 9;
                 text-align: center;
-                font-family: 'Montserrat', sans-serif;
-                font-weight: 500;
-                font-size: 9px;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
-                color: rgba(245,240,232,0.55);
-                text-shadow: 0 1px 6px rgba(0,0,0,0.6);
                 pointer-events: none;
                 transition: opacity 0.4s ease;
+            }
+            .slider-dica span {
+                display: inline-block;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                font-size: 18px;
+                letter-spacing: 0.3em;
+                text-transform: uppercase;
+                color: #F5F0E8;
+                text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+                animation: slider-dica-pulso 1.8s ease-in-out infinite;
+            }
+            @keyframes slider-dica-pulso {
+                0%, 100% { opacity: 0.35; transform: scale(1); }
+                50%      { opacity: 0.75; transform: scale(1.08); }
             }
             .slider-dica--oculta {
                 opacity: 0;
@@ -221,11 +231,6 @@
                 .card-frame--destaque .slider-handle {
                     left: 14%;
                 }
-                /* No mobile o card é o retângulo do blog (base reta), então a dica fica embaixo */
-                .slider-dica {
-                    top: auto;
-                    bottom: 9%;
-                }
             }
             /* TABLET (768px - 1024px): cards e setas fixos em px (~984px no total) vazavam da tela.
                Aqui tudo encolhe em vw, mantendo as proporções dos cards do desktop. */
@@ -316,7 +321,7 @@
                                 <img class="slider-depois" data-galeria-depois draggable="false"
                                      src="{{ asset('images/fulano'.$id.'-depois.jpg') }}" alt="Depois"
                                      id="slider-depois-{{ $id }}">
-                                <div class="slider-dica">Arraste para ver o depois &nbsp;↔</div>
+                                <div class="slider-dica"><span>Arraste</span></div>
                                 <div class="slider-handle" id="slider-handle-{{ $id }}">
                                     <div class="slider-handle-icon">↔</div>
                                 </div>
