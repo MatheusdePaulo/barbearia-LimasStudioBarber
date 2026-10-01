@@ -15,15 +15,21 @@ class HomeController extends Controller
             'nome'  => $p->name,
             'marca' => $p->description ?? '',
             'preco' => number_format((float) $p->price, 2, ',', '.'),
+            // o admin salva só o nome do arquivo, que fica em public/images
+            'imagem' => $p->image ? asset('images/'.$p->image) : null,
         ]);
 
         if ($produtos->isEmpty()) {
             $produtos = collect([
-                ['nome' => 'Pomada Matte',    'marca' => 'Barber Pro',  'preco' => '49,90'],
-                ['nome' => 'Óleo de Barba',   'marca' => "Lima's",      'preco' => '59,90'],
-                ['nome' => 'Shampoo Premium', 'marca' => 'Barber Gold', 'preco' => '39,90'],
+                ['nome' => 'Pomada Matte',    'marca' => 'Jaboque',    'preco' => '49,90', 'imagem' => asset('images/produto-pomada-matte.png'), 'escala' => 0.7],
+                ['nome' => 'Óleo de Barba',   'marca' => 'Force Men',  'preco' => '59,90', 'imagem' => asset('images/produto-oleo-barba.png')],
+                ['nome' => 'Shampoo 3 em 1',  'marca' => 'Force Men',  'preco' => '39,90', 'imagem' => asset('images/produto-shampoo.png')],
             ]);
         }
+
+        // "escala" diminui a foto de um produto no card (ex.: o pote largo da pomada ocupava a largura toda
+        // e chamava mais atenção que os frascos). Sem escala = 1.
+        $produtos = $produtos->map(fn ($p) => $p + ['escala' => 1]);
 
         return view('site.home', ['produtos' => $produtos->values()]);
     }

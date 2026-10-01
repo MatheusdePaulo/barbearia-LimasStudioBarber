@@ -12,6 +12,36 @@
     #produtos .lp-card-text.lp-trocando {
         opacity: 0;
     }
+    /* Foto do produto (PNG com fundo transparente) na parte de cima do card, acima do texto.
+       Em % da altura do card, então acompanha os tamanhos do mobile e do tablet. */
+    #produtos .lp-card-produto {
+        position: absolute;
+        top: 6%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        height: calc(50% * var(--escala, 1));
+        width: calc(80% * var(--escala, 1));
+        object-fit: contain;
+        object-position: center bottom;
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.35s ease;
+        /* card escuro: brilho dourado suave por trás do produto (que também é escuro) */
+        filter: drop-shadow(0 0 14px rgba(201,168,76,0.35)) drop-shadow(0 8px 10px rgba(0,0,0,0.6));
+    }
+    #produtos .lp-card--destaque .lp-card-produto {
+        top: 8%;
+        height: calc(46% * var(--escala, 1));
+        width: calc(72% * var(--escala, 1));
+        /* card dourado: sombra escura pra dar profundidade */
+        filter: drop-shadow(0 10px 14px rgba(0,0,0,0.45));
+    }
+    #produtos .lp-card:hover .lp-card-produto {
+        transform: translateY(-4px) scale(1.04);
+    }
+    #produtos .lp-card-produto.lp-trocando {
+        opacity: 0;
+    }
     #produtos .lp-card-nome,
     #produtos .lp-card-marca {
         white-space: nowrap;
@@ -124,6 +154,11 @@
         #produtos .lp-card:first-child .lp-card-img {
             height: 194px !important;
             visibility: hidden !important;
+        }
+        /* card do mobile é mais baixo: foto menor pra não encostar no nome */
+        #produtos .lp-card-produto {
+            top: 7% !important;
+            height: calc(36% * var(--escala, 1)) !important;
         }
         #produtos .lp-card-text {
             bottom: 22px !important;
@@ -258,6 +293,11 @@
                             <img class="lp-card-img" src="{{ asset($cardImg) }}" alt=""
                                  style="width: 100%; height: {{ $h }}; object-fit: fill; display: block;">
 
+                            {{-- Foto do produto --}}
+                            <img class="lp-card-produto" data-produto-imagem="{{ $slot }}"
+                                 src="{{ $produto['imagem'] ?? '' }}" alt="{{ $produto['nome'] }}"
+                                 style="--escala: {{ $produto['escala'] }};{{ empty($produto['imagem']) ? ' visibility: hidden;' : '' }}">
+
                             {{-- Texto sobre o card --}}
                             <div class="lp-card-text" data-produto-slot="{{ $slot }}" style="position: absolute; bottom: 28px; left: 0; right: 0; padding: 0 18px;">
                                 <p class="lp-card-nome" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; color: {{ $textColor }}; margin: 0 0 3px;">{{ $produto['nome'] }}</p>
@@ -289,14 +329,27 @@
         const produtosItens = {{ Js::from($produtos) }};
         let produtoAtual = 1 % produtosItens.length;
 
+        // pré-carrega as fotos pra troca não piscar
+        produtosItens.forEach(item => { if (item.imagem) new Image().src = item.imagem; });
+
         function moverCarrossel(dir) {
             const total = produtosItens.length;
             produtoAtual = (produtoAtual + dir + total) % total;
             const offsets = { anterior: -1, atual: 0, proximo: 1 };
 
             const cards = document.querySelectorAll('#produtos [data-produto-slot]');
+            const fotos = document.querySelectorAll('#produtos [data-produto-imagem]');
             cards.forEach(card => card.classList.add('lp-trocando'));
+            fotos.forEach(foto => foto.classList.add('lp-trocando'));
             setTimeout(() => {
+                fotos.forEach(foto => {
+                    const item = produtosItens[(produtoAtual + offsets[foto.dataset.produtoImagem] + total) % total];
+                    foto.src = item.imagem || '';
+                    foto.alt = item.nome;
+                    foto.style.visibility = item.imagem ? '' : 'hidden';
+                    foto.style.setProperty('--escala', item.escala);
+                    foto.classList.remove('lp-trocando');
+                });
                 cards.forEach(card => {
                     const item = produtosItens[(produtoAtual + offsets[card.dataset.produtoSlot] + total) % total];
                     card.querySelector('.lp-card-nome').textContent  = item.nome;
