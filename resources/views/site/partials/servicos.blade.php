@@ -138,8 +138,22 @@
     /* Tablet (768px - 1024px) */
     @media (min-width: 769px) and (max-width: 1024px) {
 
-        .enos-photo { left: 20px !important; height: 380px !important; }
-        .enos-glow  { left: -20px !important; }
+        /* Foto do Enos em vw: recorte e imagem encolhem na mesma proporção do desktop (459/540),
+           e o glow acompanha (centro continua na divisória #servicos/#sobre) */
+        .enos-photo {
+            left: 2vw !important;
+            bottom: -4vw !important;
+            height: 27vw !important;
+        }
+        .enos-photo__img {
+            height: 31.8vw !important;
+        }
+        .enos-glow {
+            left: -4vw !important;
+            width: 36vw !important;
+            height: 25vw !important;
+            bottom: -12.5vw !important;
+        }
 
         /* Tudo em vw: título e cards encolhem junto com a tela e não se sobrepõem mais.
            O padding-left 140px e o margin-left -200px do desktop é que jogavam os cards por cima do título. */
