@@ -4,6 +4,21 @@
     - No mobile, o bloco <style> abaixo sobrescreve com !important (só dentro do @media).
 --}}
 <style>
+    /* Carrossel: fade do texto ao trocar de produto, e nome/descrição numa linha só
+       (a descrição vem do admin e pode ser longa) */
+    #produtos .lp-card-text {
+        transition: opacity 0.25s ease;
+    }
+    #produtos .lp-card-text.lp-trocando {
+        opacity: 0;
+    }
+    #produtos .lp-card-nome,
+    #produtos .lp-card-marca {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     @media (max-width: 767px) {
 
         /* Seção: cola a parte de baixo do painel na quebra da galeria */
@@ -216,16 +231,18 @@
                 <div class="lp-cards" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 24px;">
 
                     @php
-                        $produtos_mock = [
-                            ['nome' => 'Pomada Matte',    'marca' => 'Barber Pro',  'preco' => '49,90', 'destaque' => false],
-                            ['nome' => 'Óleo de Barba',   'marca' => "Lima's",      'preco' => '59,90', 'destaque' => true],
-                            ['nome' => 'Shampoo Premium', 'marca' => 'Barber Gold', 'preco' => '39,90', 'destaque' => false],
-                        ];
+                        // $produtos vem do HomeController (cadastrados no admin, ou os de exemplo).
+                        // Os 3 cards são posições fixas (anterior | atual em destaque | próximo);
+                        // as setas giram qual produto aparece em cada uma (moverCarrossel, no fim do arquivo).
+                        $totalProdutos = $produtos->count();
+                        $produtoInicial = 1 % $totalProdutos;
+                        $slots = ['anterior' => -1, 'atual' => 0, 'proximo' => 1];
                     @endphp
 
-                    @foreach($produtos_mock as $produto)
+                    @foreach($slots as $slot => $offset)
                         @php
-                            $isDestaque = $produto['destaque'];
+                            $produto = $produtos[(($produtoInicial + $offset) % $totalProdutos + $totalProdutos) % $totalProdutos];
+                            $isDestaque = $slot === 'atual';
                             $w = $isDestaque ? '225px' : '200px';
                             $h = $isDestaque ? '272px' : '250px';
                             $mt = $isDestaque ? '-62px' : '90px';
@@ -242,10 +259,10 @@
                                  style="width: 100%; height: {{ $h }}; object-fit: fill; display: block;">
 
                             {{-- Texto sobre o card --}}
-                            <div class="lp-card-text" style="position: absolute; bottom: 28px; left: 0; right: 0; padding: 0 18px;">
-                                <p style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; color: {{ $textColor }}; margin: 0 0 3px;">{{ $produto['nome'] }}</p>
-                                <p style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 11px; color: {{ $subColor }}; margin: 0 0 6px;">{{ $produto['marca'] }}</p>
-                                <p style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 20px; color: {{ $priceColor }}; margin: 0;">R$ {{ $produto['preco'] }}</p>
+                            <div class="lp-card-text" data-produto-slot="{{ $slot }}" style="position: absolute; bottom: 28px; left: 0; right: 0; padding: 0 18px;">
+                                <p class="lp-card-nome" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; color: {{ $textColor }}; margin: 0 0 3px;">{{ $produto['nome'] }}</p>
+                                <p class="lp-card-marca" style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 11px; color: {{ $subColor }}; margin: 0 0 6px;">{{ $produto['marca'] }}</p>
+                                <p class="lp-card-preco" style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 20px; color: {{ $priceColor }}; margin: 0;">R$ {{ $produto['preco'] }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -269,8 +286,38 @@
 
 @push('scripts')
     <script>
+        const produtosItens = {{ Js::from($produtos) }};
+        let produtoAtual = 1 % produtosItens.length;
+
         function moverCarrossel(dir) {
-            console.log('Carrossel:', dir);
+            const total = produtosItens.length;
+            produtoAtual = (produtoAtual + dir + total) % total;
+            const offsets = { anterior: -1, atual: 0, proximo: 1 };
+
+            const cards = document.querySelectorAll('#produtos [data-produto-slot]');
+            cards.forEach(card => card.classList.add('lp-trocando'));
+            setTimeout(() => {
+                cards.forEach(card => {
+                    const item = produtosItens[(produtoAtual + offsets[card.dataset.produtoSlot] + total) % total];
+                    card.querySelector('.lp-card-nome').textContent  = item.nome;
+                    card.querySelector('.lp-card-marca').textContent = item.marca;
+                    card.querySelector('.lp-card-preco').textContent = 'R$ ' + item.preco;
+                    card.classList.remove('lp-trocando');
+                });
+            }, 250);
         }
+
+        // No celular dá pra arrastar o card pro lado, além das setas
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelector('#produtos .lp-cards');
+            let inicioX = null;
+            cards.addEventListener('touchstart', e => { inicioX = e.touches[0].clientX; }, { passive: true });
+            cards.addEventListener('touchend', e => {
+                if (inicioX === null) return;
+                const dx = e.changedTouches[0].clientX - inicioX;
+                if (Math.abs(dx) > 40) moverCarrossel(dx < 0 ? 1 : -1);
+                inicioX = null;
+            });
+        });
     </script>
 @endpush
