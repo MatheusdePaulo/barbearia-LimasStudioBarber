@@ -305,7 +305,9 @@
                     @php
                         $isDestaque = $cliente['destaque'];
                         $id = $cliente['id'];
-                        $w = $isDestaque ? '280px' : '220px';
+                        // largura +15% (280 -> 322, 220 -> 253); o min() com vw só entra em telas estreitas
+                        // (1025-1100px), onde os cards maiores não caberiam ao lado das setas
+                        $w = $isDestaque ? 'min(322px, 28vw)' : 'min(253px, 22vw)';
                         $h = $isDestaque ? '340px' : '270px';
                         $mt = $isDestaque ? '0' : '20px';
                     @endphp
