@@ -54,6 +54,29 @@
                 display: none !important;
             }
         }
+
+        /* TABLET (768px - 1024px): cards e setas fixos em px (~1026px no total) vazavam da tela.
+           Aqui tudo encolhe em vw, mantendo as proporções das molduras do desktop. */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            #blog .blog-arrow {
+                padding: 0 1.5vw !important;
+            }
+            #blog .blog-arrow img {
+                width: 4vw !important;
+            }
+            #blog #blog-track {
+                gap: 3vw !important;
+                min-width: 0 !important;
+            }
+            #blog .blog-card--lateral {
+                width: 21vw !important;
+                height: 28.3vw !important;
+            }
+            #blog .blog-card--centro {
+                width: 25vw !important;
+                height: 34.3vw !important;
+            }
+        }
     </style>
 
     {{-- Título --}}
