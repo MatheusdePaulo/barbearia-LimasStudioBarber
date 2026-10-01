@@ -116,11 +116,11 @@
              :style="scrolled
                 ? 'display: flex; align-items: center; gap: 18px; transition: gap 0.35s ease;'
                 : 'display: flex; align-items: center; gap: 28px; transition: gap 0.35s ease;'">
-            <a href="#sobre"    class="nav-link">Sobre</a>
-            <a href="#servicos" class="nav-link">Serviços</a>
-            <a href="#produtos" class="nav-link">Produtos</a>
-            <a href="#galeria"  class="nav-link">Galeria</a>
-            <a href="#contato"  class="nav-link">Contato</a>
+            <a href="{{ route('home') }}#sobre"    class="nav-link">Sobre</a>
+            <a href="{{ route('home') }}#servicos" class="nav-link">Serviços</a>
+            <a href="{{ route('home') }}#produtos" class="nav-link">Produtos</a>
+            <a href="{{ route('home') }}#galeria"  class="nav-link">Galeria</a>
+            <a href="{{ route('home') }}#contato"  class="nav-link">Contato</a>
         </div>
 
         <a href="{{ route('appointments.create') }}"
@@ -169,12 +169,12 @@
 
     {{-- Links do menu (os mesmos do nosso site) --}}
     <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 24px;">
-            <li><a href="#servicos" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/></svg> Serviços</a></li>
-            <li><a href="#sobre" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg> Sobre</a></li>
-            <li><a href="#produtos" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg> Produtos</a></li>
-            <li><a href="#galeria" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Galeria</a></li>
-            <li><a href="#blog" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12a2 2 0 012 2v14H6a2 2 0 01-2-2V4z"/><path d="M18 8h2v10a2 2 0 01-2 2M8 8h6M8 12h6M8 16h4"/></svg> Blog</a></li>
-            <li><a href="#contato" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg> Contato</a></li>
+            <li><a href="{{ route('home') }}#servicos" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/></svg> Serviços</a></li>
+            <li><a href="{{ route('home') }}#sobre" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg> Sobre</a></li>
+            <li><a href="{{ route('home') }}#produtos" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg> Produtos</a></li>
+            <li><a href="{{ route('home') }}#galeria" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Galeria</a></li>
+            <li><a href="{{ route('home') }}#blog" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12a2 2 0 012 2v14H6a2 2 0 01-2-2V4z"/><path d="M18 8h2v10a2 2 0 01-2 2M8 8h6M8 12h6M8 16h4"/></svg> Blog</a></li>
+            <li><a href="{{ route('home') }}#contato" class="nav-drawer-link" onclick="toggleNavDrawer()"><svg viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg> Contato</a></li>
     </ul>
 
     <a href="{{ route('appointments.create') }}"

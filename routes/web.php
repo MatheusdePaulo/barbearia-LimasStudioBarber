@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 // ─── Site público ────────────────────────────────────────────
 Route::get('/', [Site\HomeController::class, 'index'])->name('home');
+// Página com os tipos de corte de cabelo e barba (os cards de Serviços da home levam pra cá)
+Route::view('/cortes', 'site.cortes')->name('cortes');
 
 // Webhook do Mercado Pago (fora de qualquer middleware de autenticação)
 Route::post('/webhooks/mercadopago', [WebhookController::class, 'handleMercadoPago'])
