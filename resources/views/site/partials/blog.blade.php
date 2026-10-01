@@ -227,17 +227,21 @@
                 @foreach($cortes as $i => $corte)
                     <div class="{{ !empty($corte['centro']) ? 'blog-card--centro' : 'blog-card--lateral' }}" style="flex-shrink: 0; width: {{ $corte['w'] }}; height: {{ $corte['h'] }}; margin-top: {{ $corte['mt'] }}; position: relative;">
 
-                        {{-- Foto recortada no shape exato da moldura, via mask-image --}}
-                        <img src="{{ asset($corte['foto']) }}" alt="Corte" data-blog-slot="{{ ['anterior', 'atual', 'proximo'][$i] }}"
-                             style="position: absolute; inset: 0; width: 100%; height: 100%;
-                                object-fit: cover; object-position: center top;
-                                {{ !empty($corte['flip']) ? 'transform: scaleX(-1);' : '' }}
+                        {{-- Foto recortada no shape exato da moldura, via mask-image. A máscara fica no wrapper e o
+                             espelhamento (flip) só na <img> de dentro: se os dois ficassem no mesmo elemento, a máscara
+                             espelhava junto e, nos cards laterais (que são inclinados), a foto vazava da moldura. --}}
+                        <div style="position: absolute; inset: 0;
                                 -webkit-mask-image: url('{{ asset($corte['mask']) }}');
                                 -webkit-mask-size: 100% 100%;
                                 -webkit-mask-repeat: no-repeat;
                                 mask-image: url('{{ asset($corte['mask']) }}');
                                 mask-size: 100% 100%;
                                 mask-repeat: no-repeat;">
+                            <img src="{{ asset($corte['foto']) }}" alt="Corte" data-blog-slot="{{ ['anterior', 'atual', 'proximo'][$i] }}"
+                                 style="position: absolute; inset: 0; width: 100%; height: 100%;
+                                    object-fit: cover; object-position: center top;
+                                    {{ !empty($corte['flip']) ? 'transform: scaleX(-1);' : '' }}">
+                        </div>
 
                         {{-- Nome do corte + explicação --}}
                         <div class="blog-card-info" data-blog-info="{{ ['anterior', 'atual', 'proximo'][$i] }}"
