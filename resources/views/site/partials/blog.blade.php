@@ -36,6 +36,13 @@
             opacity: 0;
         }
 
+        /* Card do meio: foto 20% mais pra cima dentro da moldura, pro texto de baixo não ficar em cima do cliente.
+           A <img> sobe 20% e ganha 20% de altura, então a base continua encostada no fim do card (sem buraco). */
+        #blog .blog-card--centro [data-blog-slot] {
+            top: -20% !important;
+            height: 120% !important;
+        }
+
         /* Nome do corte + explicação na parte de baixo do card. O degradê escuro usa a mesma máscara da foto,
            então fica só dentro da moldura. Tamanhos em clamp pra caber nos cards menores do tablet. */
         #blog .blog-card-info {
