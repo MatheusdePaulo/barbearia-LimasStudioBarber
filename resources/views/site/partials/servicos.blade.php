@@ -294,24 +294,15 @@
         }
 
         #servicos .servico-card__seta {
-            display: flex;
-            position: absolute;
-            right: 2px;
-            bottom: 2px;
-            z-index: 5;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: #C9A84C;
-            color: #0A0A0A;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
-            pointer-events: none;
+            display: inline-flex;
+            vertical-align: middle;
+            margin-left: 3px;
+            margin-top: -2px;
+            color: #C9A84C;
         }
         #servicos .servico-card__seta svg {
-            width: 13px;
-            height: 13px;
+            width: 10px;
+            height: 10px;
         }
 
         #servicos .servicos-dica {
@@ -403,13 +394,10 @@
                                      style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                                 <div class="servico-card__overlay" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);"></div>
                                 <span class="servico-card__label" style="position: absolute; bottom: 24px; left: 0; right: 0; text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.14em;">
-                                {{ $s['nome'] }}
+                                {{ $s['nome'] }}{{-- Setinha dourada (só no celular), colada no nome e dentro do círculo:
+                                    mostra que o círculo leva pra outra página --}}<span class="servico-card__seta" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
                             </span>
                             </a>
-                            {{-- Setinha dourada (só no celular): mostra que o círculo leva pra outra página --}}
-                            <span class="servico-card__seta" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                            </span>
                         </div>
                     @endforeach
 
