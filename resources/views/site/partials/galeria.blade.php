@@ -349,7 +349,7 @@
         <div class="galeria-carousel" style="display: flex; align-items: center; gap: 0;">
 
             {{-- Seta esquerda --}}
-            <button class="galeria-arrow" onclick="galeriaNav(-1)"
+            <button class="galeria-arrow" onclick="galeriaNav(-1)" aria-label="Antes e depois anterior"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
                 <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="anterior"
                      style="width: 44px; height: auto; transform: rotate(90deg); opacity: 0.9;">
@@ -407,7 +407,7 @@
             </div>
 
             {{-- Seta direita --}}
-            <button class="galeria-arrow" onclick="galeriaNav(1)"
+            <button class="galeria-arrow" onclick="galeriaNav(1)" aria-label="Próximo antes e depois"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
                 <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="próximo"
                      style="width: 44px; height: auto; transform: rotate(-90deg); opacity: 0.9;">

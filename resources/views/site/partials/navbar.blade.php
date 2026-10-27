@@ -160,7 +160,7 @@
     </div>
 
     {{-- HAMBÚRGUER — tablet + mobile --}}
-    <button class="nav-hamburger" onclick="toggleNavDrawer()"
+    <button class="nav-hamburger" onclick="toggleNavDrawer()" aria-label="Abrir menu"
             style="background: none; border: none; cursor: pointer; padding: 8px;">
         <svg id="nav-icon-menu" width="26" height="26" fill="none" stroke="#F5F0E8" stroke-width="1.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>

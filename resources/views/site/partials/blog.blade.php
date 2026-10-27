@@ -191,7 +191,7 @@
         <div class="blog-carousel" style="display: flex; align-items: center; gap: 0;">
 
             {{-- Seta esquerda --}}
-            <button class="blog-arrow" onclick="blogNav(-1)"
+            <button class="blog-arrow" onclick="blogNav(-1)" aria-label="Corte anterior"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
                 <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="anterior"
                      style="width: 44px; height: auto; transform: rotate(90deg); opacity: 0.9;">
@@ -270,7 +270,7 @@
             </div>
 
             {{-- Seta direita --}}
-            <button class="blog-arrow" onclick="blogNav(1)"
+            <button class="blog-arrow" onclick="blogNav(1)" aria-label="Próximo corte"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
                 <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="próximo"
                      style="width: 44px; height: auto; transform: rotate(-90deg); opacity: 0.9;">

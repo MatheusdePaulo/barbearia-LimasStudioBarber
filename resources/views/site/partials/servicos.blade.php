@@ -314,7 +314,7 @@
                             @endif
                             {{-- TAMANHO DOS CÍRCULOS: width e height abaixo --}}
                             <a href="{{ route('cortes') }}#{{ strtolower($s['nome']) }}" class="servico-card {{ $featured ? 'servico-card--featured' : '' }}" style="position: relative; width: 238px; height: 238px; border-radius: 50%; overflow: hidden; display: block; text-decoration: none;">
-                                <img src="{{ asset($s['img']) }}" alt="{{ $s['nome'] }}" width="304" height="304" loading="lazy" decoding="async" class="servico-card__img"
+                                <img src="{{ asset($s['img']) }}" alt="" width="304" height="304" loading="lazy" decoding="async" class="servico-card__img"
                                      style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                                 <div class="servico-card__overlay" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);"></div>
                                 <span class="servico-card__label" style="position: absolute; bottom: 24px; left: 0; right: 0; text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.14em;">

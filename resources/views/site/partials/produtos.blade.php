@@ -255,7 +255,7 @@
                      stroke que acompanha exatamente as pontas do triângulo, não uma caixa em volta dele.
                      100% maior (30x34 → 60x68), cantos com raio 5 via <path> com curvas nos vértices, e ponta
                      mais afastada da base (era x=7, agora x=3) pra ficar mais larga/menos fina. --}}
-                <button class="lp-arrow" onclick="moverCarrossel(-1)"
+                <button class="lp-arrow" onclick="moverCarrossel(-1)" aria-label="Produto anterior"
                         style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px; margin-top: 14px;">
                     <svg width="60" height="68" viewBox="0 0 24 24" fill="#C9A84C" stroke="rgba(229,231,235,0.65)" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.9; display: block;">
                         <path d="M 17,8 L 17,16 Q 17,21 12.79,18.30 L 7.21,14.70 Q 3,12 7.21,9.30 L 12.79,5.70 Q 17,3 17,8 Z"/>
@@ -310,7 +310,7 @@
                 </div>
 
                 {{-- Seta direita — mesmos ajustes da esquerda, path espelhado --}}
-                <button class="lp-arrow" onclick="moverCarrossel(1)"
+                <button class="lp-arrow" onclick="moverCarrossel(1)" aria-label="Próximo produto"
                         style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px; margin-top: 14px;">
                     <svg width="60" height="68" viewBox="0 0 24 24" fill="#C9A84C" stroke="rgba(229,231,235,0.65)" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.9; display: block;">
                         <path d="M 7,8 L 7,16 Q 7,21 11.21,18.30 L 16.79,14.70 Q 21,12 16.79,9.30 L 11.21,5.70 Q 7,3 7,8 Z"/>

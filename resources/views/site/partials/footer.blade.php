@@ -23,7 +23,7 @@
                 height: clamp(52px, 17vw, 74px) !important;
                 max-width: 100% !important;
             }
-            footer .ft-col h4 {
+            footer .ft-col h3 {
                 font-size: clamp(9px, 2.6vw, 11px) !important;
                 letter-spacing: 0.15em !important;
                 margin-bottom: 8px !important;
@@ -53,9 +53,9 @@
 
         {{-- Endereço --}}
         <div class="ft-col" style="flex: 1 1 200px;">
-            <h4 style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; margin: 0 0 10px;">
+            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; margin: 0 0 10px;">
                 Endereço
-            </h4>
+            </h3>
             <p style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 13px; color: rgba(245,240,232,0.75); line-height: 1.7; margin: 0;">
                 Rua Pedro Ciríaco, 909<br>
                 Bairro Mutirão — Cascavel, CE
@@ -64,9 +64,9 @@
 
         {{-- Horário --}}
         <div class="ft-col" style="flex: 1 1 180px;">
-            <h4 style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; margin: 0 0 10px;">
+            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; margin: 0 0 10px;">
                 Horário
-            </h4>
+            </h3>
             <p style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 13px; color: rgba(245,240,232,0.75); line-height: 1.7; margin: 0;">
                 Segunda a sábado<br>
                 8h às 18h
@@ -75,9 +75,9 @@
 
         {{-- Contato --}}
         <div class="ft-col" style="flex: 1 1 200px;">
-            <h4 style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; margin: 0 0 10px;">
+            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; margin: 0 0 10px;">
                 Contato
-            </h4>
+            </h3>
             <div style="display: flex; flex-direction: column; gap: 8px;">
                 <a href="https://wa.me/5585985430142" target="_blank" rel="noopener"
                    style="display: flex; align-items: center; gap: 10px; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 13px; color: rgba(245,240,232,0.75); text-decoration: none; transition: color 0.25s ease;"
