@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- cabeça de criança com topete -->
+  <circle cx="24" cy="34" r="14"/>
+  <path d="M12 28c3-8 10-11 17-9 3-4 8-4 10-1-4 0-6 2-6 4 3 1 5 3 5 6" fill="#000"/>
+  <circle cx="19" cy="35" r="1.6" fill="#000" stroke="none"/>
+  <circle cx="29" cy="35" r="1.6" fill="#000" stroke="none"/>
+  <path d="M19 41c3 2.5 7 2.5 10 0"/>
+  <!-- tesoura -->
+  <circle cx="47" cy="49" r="4"/>
+  <circle cx="57" cy="49" r="4"/>
+  <path d="M49.5 46 58 30M54.5 46 46 30"/>
+</svg>
