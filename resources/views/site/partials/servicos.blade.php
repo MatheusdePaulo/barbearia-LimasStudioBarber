@@ -265,6 +265,91 @@
             width: 38vw !important;
         }
     }
+
+    /* Setinha e dica dos cards só aparecem no celular */
+    .servico-card__seta,
+    .servicos-dica {
+        display: none;
+    }
+
+    /* CELULAR: deixa claro que os círculos são clicáveis.
+       Anel dourado pulsando um de cada vez, setinha no canto e a dica "Toque e veja os cortes". */
+    @media (max-width: 767px) {
+        #servicos .servico-card-wrap::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid #C9A84C;
+            pointer-events: none;
+            opacity: 0;
+            animation: servico-anel 3.6s ease-out infinite;
+        }
+        #servicos .servico-card-wrap:nth-child(2)::before { animation-delay: 1.2s; }
+        #servicos .servico-card-wrap:nth-child(3)::before { animation-delay: 2.4s; }
+        @keyframes servico-anel {
+            0%   { transform: scale(1);    opacity: 0.9; }
+            35%  { transform: scale(1.22); opacity: 0; }
+            100% { transform: scale(1.22); opacity: 0; }
+        }
+
+        #servicos .servico-card__seta {
+            display: flex;
+            position: absolute;
+            right: 2px;
+            bottom: 2px;
+            z-index: 5;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #C9A84C;
+            color: #0A0A0A;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+            pointer-events: none;
+        }
+        #servicos .servico-card__seta svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        #servicos .servicos-dica {
+            display: flex;
+            position: absolute;
+            top: calc(100% + 16px);
+            left: 0;
+            right: 0;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #C9A84C;
+            pointer-events: none;
+            animation: servicos-dica-pulso 1.8s ease-in-out infinite;
+        }
+        #servicos .servicos-dica svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+        @keyframes servicos-dica-pulso {
+            0%, 100% { opacity: 0.45; transform: scale(1); }
+            50%      { opacity: 1;    transform: scale(1.05); }
+        }
+    }
+    @media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+        #servicos .servico-card-wrap::before,
+        #servicos .servicos-dica {
+            animation: none;
+        }
+        #servicos .servicos-dica { opacity: 0.8; }
+    }
 </style>
 
 {{-- ═══════════ SERVIÇOS + SOBRE ═══════════ --}}
@@ -291,7 +376,7 @@
             <div style="flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 32px; margin-left: -200px;">
 
                 {{-- CARDS - para ajustar espaço entre eles: gap abaixo --}}
-                <div style="display: flex; gap: 52px; align-items: center; justify-content: center; width: 100%;">
+                <div class="servicos-cards" style="position: relative; display: flex; gap: 52px; align-items: center; justify-content: center; width: 100%;">
                     @php
                         $servicos_destaque = [
                             ['nome' => 'Cabelo', 'img' => 'images/circulo-cabelo.webp'],
@@ -321,8 +406,19 @@
                                 {{ $s['nome'] }}
                             </span>
                             </a>
+                            {{-- Setinha dourada (só no celular): mostra que o círculo leva pra outra página --}}
+                            <span class="servico-card__seta" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </span>
                         </div>
                     @endforeach
+
+                    {{-- Dica (só no celular), no mesmo estilo do "Arraste" do antes/depois. Fica solta embaixo
+                         dos círculos (position absolute) pra não empurrar a frase nem a foto do Enos. --}}
+                    <p class="servicos-dica" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10"/><path d="M12 9.5a1.5 1.5 0 0 1 3 0V11"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0v3.5a6 6 0 0 1-6 6h-.6a5 5 0 0 1-4-2l-2.6-3.6a1.5 1.5 0 0 1 2.3-1.9L9 14"/><path d="M6.5 4.5 5 3M14.5 4.5 16 3M10.5 2.5V1"/></svg>
+                        Toque e veja os cortes
+                    </p>
                 </div>
 
                 {{-- FRASE + TESOURA - centralizada na coluna direita --}}
