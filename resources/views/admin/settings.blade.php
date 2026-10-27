@@ -30,7 +30,7 @@
 
                     <div class="relative inline-block mb-6">
                         {{-- Avatar dinâmico puxando o nome do Admin logado --}}
-                        <img src="{{ asset('images/Logo-Limas.png') }}" alt="Lima's Studio Barber"
+                        <img src="{{ asset('images/Logo-Limas.webp') }}" alt="Lima's Studio Barber"
                              class="object-contain p-1 bg-[#0A0A0A] w-24 h-24 rounded-3xl border-2 border-zinc-800 shadow-2xl mx-auto">
                         <button class="absolute -bottom-2 -right-2 bg-zinc-900 text-[#C9A84C] p-2 rounded-xl border border-zinc-800 hover:bg-[#C9A84C] hover:text-black transition-all">
                             <i class="fas fa-camera text-xs"></i>

@@ -22,7 +22,7 @@
       x-init="init()">
 
 <header class="lg:hidden bg-[#141414] border-b border-zinc-800 p-5 flex justify-between items-center sticky top-0 z-40">
-    <img src="{{ asset('images/logo-limas02.png') }}" alt="Lima's Studio Barber" class="h-12 w-auto">
+    <img src="{{ asset('images/logo-limas02.webp') }}" alt="Lima's Studio Barber" class="h-12 w-auto">
     <button @click="mobileMenu = true" class="text-[#C9A84C] p-2">
         <i class="fas fa-bars text-3xl"></i>
     </button>
@@ -30,7 +30,7 @@
 
 <aside class="w-[300px] bg-[#141414] border-r border-zinc-800 p-8 hidden lg:block flex-shrink-0 sticky top-0 h-screen text-center">
     <div class="mb-10">
-        <img src="{{ asset('images/logo-limas02.png') }}" alt="Lima's Studio Barber" class="w-40 h-auto mx-auto">
+        <img src="{{ asset('images/logo-limas02.webp') }}" alt="Lima's Studio Barber" class="w-40 h-auto mx-auto">
     </div>
     <nav class="space-y-4">
         <a href="{{ url('/') }}" class="block px-4 py-3 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-xl transition-all italic font-bold text-sm">← Voltar ao Início</a>
@@ -41,7 +41,7 @@
     <div @click="mobileMenu = false" class="fixed inset-0 bg-black/90 backdrop-blur-md"></div>
     <nav class="fixed top-0 right-0 bottom-0 w-[300px] bg-[#141414] p-10 shadow-2xl flex flex-col items-center">
         <button @click="mobileMenu = false" class="self-end text-white p-2 mb-10"><i class="fas fa-times text-3xl"></i></button>
-        <img src="{{ asset('images/logo-limas02.png') }}" alt="Lima's Studio Barber" class="w-40 h-auto mb-10">
+        <img src="{{ asset('images/logo-limas02.webp') }}" alt="Lima's Studio Barber" class="w-40 h-auto mb-10">
         <a href="{{ url('/') }}" class="w-full text-center px-4 py-4 text-zinc-400 border border-zinc-800 rounded-2xl font-black uppercase text-xs">Voltar ao Início</a>
     </nav>
 </div>

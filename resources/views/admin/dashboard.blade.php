@@ -14,7 +14,7 @@
                 <p class="text-[9px] text-[#C9A84C] font-bold uppercase tracking-widest leading-none">Administrador</p>
             </div>
             {{-- Atualiza também o avatar para usar o nome dinâmico --}}
-            <img src="{{ asset('images/Logo-Limas.png') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-10 h-10 rounded-xl border border-zinc-800 shadow-xl">
+            <img src="{{ asset('images/Logo-Limas.webp') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-10 h-10 rounded-xl border border-zinc-800 shadow-xl">
         </div>
     </header>
 
@@ -167,7 +167,7 @@
                 <h4 class="font-black italic uppercase text-[10px] text-zinc-500 tracking-[0.2em] ml-2">Barbeiros</h4>
                 <div class="flex items-center justify-between bg-[#141414] p-4 rounded-2xl border border-zinc-800">
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('images/Logo-Limas.png') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-10 h-10 rounded-xl border border-zinc-800">
+                        <img src="{{ asset('images/Logo-Limas.webp') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-10 h-10 rounded-xl border border-zinc-800">
                         <div>
                             <p class="text-[10px] font-black uppercase text-white leading-none tracking-tighter">Lima's Studio Barber</p>
                             <p class="text-[8px] text-zinc-600 uppercase mt-1 font-bold">Barbeiro Mestre</p>

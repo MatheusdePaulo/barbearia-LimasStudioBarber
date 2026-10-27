@@ -233,7 +233,7 @@
 
             {{-- Setinha dourada no topo --}}
             <div class="lp-polygon" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%) translateY(-48%); z-index: 2;">
-                <img src="{{ asset('images/polygon-produtos.png') }}" alt="" style="width: 52px; height: auto; display: block;">
+                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="" width="52" height="44" style="width: 52px; height: auto; display: block;">
             </div>
 
             {{-- Label + Título --}}
@@ -290,11 +290,11 @@
                         <div class="lp-card {{ $isDestaque ? 'lp-card--destaque' : 'lp-card--lateral' }}"
                              style="flex-shrink: 0; width: {{ $w }}; margin-top: {{ $mt }}; position: relative;">
                             {{-- Imagem do card como fundo --}}
-                            <img class="lp-card-img" src="{{ asset($cardImg) }}" alt=""
+                            <img loading="lazy" decoding="async" class="lp-card-img" src="{{ asset($cardImg) }}" alt=""
                                  style="width: 100%; height: {{ $h }}; object-fit: fill; display: block;">
 
                             {{-- Foto do produto --}}
-                            <img class="lp-card-produto" data-produto-imagem="{{ $slot }}"
+                            <img loading="lazy" decoding="async" class="lp-card-produto" data-produto-imagem="{{ $slot }}"
                                  src="{{ $produto['imagem'] ?? '' }}" alt="{{ $produto['nome'] }}"
                                  style="--escala: {{ $produto['escala'] }};{{ empty($produto['imagem']) ? ' visibility: hidden;' : '' }}">
 

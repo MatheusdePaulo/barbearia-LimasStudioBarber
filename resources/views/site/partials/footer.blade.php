@@ -47,7 +47,7 @@
 
         {{-- Logo --}}
         <div class="ft-col ft-logo" style="flex: 1 1 160px; max-width: 200px; display: flex; align-items: center;">
-            <img src="{{ asset('images/logo-limas02.png') }}" alt="Lima's Studio Barber"
+            <img src="{{ asset('images/logo-limas02.webp') }}" alt="Lima's Studio Barber" width="400" height="341" loading="lazy" decoding="async"
                  style="height: 74px; width: auto; object-fit: contain;">
         </div>
 

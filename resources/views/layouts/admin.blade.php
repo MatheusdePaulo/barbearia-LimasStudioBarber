@@ -32,7 +32,7 @@
     -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 ease-in-out">
 
     <div class="p-8 flex justify-center items-center border-b border-zinc-800/50 h-[150px] relative">
-        <img src="{{ asset('images/logo-limas02.png') }}"
+        <img src="{{ asset('images/logo-limas02.webp') }}"
              alt="Lima's Studio Barber"
              class="max-h-[100px] w-auto object-contain">
 
@@ -128,7 +128,7 @@
         </button>
         <span class="text-[10px] font-black uppercase text-white tracking-widest italic">Lima's Studio Barber</span>
         <div class="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 overflow-hidden">
-            <img src="{{ asset('images/Logo-Limas.png') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-full h-full">
+            <img src="{{ asset('images/Logo-Limas.webp') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-full h-full">
         </div>
     </header>
 

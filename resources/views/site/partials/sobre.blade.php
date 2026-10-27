@@ -51,7 +51,7 @@
     {{-- SOBRE (fundo preto neutro, levemente mais claro que #servicos pra diferenciar as seções).
          Grid 2 colunas: ESQUERDA = selo "Nossa História" + heading + texto + estatísticas, com margin-top pra
          "nascer" logo abaixo da foto do Enos que vaza de #servicos (que aqui só poka ~59-80px dentro de #sobre).
-         DIREITA = foto barbeiro-trabalhando.png. Fontes aumentadas (estavam pequenas demais). --}}
+         DIREITA = foto barbeiro-trabalhando.webp. Fontes aumentadas (estavam pequenas demais). --}}
     <section id="sobre" style="background: #1A1A1A; padding: 40px 0 80px; position: relative;">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 60px 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
 
@@ -91,9 +91,9 @@
                 {{-- TRACK — as 2 fotos lado a lado (width:200%, cada uma 50% = 100% do quadro); desliza via
                      translateX pra dar o efeito de carrossel real --}}
                 <div :style="'display: flex; width: 200%; height: 100%; transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); transform: translateX(' + (slide * -50) + '%);'">
-                    <img src="{{ asset('images/barbeiro-trabalhando.png') }}" alt="Barbeiro trabalhando"
+                    <img loading="lazy" decoding="async" src="{{ asset('images/barbeiro-trabalhando.webp') }}" alt="Barbeiro trabalhando"
                          style="width: 50%; height: 100%; object-fit: cover; display: block;">
-                    <img src="{{ asset('images/barbeiro-trabalhando2.jpg') }}" alt="Barbeiro trabalhando 2"
+                    <img loading="lazy" decoding="async" src="{{ asset('images/barbeiro-trabalhando2.webp') }}" alt="Barbeiro trabalhando 2"
                          style="width: 50%; height: 100%; object-fit: cover; display: block;">
                 </div>
 

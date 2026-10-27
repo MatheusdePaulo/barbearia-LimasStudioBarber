@@ -4,19 +4,19 @@
     // com o fulano4 à esquerda e o fulano1 à direita. "flip" espelha a foto (o fulano5 olha pro outro lado).
     // "nome" e "texto" aparecem na parte de baixo do card.
     $blogItens = collect([
-        ['foto' => 'images/fulano4-depois.png', 'nome' => 'Degradê Social',
+        ['foto' => 'images/fulano4-depois.webp', 'nome' => 'Degradê Social',
          'texto' => 'Laterais em degradê suave e topo mais cheio. Discreto e alinhado para o dia a dia.'],
-        ['foto' => 'images/fulano5-depois.png', 'flip' => true, 'nome' => 'Corte Italiano',
+        ['foto' => 'images/fulano5-depois.webp', 'flip' => true, 'nome' => 'Corte Italiano',
          'texto' => 'Volume no topo penteado para trás, com acabamento natural. Elegância clássica com movimento.'],
-        ['foto' => 'images/fulano1-depois.png', 'nome' => 'Barba Desenhada',
+        ['foto' => 'images/fulano1-depois.webp', 'nome' => 'Barba Desenhada',
          'texto' => 'Laterais baixas e barba alinhada com contorno marcado. Visual maduro e imponente.'],
-        ['foto' => 'images/fulano6-depois.png', 'nome' => 'Low Fade',
+        ['foto' => 'images/fulano6-depois.webp', 'nome' => 'Low Fade',
          'texto' => 'Degradê baixo, rente à orelha, com topo médio. Moderno sem perder a sobriedade.'],
-        ['foto' => 'images/fulano2-depois.png', 'nome' => 'Topete Clássico',
+        ['foto' => 'images/fulano2-depois.webp', 'nome' => 'Topete Clássico',
          'texto' => 'Topo com volume penteado para cima e laterais curtas. Um clássico que valoriza o rosto.'],
-        ['foto' => 'images/fulano8-depois.png', 'nome' => 'Corte Curto',
+        ['foto' => 'images/fulano8-depois.webp', 'nome' => 'Corte Curto',
          'texto' => 'Degradê baixo nas laterais e topo curto texturizado. Prático e sempre alinhado.'],
-        ['foto' => 'images/fulano7-crianca-depois.png', 'nome' => 'Corte Infantil',
+        ['foto' => 'images/fulano7-crianca-depois.webp', 'nome' => 'Corte Infantil',
          'texto' => 'Corte pra criançada feito com calma, paciência e acabamento caprichado.'],
     ])->map(fn ($item) => [
         'foto'  => asset($item['foto']),
@@ -193,7 +193,7 @@
             {{-- Seta esquerda --}}
             <button class="blog-arrow" onclick="blogNav(-1)"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
-                <img src="{{ asset('images/polygon-produtos.png') }}" alt="anterior"
+                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="anterior"
                      style="width: 44px; height: auto; transform: rotate(90deg); opacity: 0.9;">
             </button>
 
@@ -203,7 +203,7 @@
                 @php
                     $cortes = [
                         [
-                            'foto'     => 'images/fulano4-depois.png',
+                            'foto'     => 'images/fulano4-depois.webp',
                             'moldura'  => 'images/Rectangle-esquerda-blog.png',
                             // máscara preenchida (gerada a partir da moldura, via flood-fill)
                             // usada para recortar a foto exatamente no contorno da moldura
@@ -213,7 +213,7 @@
                             'mt'       => '15px',
                         ],
                         [
-                            'foto'     => 'images/fulano5-depois.png',
+                            'foto'     => 'images/fulano5-depois.webp',
                             'moldura'  => 'images/Rectangle-centro-blog.png',
                             'mask'     => 'images/rectangle-centro-blog-mask.png',
                             'w'        => '270px',
@@ -223,7 +223,7 @@
                             'centro'   => true,
                         ],
                         [
-                            'foto'     => 'images/fulano1-depois.png',
+                            'foto'     => 'images/fulano1-depois.webp',
                             'moldura'  => 'images/Rectangle-direita-blog.png',
                             'mask'     => 'images/rectangle-direita-blog-mask.png',
                             'w'        => '230px',
@@ -246,7 +246,7 @@
                                 mask-image: url('{{ asset($corte['mask']) }}');
                                 mask-size: 100% 100%;
                                 mask-repeat: no-repeat;">
-                            <img src="{{ asset($corte['foto']) }}" alt="Corte" data-blog-slot="{{ ['anterior', 'atual', 'proximo'][$i] }}"
+                            <img loading="lazy" decoding="async" src="{{ asset($corte['foto']) }}" alt="Corte" data-blog-slot="{{ ['anterior', 'atual', 'proximo'][$i] }}"
                                  style="position: absolute; inset: 0; width: 100%; height: 100%;
                                     object-fit: cover; object-position: center top;
                                     {{ !empty($corte['flip']) ? 'transform: scaleX(-1);' : '' }}">
@@ -260,7 +260,7 @@
                         </div>
 
                         {{-- Moldura do Figma por cima --}}
-                        <img src="{{ asset($corte['moldura']) }}" alt=""
+                        <img loading="lazy" decoding="async" src="{{ asset($corte['moldura']) }}" alt=""
                              style="position: absolute; inset: 0; width: 100%; height: 100%;
                                 object-fit: fill; pointer-events: none; z-index: 5;">
 
@@ -272,7 +272,7 @@
             {{-- Seta direita --}}
             <button class="blog-arrow" onclick="blogNav(1)"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
-                <img src="{{ asset('images/polygon-produtos.png') }}" alt="próximo"
+                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="próximo"
                      style="width: 44px; height: auto; transform: rotate(-90deg); opacity: 0.9;">
             </button>
 

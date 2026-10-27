@@ -56,7 +56,7 @@
                     <p class="text-xs font-black uppercase tracking-widest text-white leading-none mb-1">{{ auth()->user()->name }}</p>
                     <p class="text-[9px] text-[#C9A84C] font-bold uppercase tracking-widest leading-none">Administrador</p>
                 </div>
-                <img src="{{ asset('images/Logo-Limas.png') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-10 h-10 rounded-xl border border-zinc-800 shadow-xl">
+                <img src="{{ asset('images/Logo-Limas.webp') }}" alt="Lima's Studio Barber" class="object-contain p-1 bg-[#0A0A0A] w-10 h-10 rounded-xl border border-zinc-800 shadow-xl">
             </div>
         </header>
  

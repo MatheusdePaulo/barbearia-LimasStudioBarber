@@ -15,7 +15,7 @@
     {{-- Logo --}}
     <div class="text-center mb-2">
         <a href="{{ url('/') }}">
-            <img src="{{ asset('images/logo-limas02.png') }}" alt="Lima's Studio Barber" class="h-16 w-auto mx-auto">
+            <img src="{{ asset('images/logo-limas02.webp') }}" alt="Lima's Studio Barber" class="h-16 w-auto mx-auto">
         </a>
     </div>
 

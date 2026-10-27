@@ -1,6 +1,6 @@
 {{-- ═══════════ QUEBRA DE LAYOUT — GALERIA ═══════════ --}}
 <div style="position: relative; width: 100vw; margin-left: calc(-1 * (100vw - 100%) / 2); height: 200px; overflow: hidden;">
-    <img src="{{ asset('images/Ambiente.png') }}" alt=""
+    <img loading="lazy" decoding="async" src="{{ asset('images/Ambiente.webp') }}" alt=""
          style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;">
     <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.85) 100%);"></div>
     <div class="gq-content" style="position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px;">
@@ -351,7 +351,7 @@
             {{-- Seta esquerda --}}
             <button class="galeria-arrow" onclick="galeriaNav(-1)"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
-                <img src="{{ asset('images/polygon-produtos.png') }}" alt="anterior"
+                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="anterior"
                      style="width: 44px; height: auto; transform: rotate(90deg); opacity: 0.9;">
             </button>
 
@@ -384,10 +384,10 @@
                         @if($isDestaque)
                             {{-- Card destaque: slider interativo --}}
                             <div class="slider-container" id="slider-{{ $id }}">
-                                <img class="slider-antes" data-galeria-antes draggable="false"
-                                     src="{{ asset('images/fulano'.$id.'-antes.png') }}" alt="Antes">
-                                <img class="slider-depois" data-galeria-depois draggable="false"
-                                     src="{{ asset('images/fulano'.$id.'-depois.png') }}" alt="Depois"
+                                <img loading="lazy" decoding="async" class="slider-antes" data-galeria-antes draggable="false"
+                                     src="{{ asset('images/fulano'.$id.'-antes.webp') }}" alt="Antes">
+                                <img loading="lazy" decoding="async" class="slider-depois" data-galeria-depois draggable="false"
+                                     src="{{ asset('images/fulano'.$id.'-depois.webp') }}" alt="Depois"
                                      id="slider-depois-{{ $id }}">
                                 <div class="slider-dica"><span>Arraste</span></div>
                                 <div class="slider-handle" id="slider-handle-{{ $id }}">
@@ -396,8 +396,8 @@
                             </div>
                         @else
                             {{-- Card lateral: foto com shape --}}
-                            <img class="foto-lateral" data-galeria-slot="{{ $loop->first ? 'anterior' : 'proximo' }}"
-                                 src="{{ asset('images/fulano'.$id.'-depois.png') }}" alt="Resultado">
+                            <img loading="lazy" decoding="async" class="foto-lateral" data-galeria-slot="{{ $loop->first ? 'anterior' : 'proximo' }}"
+                                 src="{{ asset('images/fulano'.$id.'-depois.webp') }}" alt="Resultado">
                         @endif
 
 
@@ -409,7 +409,7 @@
             {{-- Seta direita --}}
             <button class="galeria-arrow" onclick="galeriaNav(1)"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
-                <img src="{{ asset('images/polygon-produtos.png') }}" alt="próximo"
+                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="próximo"
                      style="width: 44px; height: auto; transform: rotate(-90deg); opacity: 0.9;">
             </button>
 
@@ -431,8 +431,8 @@
 
 @php
     $galeriaItens = collect([1, 3, 2])->map(fn ($id) => [
-        'antes'  => asset('images/fulano'.$id.'-antes.png'),
-        'depois' => asset('images/fulano'.$id.'-depois.png'),
+        'antes'  => asset('images/fulano'.$id.'-antes.webp'),
+        'depois' => asset('images/fulano'.$id.'-depois.webp'),
     ]);
 @endphp
 @push('scripts')

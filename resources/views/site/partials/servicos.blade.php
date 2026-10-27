@@ -294,9 +294,9 @@
                 <div style="display: flex; gap: 52px; align-items: center; justify-content: center; width: 100%;">
                     @php
                         $servicos_destaque = [
-                            ['nome' => 'Cabelo', 'img' => 'images/circulo-cabelo.png'],
-                            ['nome' => 'Combo',  'img' => 'images/circulo-combo.png'],
-                            ['nome' => 'Barba',  'img' => 'images/circulo-barba.png'],
+                            ['nome' => 'Cabelo', 'img' => 'images/circulo-cabelo.webp'],
+                            ['nome' => 'Combo',  'img' => 'images/circulo-combo.webp'],
+                            ['nome' => 'Barba',  'img' => 'images/circulo-barba.webp'],
                         ];
                     @endphp
                     @foreach($servicos_destaque as $s)
@@ -314,7 +314,7 @@
                             @endif
                             {{-- TAMANHO DOS CÍRCULOS: width e height abaixo --}}
                             <a href="{{ route('cortes') }}#{{ strtolower($s['nome']) }}" class="servico-card {{ $featured ? 'servico-card--featured' : '' }}" style="position: relative; width: 238px; height: 238px; border-radius: 50%; overflow: hidden; display: block; text-decoration: none;">
-                                <img src="{{ asset($s['img']) }}" alt="{{ $s['nome'] }}" class="servico-card__img"
+                                <img src="{{ asset($s['img']) }}" alt="{{ $s['nome'] }}" width="304" height="304" loading="lazy" decoding="async" class="servico-card__img"
                                      style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                                 <div class="servico-card__overlay" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);"></div>
                                 <span class="servico-card__label" style="position: absolute; bottom: 24px; left: 0; right: 0; text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.14em;">
@@ -370,7 +370,7 @@
              bug de composição gráfica que já pegamos (mask-image + transform 3D no mesmo elemento). Aqui nem é
              3D, mas mantive a separação por segurança. pointer-events volta a "auto" pro :hover funcionar. --}}
         <div class="enos-photo" style="position: absolute; bottom: -59px; left: 50px; z-index: 20; pointer-events: auto; height: 459px; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 85%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 85%, transparent 100%);">
-            <img src="{{ asset('images/enos-barbeiro.png') }}" alt="Enos Lima" class="enos-photo__img"
+            <img src="{{ asset('images/enos-barbeiro.webp') }}" alt="Enos Lima" width="687" height="600" loading="lazy" decoding="async" class="enos-photo__img"
                  style="height: 540px; width: auto; object-fit: contain; display: block;">
         </div>
 

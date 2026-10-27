@@ -27,7 +27,7 @@
 
 <header class="border-b border-zinc-800/80 bg-[#0A0A0A]">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-        <a href="{{ url('/') }}"><img src="{{ asset('images/Logo-Limas.png') }}" alt="Lima's Studio Barber" class="h-10 w-auto"></a>
+        <a href="{{ url('/') }}"><img src="{{ asset('images/Logo-Limas.webp') }}" alt="Lima's Studio Barber" class="h-10 w-auto"></a>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="text-zinc-500 hover:text-white text-[10px] font-black uppercase tracking-widest transition-colors">

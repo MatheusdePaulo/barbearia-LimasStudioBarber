@@ -111,7 +111,7 @@
 
     {{-- LOGO --}}
     <a href="{{ route('home') }}" class="nav-logo" style="flex-shrink: 0;">
-        <img src="{{ asset('images/Logo-Limas.png') }}"
+        <img src="{{ asset('images/Logo-Limas.webp') }}"
              alt="Lima's Studio Barber"
              style="height: 46px; width: auto; object-fit: contain; transition: height 0.35s ease;"
              :style="scrolled
@@ -190,7 +190,7 @@
                 style="position: absolute; top: 0; right: 0; background: none; border: none; cursor: pointer; padding: 8px; color: #F5F0E8;">
             <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
-        <img src="{{ asset('images/logo-limas02.png') }}" alt="Lima's Studio Barber"
+        <img src="{{ asset('images/logo-limas02.webp') }}" alt="Lima's Studio Barber" width="400" height="341" loading="lazy" decoding="async"
              style="margin-top: 24px; width: 176px; height: auto; object-fit: contain;">
     </div>
 

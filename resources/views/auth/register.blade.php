@@ -4,7 +4,7 @@
             {{-- HEADER COM IDENTIDADE --}}
             <div class="text-center mb-10">
                 <a href="/" class="inline-block mb-6">
-                    <img src="{{ asset('images/logo-limas02.png') }}" alt="Lima's Studio Barber" class="h-20 w-auto mx-auto">
+                    <img src="{{ asset('images/logo-limas02.webp') }}" alt="Lima's Studio Barber" class="h-20 w-auto mx-auto">
                 </a>
                 <h1 class="text-2xl font-black italic text-white uppercase tracking-tighter">Criar sua conta</h1>
                 <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mt-2">Agende mais rápido e acompanhe seus horários</p>
