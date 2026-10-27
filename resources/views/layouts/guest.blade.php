@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
+    <title>Lima's Studio Barber</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}?v=2" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}?v=2">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}?v=2">
 
     <!-- Scripts e CSS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
