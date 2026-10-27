@@ -19,8 +19,9 @@
         ['foto' => 'images/fulano7-crianca-depois.webp', 'nome' => 'Corte Infantil',
          'texto' => 'Corte pra criançada feito com calma, paciência e acabamento caprichado.'],
     ])->map(fn ($item) => [
-        'foto'  => asset($item['foto']),
-        'flip'  => $item['flip'] ?? false,
+        'foto'   => asset($item['foto']),
+        'srcset' => \App\Support\Imagem::srcset($item['foto']),
+        'flip'   => $item['flip'] ?? false,
         'nome'  => $item['nome'],
         'texto' => $item['texto'],
     ]);
@@ -193,7 +194,7 @@
             {{-- Seta esquerda --}}
             <button class="blog-arrow" onclick="blogNav(-1)" aria-label="Corte anterior"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
-                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="anterior"
+                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" width="44" height="31" alt="anterior"
                      style="width: 44px; height: auto; transform: rotate(90deg); opacity: 0.9;">
             </button>
 
@@ -246,7 +247,9 @@
                                 mask-image: url('{{ asset($corte['mask']) }}');
                                 mask-size: 100% 100%;
                                 mask-repeat: no-repeat;">
-                            <img loading="lazy" decoding="async" src="{{ asset($corte['foto']) }}" alt="Corte" data-blog-slot="{{ ['anterior', 'atual', 'proximo'][$i] }}"
+                            <img loading="lazy" decoding="async" src="{{ asset($corte['foto']) }}" srcset="{{ \App\Support\Imagem::srcset($corte['foto']) }}"
+                                 sizes="{{ !empty($corte['centro']) ? '(min-width: 768px) and (max-width: 1024px) 25vw, 270px' : '(max-width: 1024px) 21vw, 230px' }}"
+                                 alt="Corte" data-blog-slot="{{ ['anterior', 'atual', 'proximo'][$i] }}"
                                  style="position: absolute; inset: 0; width: 100%; height: 100%;
                                     object-fit: cover; object-position: center top;
                                     {{ !empty($corte['flip']) ? 'transform: scaleX(-1);' : '' }}">
@@ -272,7 +275,7 @@
             {{-- Seta direita --}}
             <button class="blog-arrow" onclick="blogNav(1)" aria-label="Próximo corte"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
-                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="próximo"
+                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" width="44" height="31" alt="próximo"
                      style="width: 44px; height: auto; transform: rotate(-90deg); opacity: 0.9;">
             </button>
 
@@ -287,7 +290,7 @@
         let blogAtual = 1;
 
         // pré-carrega todas as fotos pra troca não piscar
-        blogItens.forEach(item => { new Image().src = item.foto; });
+        blogItens.forEach(item => { const img = new Image(); img.sizes = '270px'; img.srcset = item.srcset; img.src = item.foto; });
 
         function blogNav(dir) {
             const total = blogItens.length;
@@ -306,6 +309,7 @@
             setTimeout(() => {
                 imgs.forEach(img => {
                     const item = slots[img.dataset.blogSlot];
+                    img.srcset = item.srcset;
                     img.src = item.foto;
                     img.style.transform = item.flip ? 'scaleX(-1)' : '';
                     img.classList.remove('blog-trocando');

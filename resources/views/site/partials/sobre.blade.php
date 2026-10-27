@@ -93,7 +93,7 @@
                 <div :style="'display: flex; width: 200%; height: 100%; transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); transform: translateX(' + (slide * -50) + '%);'">
                     <img loading="lazy" decoding="async" src="{{ asset('images/barbeiro-trabalhando.webp') }}" alt="Barbeiro trabalhando"
                          style="width: 50%; height: 100%; object-fit: cover; display: block;">
-                    <img loading="lazy" decoding="async" src="{{ asset('images/barbeiro-trabalhando2.webp') }}" alt="Barbeiro trabalhando 2"
+                    <img loading="lazy" decoding="async" src="{{ asset('images/barbeiro-trabalhando2.webp') }}" srcset="{{ \App\Support\Imagem::srcset('images/barbeiro-trabalhando2.webp') }}" sizes="(max-width: 767px) 90vw, 528px" alt="Barbeiro trabalhando 2"
                          style="width: 50%; height: 100%; object-fit: cover; display: block;">
                 </div>
 

@@ -60,7 +60,7 @@
     <div class="cta-banner" style="position: relative; width: 100vw; margin-left: calc(-1 * (100vw - 100%) / 2); height: 300px; overflow: hidden;">
 
         {{-- Foto do ambiente --}}
-        <img loading="lazy" decoding="async" src="{{ asset('images/Ambiente.webp') }}" alt="Lima's Studio Barber"
+        <img loading="lazy" decoding="async" src="{{ asset('images/Ambiente.webp') }}" srcset="{{ \App\Support\Imagem::srcset('images/Ambiente.webp') }}" sizes="100vw" alt="Lima's Studio Barber"
              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;">
 
         {{-- Overlay gradiente leve --}}

@@ -233,7 +233,7 @@
 
             {{-- Setinha dourada no topo --}}
             <div class="lp-polygon" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%) translateY(-48%); z-index: 2;">
-                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="" width="52" height="44" style="width: 52px; height: auto; display: block;">
+                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="" width="44" height="31" style="width: 52px; height: auto; display: block;">
             </div>
 
             {{-- Label + Título --}}

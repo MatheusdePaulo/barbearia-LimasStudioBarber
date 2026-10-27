@@ -1,6 +1,6 @@
 {{-- ═══════════ QUEBRA DE LAYOUT — GALERIA ═══════════ --}}
 <div style="position: relative; width: 100vw; margin-left: calc(-1 * (100vw - 100%) / 2); height: 200px; overflow: hidden;">
-    <img loading="lazy" decoding="async" src="{{ asset('images/Ambiente.webp') }}" alt=""
+    <img loading="lazy" decoding="async" src="{{ asset('images/Ambiente.webp') }}" srcset="{{ \App\Support\Imagem::srcset('images/Ambiente.webp') }}" sizes="100vw" alt=""
          style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;">
     <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.85) 100%);"></div>
     <div class="gq-content" style="position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px;">
@@ -351,7 +351,7 @@
             {{-- Seta esquerda --}}
             <button class="galeria-arrow" onclick="galeriaNav(-1)" aria-label="Antes e depois anterior"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
-                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="anterior"
+                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" width="44" height="31" alt="anterior"
                      style="width: 44px; height: auto; transform: rotate(90deg); opacity: 0.9;">
             </button>
 
@@ -359,6 +359,9 @@
             <div class="galeria-cards" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 24px;">
 
                 @php
+                    // Largura do card central na tela (celular 270px, tablet 27,5vw, desktop até 385px),
+                    // já com o scale(1.15) da foto. O navegador usa isso pra escolher o tamanho da foto.
+                    $sizesCentro = '(max-width: 767px) 311px, (max-width: 1024px) 32vw, min(443px, 31vw)';
                     $clientes = [
                         ['id' => 1, 'destaque' => false],
                         ['id' => 3, 'destaque' => true],
@@ -385,9 +388,11 @@
                             {{-- Card destaque: slider interativo --}}
                             <div class="slider-container" id="slider-{{ $id }}">
                                 <img loading="lazy" decoding="async" class="slider-antes" data-galeria-antes draggable="false"
-                                     src="{{ asset('images/fulano'.$id.'-antes.webp') }}" alt="Antes">
+                                     src="{{ asset('images/fulano'.$id.'-antes.webp') }}" srcset="{{ \App\Support\Imagem::srcset('images/fulano'.$id.'-antes.webp') }}"
+                                     sizes="{{ $sizesCentro }}" alt="Antes">
                                 <img loading="lazy" decoding="async" class="slider-depois" data-galeria-depois draggable="false"
-                                     src="{{ asset('images/fulano'.$id.'-depois.webp') }}" alt="Depois"
+                                     src="{{ asset('images/fulano'.$id.'-depois.webp') }}" srcset="{{ \App\Support\Imagem::srcset('images/fulano'.$id.'-depois.webp') }}"
+                                     sizes="{{ $sizesCentro }}" alt="Depois"
                                      id="slider-depois-{{ $id }}">
                                 <div class="slider-dica"><span>Arraste</span></div>
                                 <div class="slider-handle" id="slider-handle-{{ $id }}">
@@ -397,7 +402,8 @@
                         @else
                             {{-- Card lateral: foto com shape --}}
                             <img loading="lazy" decoding="async" class="foto-lateral" data-galeria-slot="{{ $loop->first ? 'anterior' : 'proximo' }}"
-                                 src="{{ asset('images/fulano'.$id.'-depois.webp') }}" alt="Resultado">
+                                 src="{{ asset('images/fulano'.$id.'-depois.webp') }}" srcset="{{ \App\Support\Imagem::srcset('images/fulano'.$id.'-depois.webp') }}"
+                                 sizes="(max-width: 1024px) 27vw, min(380px, 27vw)" alt="Resultado">
                         @endif
 
 
@@ -409,7 +415,7 @@
             {{-- Seta direita --}}
             <button class="galeria-arrow" onclick="galeriaNav(1)" aria-label="Próximo antes e depois"
                     style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px;">
-                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" alt="próximo"
+                <img loading="lazy" decoding="async" src="{{ asset('images/polygon-produtos.png') }}" width="44" height="31" alt="próximo"
                      style="width: 44px; height: auto; transform: rotate(-90deg); opacity: 0.9;">
             </button>
 
@@ -431,8 +437,10 @@
 
 @php
     $galeriaItens = collect([1, 3, 2])->map(fn ($id) => [
-        'antes'  => asset('images/fulano'.$id.'-antes.webp'),
-        'depois' => asset('images/fulano'.$id.'-depois.webp'),
+        'antes'        => asset('images/fulano'.$id.'-antes.webp'),
+        'depois'       => asset('images/fulano'.$id.'-depois.webp'),
+        'antesSrcset'  => \App\Support\Imagem::srcset('images/fulano'.$id.'-antes.webp'),
+        'depoisSrcset' => \App\Support\Imagem::srcset('images/fulano'.$id.'-depois.webp'),
     ]);
 @endphp
 @push('scripts')
@@ -491,7 +499,12 @@
         let galeriaAtual = 1;
 
         // pré-carrega todas as fotos pra troca não piscar
-        galeriaItens.forEach(item => { new Image().src = item.antes; new Image().src = item.depois; });
+        // pré-carrega as fotos no tamanho certo pra tela (mesmo srcset/sizes do card central)
+        galeriaItens.forEach(item => {
+            [[item.antes, item.antesSrcset], [item.depois, item.depoisSrcset]].forEach(([src, srcset]) => {
+                const img = new Image(); img.sizes = @js($sizesCentro); img.srcset = srcset; img.src = src;
+            });
+        });
 
         function galeriaNav(dir) {
             const total = galeriaItens.length;
@@ -510,10 +523,10 @@
 
             imgs.forEach(img => img.classList.add('galeria-trocando'));
             setTimeout(() => {
-                antes.src   = atual.antes;
-                depois.src  = atual.depois;
-                latAnt.src  = anterior.depois;
-                latProx.src = proximo.depois;
+                antes.srcset   = atual.antesSrcset;     antes.src   = atual.antes;
+                depois.srcset  = atual.depoisSrcset;    depois.src  = atual.depois;
+                latAnt.srcset  = anterior.depoisSrcset; latAnt.src  = anterior.depois;
+                latProx.srcset = proximo.depoisSrcset;  latProx.src = proximo.depois;
                 // volta o slider pro estado inicial (só o "antes" visível) e mostra a dica de novo
                 depois.style.clipPath = '';
                 handle.style.left = '';

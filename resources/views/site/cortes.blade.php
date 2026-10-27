@@ -347,7 +347,8 @@
                             <div class="corte-foto" style="--rosto: {{ $item['rosto'] }};">
                                 @foreach(['base', 'rosto'] as $camada)
                                     <div class="corte-foto-camada corte-foto-{{ $camada }}">
-                                        <img src="{{ asset($item['foto']) }}" alt="{{ $camada === 'rosto' ? $item['nome'] : '' }}" loading="lazy"
+                                        <img src="{{ asset($item['foto']) }}" srcset="{{ \App\Support\Imagem::srcset($item['foto']) }}" sizes="(max-width: 767px) calc(100vw - 48px), 421px"
+                                             alt="{{ $camada === 'rosto' ? $item['nome'] : '' }}" loading="lazy"
                                              style="object-position: {{ $item['foco'] }};{{ !empty($item['flip']) ? ' transform: scaleX(-1);' : '' }}">
                                     </div>
                                 @endforeach

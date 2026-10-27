@@ -116,7 +116,7 @@
 
     {{-- Foto de fundo --}}
     <div style="position: absolute; inset: 0;">
-        <img src="{{ asset('images/Ambiente.webp') }}" alt="Lima's Studio Barber" width="1717" height="916" fetchpriority="high"
+        <img src="{{ asset('images/Ambiente.webp') }}" srcset="{{ \App\Support\Imagem::srcset('images/Ambiente.webp') }}" sizes="100vw" alt="Lima's Studio Barber" width="1717" height="916" fetchpriority="high"
              style="width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(1.05);">
         <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.85) 100%);"></div>
     </div>
