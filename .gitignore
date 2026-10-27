@@ -29,3 +29,7 @@ Thumbs.db
 
 # Pacotes baixados por engano
 *.deb
+
+# Rascunhos de imagem (cópias e recortes do remove.bg)
+* - Copia.*
+*-removebg-preview.*
