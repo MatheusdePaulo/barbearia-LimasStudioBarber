@@ -161,7 +161,7 @@
         </svg>
     </div>
 
-    {{-- Barra inferior — sempre fixada no bottom --}}
+    {{-- Barra inferior - sempre fixada no bottom --}}
     <div class="hero-info-bar" style="position: relative; z-index: 10; flex-shrink: 0; padding: 12px 24px; display: flex; align-items: center; justify-content: flex-end; gap: 16px;">
         <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 11px; color: rgba(245,240,232,0.55);">✦ +30 anos de experiência</span>
         <span class="separador" style="color: rgba(255,255,255,0.15);">|</span>

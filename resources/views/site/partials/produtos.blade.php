@@ -218,7 +218,7 @@
 
         {{-- Painel usando a imagem do Figma como fundo. Sombra pra destacar do fundo #0A0A0A (que é quase
              preto igual ao painel): sombra escura funda embaixo (profundidade/flutuação) + glow dourado sutil.
-             O CONTORNO dourado fino NÃO é mais box-shadow — a imagem tem uma curva côncava no topo (recorte
+             O CONTORNO dourado fino NÃO é mais box-shadow - a imagem tem uma curva côncava no topo (recorte
              onde a setinha encaixa; medi o PNG: vai de x=385 a x=515 num canvas de 900×568, fundo em x=450/y=51)
              e um box-shadow simples seguiria só a caixa retangular, cortando essa curva em linha reta. Uso um
              <svg> overlay com um <path> que traça o contorno real (cantos arredondados + a curva), calculado
@@ -251,7 +251,7 @@
             {{-- Carrossel --}}
             <div class="lp-carousel" style="display: flex; align-items: center;">
 
-                {{-- Seta esquerda — sem botão/moldura ao redor. SVG inline (em vez do PNG) pra poder dar um
+                {{-- Seta esquerda - sem botão/moldura ao redor. SVG inline (em vez do PNG) pra poder dar um
                      stroke que acompanha exatamente as pontas do triângulo, não uma caixa em volta dele.
                      100% maior (30x34 → 60x68), cantos com raio 5 via <path> com curvas nos vértices, e ponta
                      mais afastada da base (era x=7, agora x=3) pra ficar mais larga/menos fina. --}}
@@ -310,7 +310,7 @@
 
                 </div>
 
-                {{-- Seta direita — mesmos ajustes da esquerda, path espelhado --}}
+                {{-- Seta direita - mesmos ajustes da esquerda, path espelhado --}}
                 <button class="lp-arrow" onclick="moverCarrossel(1)" aria-label="Próximo produto"
                         style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 0 20px; margin-top: 14px;">
                     <svg width="60" height="68" viewBox="0 0 24 24" fill="#C9A84C" stroke="rgba(229,231,235,0.65)" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.9; display: block;">

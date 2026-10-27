@@ -1,7 +1,7 @@
 {{-- ═══════════ FOOTER ═══════════ --}}
 <footer style="background: #0A0A0A; border-top: 1px solid rgba(201,168,76,0.2);">
 
-    {{-- RESPONSIVIDADE MOBILE (até 767px): grade 2x2 — logo | endereço em cima, horário | contato embaixo.
+    {{-- RESPONSIVIDADE MOBILE (até 767px): grade 2x2 - logo | endereço em cima, horário | contato embaixo.
          Fontes em vw (com limites) pra encaixar lado a lado de celulares pequenos (320px) aos grandes.
          Desktop continua com os estilos inline originais. --}}
     <style>
@@ -58,7 +58,7 @@
             </h3>
             <p style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 13px; color: rgba(245,240,232,0.75); line-height: 1.7; margin: 0;">
                 Rua Pedro Ciríaco, 909<br>
-                Bairro Mutirão — Cascavel, CE
+                Bairro Mutirão, Cascavel - CE
             </p>
         </div>
 
@@ -105,7 +105,7 @@
 
     </div>
 
-    {{-- Barra inferior — direitos autorais à esquerda, desenvolvido por à direita --}}
+    {{-- Barra inferior - direitos autorais à esquerda, desenvolvido por à direita --}}
     <div style="border-top: 1px solid rgba(245,240,232,0.08); padding: 16px 0;">
         <div style="max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between;">
             <p style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 12px; color: rgba(245,240,232,0.45); margin: 0;">

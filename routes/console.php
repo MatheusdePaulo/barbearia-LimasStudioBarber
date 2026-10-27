@@ -12,7 +12,7 @@ Artisan::command('inspire', function () {
 Schedule::command('app:send-appointment-reminders')->everyMinute();
 Schedule::command('appointments:expirar-pendentes')->everyMinute();
 
-// Aniversariantes (todo dia às 08:00) — DATE_FORMAT porque o Limas usa MySQL (o strftime era do SQLite)
+// Aniversariantes (todo dia às 08:00) - DATE_FORMAT porque o Limas usa MySQL (o strftime era do SQLite)
 Schedule::call(function () {
     $hoje = now()->format('m-d');
     $aniversariantes = \App\Models\User::whereRaw("DATE_FORMAT(birthday, '%m-%d') = ?", [$hoje])->get();

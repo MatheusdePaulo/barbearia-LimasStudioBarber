@@ -47,7 +47,7 @@ class ReviewController extends Controller
         return view('reviews.form', compact('user', 'jaAvaliou', 'reviewCouponActive', 'reviewCouponPercent'));
     }
 
-    // Salva avaliação (via fetch — sucesso.blade e form standalone)
+    // Salva avaliação (via fetch - sucesso.blade e form standalone)
     public function store(Request $request)
     {
         $request->validate([

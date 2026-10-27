@@ -1,6 +1,6 @@
     <style>
         /* Mobile only: sobe a seção #sobre.
-           IMPORTANTE: usar margin-top negativo, NÃO transform — transform só desloca o "desenho" (paint),
+           IMPORTANTE: usar margin-top negativo, NÃO transform - transform só desloca o "desenho" (paint),
            não a caixa real no fluxo do documento. Isso fazia a onda divisória (que fica presa em #servicos,
            ancorada no boundary real) ficar desalinhada e "flutuando" sobre o #sobre deslocado. Com margin
            a caixa de #sobre realmente sobe e encaixa certinho com a onda. */
@@ -18,7 +18,7 @@
                 padding: 0 20px !important;
             }
 
-            /* Remove o respiro de 110px usado no desktop pra "nascer" abaixo da foto do Enos —
+            /* Remove o respiro de 110px usado no desktop pra "nascer" abaixo da foto do Enos -
                no mobile a foto é bem menor, então sobe todo o bloco de texto */
             .sobre-coluna-texto {
                 margin-top: 0 !important;
@@ -55,7 +55,7 @@
     <section id="sobre" style="background: #1A1A1A; padding: 40px 0 80px; position: relative;">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 60px 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
 
-            {{-- COLUNA ESQUERDA — selo + texto abaixo da foto do Enos que vaza de #servicos --}}
+            {{-- COLUNA ESQUERDA - selo + texto abaixo da foto do Enos que vaza de #servicos --}}
             <div class="sobre-coluna-texto" style="margin-top: 110px;">
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
                     <span style="display: block; width: 32px; height: 1px; background: #C9A84C;"></span>
@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-            {{-- COLUNA DIREITA — carrossel de verdade (desliza horizontalmente, não crossfade) entre
+            {{-- COLUNA DIREITA - carrossel de verdade (desliza horizontalmente, não crossfade) entre
                  barbeiro-trabalhando (436×573) e barbeiro-trabalhando2 (947×1600, proporção bem diferente).
                  O quadro fica travado na proporção da 1ª foto (aspect-ratio) e as duas usam object-fit:cover,
                  então a 2ª é recortada via CSS (sem editar o arquivo) pra sair do mesmo tamanho exato da 1ª.
@@ -88,7 +88,7 @@
             <div class="sobre-carrossel" x-data="{ slide: 0 }" x-init="setInterval(() => { slide = (slide + 1) % 2 }, 5000)"
                  style="position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(201,168,76,0.2); transform: translateY(-8%); aspect-ratio: 436 / 573;">
 
-                {{-- TRACK — as 2 fotos lado a lado (width:200%, cada uma 50% = 100% do quadro); desliza via
+                {{-- TRACK - as 2 fotos lado a lado (width:200%, cada uma 50% = 100% do quadro); desliza via
                      translateX pra dar o efeito de carrossel real --}}
                 <div :style="'display: flex; width: 200%; height: 100%; transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); transform: translateX(' + (slide * -50) + '%);'">
                     <img loading="lazy" decoding="async" src="{{ asset('images/barbeiro-trabalhando.webp') }}" alt="Barbeiro trabalhando"
@@ -97,13 +97,13 @@
                          style="width: 50%; height: 100%; object-fit: cover; display: block;">
                 </div>
 
-                {{-- VINHETA — por cima do track, estilo idêntico ao que já usávamos --}}
+                {{-- VINHETA - por cima do track, estilo idêntico ao que já usávamos --}}
                 <div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 32%, rgba(26,26,26,0.55) 68%, #1A1A1A 100%);"></div>
 
-                {{-- DOTS — indicam qual foto está visível, clicáveis. "Pílula" de fundo escuro atrás da fileira
+                {{-- DOTS - indicam qual foto está visível, clicáveis. "Pílula" de fundo escuro atrás da fileira
                      pra garantir contraste contra qualquer parte da foto (independe do que estiver atrás).
                      IMPORTANTE: o Alpine SUBSTITUI o atributo style inteiro quando :style é string (não mescla
-                     com o style estático) — por isso cada branch do ternário repete width/height/padding/border/
+                     com o style estático) - por isso cada branch do ternário repete width/height/padding/border/
                      border-radius/cursor/transition, e não só o background/transform que mudam. --}}
                 <div style="position: absolute; bottom: 20px; left: 0; right: 0; z-index: 30; display: flex; align-items: center; justify-content: center;">
                     <div style="display: flex; align-items: center; gap: 14px; background: rgba(10,10,10,0.55); border: 1px solid rgba(255,255,255,0.15); border-radius: 999px; padding: 8px 14px;">

@@ -1,4 +1,4 @@
-{{-- ═══════════ CTA FINAL — AGENDE SEU HORÁRIO ═══════════ --}}
+{{-- ═══════════ CTA FINAL - AGENDE SEU HORÁRIO ═══════════ --}}
 <section id="contato" style="background: #0A0A0A; padding-top: 60px;">
 
     {{-- RESPONSIVIDADE MOBILE (até 767px): só os textos à esquerda, o botão continua centralizado.
@@ -36,7 +36,7 @@
                 white-space: nowrap !important;
             }
 
-            /* Textos menores (desktop: título 40–56px, subtexto 15px) */
+            /* Textos menores (desktop: título 40-56px, subtexto 15px) */
             #contato .cta-title {
                 font-size: 30px !important;
             }

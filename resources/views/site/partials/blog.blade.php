@@ -1,4 +1,4 @@
-{{-- ═══════════ BLOG — CORTES RECENTES ═══════════ --}}
+{{-- ═══════════ BLOG - CORTES RECENTES ═══════════ --}}
 @php
     // Fotos do carrossel, na ordem em que giram. Começa no fulano5 no meio (o que já aparece ao carregar),
     // com o fulano4 à esquerda e o fulano1 à direita. "flip" espelha a foto (o fulano5 olha pro outro lado).

@@ -514,7 +514,7 @@
         updateTimes();
 
         // Recarrega a página silenciosamente a cada 60s apenas quando não há modal aberto e
-        // o usuário não está interagindo com nenhum input — preserva o estado da UI
+        // o usuário não está interagindo com nenhum input - preserva o estado da UI
         let reloadTimer = null;
 
         function scheduleReload() {

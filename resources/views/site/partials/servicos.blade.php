@@ -1,6 +1,6 @@
 <style>
     /* ══════════════════════════════════════════
-       SERVIÇOS — RESPONSIVO MOBILE ONLY
+       SERVIÇOS - RESPONSIVO MOBILE ONLY
        Não altera nada no desktop (> 768px)
     ══════════════════════════════════════════ */
 
@@ -118,7 +118,7 @@
             align-items: flex-end !important;
         }
 
-        /* Reduz padding da seção — título sobe pro topo */
+        /* Reduz padding da seção - título sobe pro topo */
         #servicos {
             padding: 0 0 120px !important;
         }
@@ -279,7 +279,7 @@
         {{-- ─── LAYOUT: flex row, título esquerda | cards direita ─── --}}
         <div style="width: 100%; padding: 0 40px 0 16px; display: flex; align-items: flex-start; gap: 60px;">
 
-            {{-- TÍTULO — para mover: ajuste padding-left abaixo --}}
+            {{-- TÍTULO - para mover: ajuste padding-left abaixo --}}
             <div style="flex-shrink: 0; padding-left: 140px;">
                 {{-- TAMANHO DO TÍTULO: font-size abaixo --}}
                 <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 52px; color: #F5F0E8; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; margin: 0;">
@@ -290,7 +290,7 @@
             {{-- COLUNA DIREITA: cards + frase --}}
             <div style="flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 32px; margin-left: -200px;">
 
-                {{-- CARDS — para ajustar espaço entre eles: gap abaixo --}}
+                {{-- CARDS - para ajustar espaço entre eles: gap abaixo --}}
                 <div style="display: flex; gap: 52px; align-items: center; justify-content: center; width: 100%;">
                     @php
                         $servicos_destaque = [
@@ -301,11 +301,11 @@
                     @endphp
                     @foreach($servicos_destaque as $s)
                         @php $featured = $s['nome'] === 'Combo'; @endphp
-                        {{-- Wrapper SEM overflow:hidden — necessário pra estrelinha do Combo poder "flutuar"
+                        {{-- Wrapper SEM overflow:hidden - necessário pra estrelinha do Combo poder "flutuar"
                              pra fora da borda do círculo sem ser cortada pelo overflow:hidden do card em si. --}}
                         <div class="servico-card-wrap" style="position: relative; flex-shrink: 0;">
                             @if($featured)
-                                {{-- ESTRELINHA DOURADA — badge de destaque no topo do card Combo --}}
+                                {{-- ESTRELINHA DOURADA - badge de destaque no topo do card Combo --}}
                                 <div class="servico-card__badge" style="position: absolute; top: -14px; left: 50%; transform: translateX(-50%); z-index: 10; width: 32px; height: 32px; border-radius: 50%; background: #0A0A0A; border: 1.5px solid #C9A84C; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.45);">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#C9A84C" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12 2l2.9 6.9L22 9.6l-5.3 4.7L18.2 22 12 18l-6.2 4 1.5-7.7L2 9.6l7.1-.7L12 2z"/>
@@ -325,7 +325,7 @@
                     @endforeach
                 </div>
 
-                {{-- FRASE + TESOURA — centralizada na coluna direita --}}
+                {{-- FRASE + TESOURA - centralizada na coluna direita --}}
                 <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
                     {{-- TAMANHO DA FRASE: font-size abaixo --}}
                     <p class="frase-servicos-desktop" style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 40px; color: #C9A84C; line-height: 1.15; text-transform: uppercase; margin-bottom: 10px; white-space: nowrap; text-align: center;">
@@ -354,19 +354,19 @@
 
         {{-- GLOW DE PROFUNDIDADE: pool de luz dourada radial atrás da foto. O gradiente em si continua centralizado
              na divisória #servicos/#sobre (mesma forma/curva de antes), mas a mask-image corta exatamente na
-             metade (a linha da divisória), deixando visível só a parte de cima — de #servicos pra cima da foto.
+             metade (a linha da divisória), deixando visível só a parte de cima - de #servicos pra cima da foto.
              Dourado em vez de preto porque uma sombra escura sobre fundo quase-preto não teria contraste nenhum.
              Ajuste left/width/bottom abaixo pra recentralizar caso não bata exatamente com a silhueta da foto. --}}
         <div class="enos-glow" style="position: absolute; bottom: -210px; left: -50px; z-index: 15; width: 600px; height: 420px; pointer-events: none; background: radial-gradient(ellipse at center, rgba(201,168,76,0.28) 0%, rgba(201,168,76,0.1) 45%, transparent 72%); -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 50%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 50%, transparent 100%);"></div>
 
-        {{-- FOTO BARBEIRO — para mover: bottom e left abaixo. Atravessa o fundo de #servicos (#0A0A0A) e o de
+        {{-- FOTO BARBEIRO - para mover: bottom e left abaixo. Atravessa o fundo de #servicos (#0A0A0A) e o de
              #sobre (#1A1A1A); o filter mantém contraste/legibilidade uniformes nas duas metades da foto.
              Wrapper com overflow:hidden e altura de 459px (85% de 540px) corta os 15% finais (base) da imagem.
              Mask no topo (transparent → opaco nos primeiros 18% da altura) faz a foto "emergir" suavemente da
              seção de cima. Mask na base (opaco → transparent nos últimos 15%) suaviza a linha onde o
              overflow:hidden corta a imagem, em vez de um corte seco.
              Hover em CSS puro (:hover): zoom + brilho na foto, anel dourado no quadro, glow atrás intensifica.
-             O transform (scale) fica só na <img>, NUNCA no mesmo elemento que tem o mask-image — é a lição do
+             O transform (scale) fica só na <img>, NUNCA no mesmo elemento que tem o mask-image - é a lição do
              bug de composição gráfica que já pegamos (mask-image + transform 3D no mesmo elemento). Aqui nem é
              3D, mas mantive a separação por segurança. pointer-events volta a "auto" pro :hover funcionar. --}}
         <div class="enos-photo" style="position: absolute; bottom: -59px; left: 50px; z-index: 20; pointer-events: auto; height: 459px; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 85%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 85%, transparent 100%);">
@@ -374,10 +374,10 @@
                  style="height: 540px; width: auto; object-fit: contain; display: block;">
         </div>
 
-        {{-- ONDA SVG (Retângulo 70): preenchida com a cor de #sobre, não de #servicos — assim a curva fica
+        {{-- ONDA SVG (Retângulo 70): preenchida com a cor de #sobre, não de #servicos - assim a curva fica
              visível subindo com o tom da próxima seção, criando a quebra de página.
              Versão mobile separada: usa o asset real (wave-divider.png), que existia no projeto mas não estava
-             sendo referenciado em lugar nenhum — o SVG desenhado à mão tinha um formato diferente do original. --}}
+             sendo referenciado em lugar nenhum - o SVG desenhado à mão tinha um formato diferente do original. --}}
         <div class="onda-divisoria-wrap" style="position: absolute; bottom: -2px; left: 0; right: 0; z-index: 10; line-height: 0;">
             <svg class="onda-divisoria-desktop" viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
                  style="width: 100%; height: 200px; display: block;">
@@ -385,7 +385,7 @@
                       fill="#1A1A1A"/>
             </svg>
             {{-- Usa mask-image (não <img> direto) pra recolorir o preto puro do PNG pra #1A1A1A,
-                 a cor exata de #sobre — mesma técnica já usada nos cards do blog. --}}
+                 a cor exata de #sobre - mesma técnica já usada nos cards do blog. --}}
             <div class="onda-divisoria-mobile" style="width: 100%; height: 90px; display: none; background: #1A1A1A;
                     -webkit-mask-image: url('{{ asset('images/wave-divider.png') }}');
                     -webkit-mask-size: 100% 100%;

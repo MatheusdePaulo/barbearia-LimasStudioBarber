@@ -114,7 +114,7 @@
             <div class="flex items-start gap-3">
                 <i class="fas fa-triangle-exclamation text-yellow-500 mt-0.5 text-base"></i>
                 <div>
-                    <p class="text-yellow-500 font-black uppercase text-[10px] tracking-widest mb-1">Atenção — Tolerância de Atraso</p>
+                    <p class="text-yellow-500 font-black uppercase text-[10px] tracking-widest mb-1">Atenção: Tolerância de Atraso</p>
                     <p class="text-zinc-400 text-xs leading-relaxed">
                         O seu horário possui uma tolerância de <span class="text-white font-bold">15 minutos</span> de atraso.
                         Após esse tempo, o horário <span class="text-red-400 font-bold">poderá ser repassado</span>.

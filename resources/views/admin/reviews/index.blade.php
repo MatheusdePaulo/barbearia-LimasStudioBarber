@@ -16,7 +16,7 @@
         <div class="grid grid-cols-2 gap-4">
             <div class="bg-[#141414] border border-zinc-800 rounded-2xl p-6 text-center">
                 <p class="text-[10px] font-black uppercase text-zinc-500 tracking-widest mb-2">Média Geral</p>
-                <p class="text-4xl font-black text-[#C9A84C]">{{ $average ?? '—' }}</p>
+                <p class="text-4xl font-black text-[#C9A84C]">{{ $average ?? '-' }}</p>
                 <p class="text-[10px] text-zinc-600 mt-1 italic">Notas 3, 4 e 5</p>
             </div>
             <div class="bg-[#141414] border border-zinc-800 rounded-2xl p-6 text-center">

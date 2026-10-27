@@ -70,16 +70,16 @@ class ScheduleOverride extends Model
             if ($override->is_closed) return 'Fechado (customizado)';
             $open  = substr($override->open_time, 0, 5);
             $close = substr($override->close_time, 0, 5);
-            $desc = "{$open} – {$close}";
+            $desc = "{$open} - {$close}";
             if ($override->break_start && $override->break_end) {
-                $desc .= " | Almoço " . substr($override->break_start, 0, 5) . "–" . substr($override->break_end, 0, 5);
+                $desc .= " | Almoço " . substr($override->break_start, 0, 5) . "-" . substr($override->break_end, 0, 5);
             }
             if ($override->notes) $desc .= " ({$override->notes})";
             return $desc . ' ✏️';
         }
 
         if ($dow === 0) return 'Fechado';
-        return '08:00 – 18:00 | Almoço 12:00–14:00';
+        return '08:00 - 18:00 | Almoço 12:00-14:00';
     }
 
     /**

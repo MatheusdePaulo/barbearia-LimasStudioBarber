@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-    /* Lima's Studio Barber — Design Tokens */
+    /* Lima's Studio Barber - Design Tokens */
     --color-ouro: #C9A84C;
     --color-ouro-claro: #E2C97E;
     --color-ouro-escuro: #A07830;

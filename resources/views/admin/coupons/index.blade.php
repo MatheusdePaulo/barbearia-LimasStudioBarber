@@ -70,7 +70,7 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 text-zinc-400 text-xs">
-                                    {{ $coupon->expires_at ? $coupon->expires_at->format('d/m/Y') : '—' }}
+                                    {{ $coupon->expires_at ? $coupon->expires_at->format('d/m/Y') : '-' }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full border {{ $statusClass }}">

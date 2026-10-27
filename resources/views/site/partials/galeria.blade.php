@@ -1,4 +1,4 @@
-{{-- ═══════════ QUEBRA DE LAYOUT — GALERIA ═══════════ --}}
+{{-- ═══════════ QUEBRA DE LAYOUT - GALERIA ═══════════ --}}
 <div style="position: relative; width: 100vw; margin-left: calc(-1 * (100vw - 100%) / 2); height: 200px; overflow: hidden;">
     <img loading="lazy" decoding="async" src="{{ asset('images/Ambiente.webp') }}" srcset="{{ \App\Support\Imagem::srcset('images/Ambiente.webp') }}" sizes="100vw" alt=""
          style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;">
@@ -15,7 +15,7 @@
     </div>
 </div>
 
-{{-- ═══════════ GALERIA — CARDS ANTES/DEPOIS ═══════════ --}}
+{{-- ═══════════ GALERIA - CARDS ANTES/DEPOIS ═══════════ --}}
 <section id="galeria" style="background: #0A0A0A; padding: 60px 0 80px;">
 
     @push('styles')

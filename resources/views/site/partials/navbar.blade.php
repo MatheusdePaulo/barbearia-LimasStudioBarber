@@ -26,7 +26,7 @@
         .nav-hamburger { display: flex !important; align-items: center; justify-content: center; }
     }
 
-    /* Drawer mobile — mesmo formato do menu do Nathan do Corte: painel lateral que entra pela direita
+    /* Drawer mobile - mesmo formato do menu do Nathan do Corte: painel lateral que entra pela direita
        sobre um fundo escurecido, com logo, links com ícone, card do Wi-Fi e Instagram/WhatsApp */
     [x-cloak] { display: none !important; }
     .nav-overlay {
@@ -119,7 +119,7 @@
                 : 'height: 46px; width: auto; object-fit: contain; transition: height 0.35s ease;'">
     </a>
 
-    {{-- LINKS + CTA — só desktop --}}
+    {{-- LINKS + CTA - só desktop --}}
     <div class="nav-desktop" style="align-items: center; gap: 140px; transition: gap 0.35s ease;"
          :style="scrolled
             ? 'display: flex; align-items: center; gap: 36px; transition: gap 0.35s ease;'
@@ -159,7 +159,7 @@
 
     </div>
 
-    {{-- HAMBÚRGUER — tablet + mobile --}}
+    {{-- HAMBÚRGUER - tablet + mobile --}}
     <button class="nav-hamburger" onclick="toggleNavDrawer()" aria-label="Abrir menu"
             style="background: none; border: none; cursor: pointer; padding: 8px;">
         <svg id="nav-icon-menu" width="26" height="26" fill="none" stroke="#F5F0E8" stroke-width="1.5" viewBox="0 0 24 24">
