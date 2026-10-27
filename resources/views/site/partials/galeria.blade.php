@@ -23,21 +23,91 @@
             .card-frame {
                 position: relative;
                 overflow: hidden;
-                /* Formato calcado no shape real de retangulo-galeria.png (425x340):
-                   cantos superiores arredondados e um recorte diagonal grande que
-                   começa a ~70% da altura na borda direita e desce até perto do
-                   canto inferior esquerdo. Pontos em %, não px, porque a borda é
-                   esticada via object-fit:fill até preencher o card (100% x 100%);
-                   usando % o recorte da foto acompanha esse esticamento e fica
-                   sempre alinhado com o contorno dourado, em qualquer tamanho de card. */
-                clip-path: polygon(
-                    3% 0%, 97% 0%,
-                    100% 3.5%,
-                    100% 70%,
-                    4% 98%,
-                    0% 96%,
-                    0% 3.5%
-                );
+            }
+            /* Desktop/tablet: cards retangulares com borda dourada arredondada (laterais 330x500,
+               central 385x580). A borda fica num ::after por cima da foto. No mobile o card central
+               usa a moldura do blog (ver @media max-width 767px). */
+            @media (min-width: 768px) {
+                .card-frame {
+                    border-radius: 14px;
+                }
+                .card-frame::after {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    border: 3px solid #C9A84C;
+                    border-radius: 14px;
+                    pointer-events: none;
+                    z-index: 15;
+                }
+
+                /* Efeitos: entrada com fade ao chegar na seção, card sobe com brilho dourado no hover,
+                   reflexo de luz passando pela foto, laterais apagados que acendem e o central pulsando */
+                .card-frame {
+                    opacity: 0;
+                    transform: translateY(40px);
+                    transition: opacity 0.7s ease, transform 0.45s ease, box-shadow 0.45s ease;
+                }
+                .galeria-cards--visivel .card-frame {
+                    opacity: 1;
+                    transform: none;
+                }
+                .galeria-cards--visivel .card-frame--lateral:last-child {
+                    transition-delay: 0.15s, 0s, 0s;
+                }
+                .galeria-cards--visivel .card-frame--destaque {
+                    transition-delay: 0.08s, 0s, 0s;
+                }
+                .card-frame::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: -75%;
+                    width: 50%;
+                    background: linear-gradient(105deg, transparent, rgba(255, 236, 190, 0.28), transparent);
+                    transform: skewX(-20deg);
+                    pointer-events: none;
+                    z-index: 14;
+                }
+                .card-frame:hover::before {
+                    left: 130%;
+                    transition: left 0.9s ease;
+                }
+                .card-frame--lateral {
+                    cursor: pointer;
+                }
+                .card-frame--lateral .foto-lateral {
+                    filter: brightness(0.6) saturate(0.8);
+                }
+                .card-frame--lateral:hover .foto-lateral {
+                    filter: none;
+                    transform: scale(1.22);
+                }
+                .galeria-cards--visivel .card-frame--lateral:hover {
+                    transform: translateY(-10px);
+                    box-shadow: 0 18px 40px rgba(201, 168, 76, 0.28);
+                }
+                .card-frame--destaque {
+                    animation: galeriaPulso 3.5s ease-in-out infinite;
+                }
+                .galeria-cards--visivel .card-frame--destaque:hover {
+                    transform: translateY(-6px);
+                }
+                @keyframes galeriaPulso {
+                    0%, 100% { box-shadow: 0 0 18px rgba(201, 168, 76, 0.18); }
+                    50%      { box-shadow: 0 0 38px rgba(201, 168, 76, 0.42); }
+                }
+                @media (prefers-reduced-motion: reduce) {
+                    .card-frame,
+                    .card-frame--lateral .foto-lateral {
+                        transition: none;
+                        animation: none;
+                    }
+                    .card-frame::before {
+                        display: none;
+                    }
+                }
             }
             .slider-container {
                 position: absolute;
@@ -61,15 +131,16 @@
                 user-select: none;
                 pointer-events: none;
             }
-            .slider-antes {
-                object-position: center 52%;
-                transform: scale(1.3) translateY(10%);
+            /* As fotos são padronizadas (961x1637, cabeça em ~40% x 45%): antes, depois e laterais
+               usam o mesmo enquadramento, assim o rosto fica no mesmo lugar ao arrastar o slider */
+            .slider-antes,
+            .slider-depois,
+            .foto-lateral {
+                object-position: 40% 50%;
+                transform: scale(1.15);
+                transform-origin: 40% 45%;
             }
             .slider-depois {
-                object-position: center top;
-                /* 1.4 é o zoom mínimo que ainda cobre o translateX(20%) sem sobrar
-                   espaço vazio na lateral esquerda da foto */
-                transform: scale(1.4) translateX(20%);
                 /* estado inicial: "depois" totalmente escondida, mostrando só a
                    foto de "antes"; arrastar para a direita é que revela a "depois" */
                 clip-path: inset(0 100% 0 0);
@@ -208,9 +279,6 @@
                     clip-path: none !important;
                     overflow: visible !important;
                 }
-                .card-frame--destaque .card-frame__borda {
-                    display: none !important;
-                }
                 .card-frame--destaque .slider-container {
                     -webkit-mask-image: url('{{ asset('images/rectangle-centro-blog-mask.png') }}');
                     -webkit-mask-size: 100% 100%;
@@ -246,19 +314,17 @@
                     min-width: 0 !important;
                 }
                 .card-frame--lateral {
-                    width: 21vw !important;
-                    height: 25.8vw !important;
+                    width: 23vw !important;
                 }
                 .card-frame--destaque {
-                    width: 27vw !important;
-                    height: 32.8vw !important;
+                    width: 27.5vw !important;
                 }
             }
             /* Fade ao trocar de foto no carrossel (galeriaNav) */
             .slider-antes,
             .slider-depois,
             .foto-lateral {
-                transition: opacity 0.25s ease;
+                transition: opacity 0.25s ease, transform 0.5s ease, filter 0.45s ease;
             }
             .galeria-trocando {
                 opacity: 0;
@@ -269,12 +335,11 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                object-position: center top;
             }
         </style>
     @endpush
 
-    <div style="max-width: 1100px; margin: 0 auto; padding: 0 24px;">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 0 24px;">
 
         {{-- Título --}}
         <h2 class="galeria-title" style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 36px; color: #F5F0E8; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 48px; text-align: center;">
@@ -305,23 +370,24 @@
                     @php
                         $isDestaque = $cliente['destaque'];
                         $id = $cliente['id'];
-                        // largura +15% (280 -> 322, 220 -> 253); o min() com vw só entra em telas estreitas
-                        // (1025-1100px), onde os cards maiores não caberiam ao lado das setas
-                        $w = $isDestaque ? 'min(322px, 28vw)' : 'min(253px, 22vw)';
-                        $h = $isDestaque ? '340px' : '270px';
-                        $mt = $isDestaque ? '0' : '20px';
+                        // laterais 330x500 e central 385x580; o min() com vw só entra abaixo de ~1320px,
+                        // onde os cards não caberiam ao lado das setas (a altura acompanha pelo aspect-ratio)
+                        $w = $isDestaque ? 'min(385px, 27vw)' : 'min(330px, 23vw)';
+                        $ratio = $isDestaque ? '385 / 580' : '330 / 500';
                     @endphp
 
                     {{-- Container do card --}}
-                    <div class="card-frame {{ $isDestaque ? 'card-frame--destaque' : 'card-frame--lateral' }}" style="flex-shrink: 0; width: {{ $w }}; height: {{ $h }}; margin-top: {{ $mt }};">
+                    <div class="card-frame {{ $isDestaque ? 'card-frame--destaque' : 'card-frame--lateral' }}"
+                         @unless($isDestaque) onclick="galeriaNav({{ $loop->first ? -1 : 1 }})" @endunless
+                         style="flex-shrink: 0; width: {{ $w }}; aspect-ratio: {{ $ratio }};">
 
                         @if($isDestaque)
                             {{-- Card destaque: slider interativo --}}
                             <div class="slider-container" id="slider-{{ $id }}">
                                 <img class="slider-antes" data-galeria-antes draggable="false"
-                                     src="{{ asset('images/fulano'.$id.'-antes.jpg') }}" alt="Antes">
+                                     src="{{ asset('images/fulano'.$id.'-antes.png') }}" alt="Antes">
                                 <img class="slider-depois" data-galeria-depois draggable="false"
-                                     src="{{ asset('images/fulano'.$id.'-depois.jpg') }}" alt="Depois"
+                                     src="{{ asset('images/fulano'.$id.'-depois.png') }}" alt="Depois"
                                      id="slider-depois-{{ $id }}">
                                 <div class="slider-dica"><span>Arraste</span></div>
                                 <div class="slider-handle" id="slider-handle-{{ $id }}">
@@ -331,12 +397,9 @@
                         @else
                             {{-- Card lateral: foto com shape --}}
                             <img class="foto-lateral" data-galeria-slot="{{ $loop->first ? 'anterior' : 'proximo' }}"
-                                 src="{{ asset('images/fulano'.$id.'-depois.jpg') }}" alt="Resultado">
+                                 src="{{ asset('images/fulano'.$id.'-depois.png') }}" alt="Resultado">
                         @endif
 
-                        {{-- Borda do Figma sobreposta (por cima da foto) --}}
-                        <img class="card-frame__borda" src="{{ asset('images/retangulo-galeria.png') }}" alt=""
-                             style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; pointer-events: none; z-index: 5;">
 
                     </div>
                 @endforeach
@@ -368,13 +431,26 @@
 
 @php
     $galeriaItens = collect([1, 3, 2])->map(fn ($id) => [
-        'antes'  => asset('images/fulano'.$id.'-antes.jpg'),
-        'depois' => asset('images/fulano'.$id.'-depois.jpg'),
+        'antes'  => asset('images/fulano'.$id.'-antes.png'),
+        'depois' => asset('images/fulano'.$id.'-depois.png'),
     ]);
 @endphp
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Entrada dos cards (fade + subida) quando a seção aparece na tela
+            const galeriaCards = document.querySelector('#galeria .galeria-cards');
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver((entradas, obs) => {
+                    if (entradas[0].isIntersecting) {
+                        galeriaCards.classList.add('galeria-cards--visivel');
+                        obs.disconnect();
+                    }
+                }, { threshold: 0.25 }).observe(galeriaCards);
+            } else {
+                galeriaCards.classList.add('galeria-cards--visivel');
+            }
+
             const containers = document.querySelectorAll('.slider-container');
             containers.forEach(container => {
                 const id = container.id.replace('slider-', '');
