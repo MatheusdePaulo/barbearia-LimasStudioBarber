@@ -14,8 +14,10 @@
          'texto' => 'Degradê baixo, rente à orelha, com topo médio. Moderno sem perder a sobriedade.'],
         ['foto' => 'images/fulano2-depois.png', 'nome' => 'Topete Clássico',
          'texto' => 'Topo com volume penteado para cima e laterais curtas. Um clássico que valoriza o rosto.'],
-        ['foto' => 'images/fulano3-depois.png', 'nome' => 'Risca Lateral',
-         'texto' => 'Risca marcada na navalha com degradê nas laterais. Acabamento preciso e estiloso.'],
+        ['foto' => 'images/fulano8-depois.png', 'nome' => 'Corte Curto',
+         'texto' => 'Degradê baixo nas laterais e topo curto texturizado. Prático e sempre alinhado.'],
+        ['foto' => 'images/fulano7-crianca-depois.png', 'nome' => 'Corte Infantil',
+         'texto' => 'Corte pra criançada feito com calma, paciência e acabamento caprichado.'],
     ])->map(fn ($item) => [
         'foto'  => asset($item['foto']),
         'flip'  => $item['flip'] ?? false,

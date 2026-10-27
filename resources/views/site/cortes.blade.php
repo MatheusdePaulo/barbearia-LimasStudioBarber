@@ -21,10 +21,12 @@
                  'texto' => 'Clássico e discreto: laterais curtas, topo um pouco mais cheio e acabamento alinhado. Funciona no trabalho, em eventos e no dia a dia.'],
                 ['nome' => 'Corte Italiano', 'rosto' => '47% 45%', 'foto' => 'images/fulano5-depois.png', 'foco' => '55% center', 'flip' => true,
                  'texto' => 'Volume no topo penteado para trás, com movimento e acabamento natural nas laterais. Elegância de estilo clássico que nunca sai de moda.'],
-                ['nome' => 'Risca Lateral', 'rosto' => '40% 46%', 'foto' => 'images/fulano3-depois.png', 'foco' => 'center 40%',
-                 'texto' => 'Uma risca marcada na navalha separa o penteado, combinada com degradê nas laterais. Acabamento preciso que dá personalidade ao corte.'],
+                ['nome' => 'Corte Curto', 'rosto' => '50% 45%', 'foto' => 'images/fulano8-depois.png', 'foco' => 'center 40%',
+                 'texto' => 'Laterais baixas no degradê e topo curto e texturizado. Prático no dia a dia, fica alinhado sem precisar de muito produto.'],
                 ['nome' => 'Topete', 'rosto' => '45% 52%', 'foto' => 'images/fulano2-depois.png', 'foco' => 'center 60%',
                  'texto' => 'Topo com volume penteado pra cima e laterais curtas. Valoriza o rosto e fica ótimo com pomada ou cera.'],
+                ['nome' => 'Corte Infantil', 'rosto' => '45% 50%', 'foto' => 'images/fulano7-crianca-depois.png', 'foco' => 'center 45%', 'servico' => 'infantil',
+                 'texto' => 'Corte pra criançada feito com calma e paciência, do jeitinho que os pais pedirem ou no estilo que a criança curte. Degradê, social ou topete, sempre com acabamento caprichado.'],
             ],
         ],
         [
@@ -39,7 +41,7 @@
                  'texto' => 'Pra quem deixa crescer: aparamos o volume, tiramos as pontas e acertamos o desenho, mantendo a barba cheia e saudável.'],
                 ['nome' => 'Cavanhaque', 'rosto' => '46% 47%', 'foto' => 'images/fulano4-depois.png', 'foco' => 'center 60%',
                  'texto' => 'Bigode e queixo em destaque, com as laterais bem baixas. Um estilo marcante que muda a expressão do rosto.'],
-                ['nome' => 'Barba Rente', 'rosto' => '36% 41%', 'foto' => 'images/fulano3-depois.png', 'foco' => 'center 55%',
+                ['nome' => 'Barba Rente', 'rosto' => '52% 55%', 'foto' => 'images/fulano9-barba.png', 'foco' => 'center 55%',
                  'texto' => 'Barba curta e uniforme, feita na máquina com acabamento na navalha. Prática pra quem quer um visual limpo sem tirar tudo.'],
             ],
         ],
@@ -353,8 +355,8 @@
                                 <span class="corte-num">{{ str_pad($numero, 2, '0', STR_PAD_LEFT) }}</span>
                                 <h3 class="corte-nome">{{ $item['nome'] }}</h3>
                                 <p class="corte-desc">{{ $item['texto'] }}</p>
-                                <a href="{{ route('appointments.create', $secao['servico']) }}" class="corte-agendar">
-                                    Agendar {{ $secao['label'] === 'Combo' ? 'combo' : strtolower($secao['label']) }} <span>→</span>
+                                <a href="{{ route('appointments.create', $item['servico'] ?? $secao['servico']) }}" class="corte-agendar">
+                                    Agendar {{ isset($item['servico']) ? 'corte infantil' : ($secao['label'] === 'Combo' ? 'combo' : strtolower($secao['label'])) }} <span>→</span>
                                 </a>
                             </div>
                         </article>
