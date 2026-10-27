@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', "Nossos Cortes | Lima's Studio Barber")
+@section('description', "Conheça os cortes da Lima's Studio Barber em Cascavel-CE: degradê, social, italiano, topete, corte infantil e estilos de barba. Escolha o seu e agende online.")
 
 @php
     // Tipos de corte. "foco" é o object-position da foto (qual parte aparece quando ela é cortada pra caber no quadro);

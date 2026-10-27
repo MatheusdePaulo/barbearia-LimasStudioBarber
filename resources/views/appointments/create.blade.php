@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lima's Studio Barber | Agendar Horário</title>
+    <meta name="description" content="Agende seu horário na Lima's Studio Barber em Cascavel-CE: escolha o serviço, o dia e o horário, e pague no dia ou pelo site.">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
