@@ -289,9 +289,10 @@
 
                         <div class="lp-card {{ $isDestaque ? 'lp-card--destaque' : 'lp-card--lateral' }}"
                              style="flex-shrink: 0; width: {{ $w }}; margin-top: {{ $mt }}; position: relative;">
-                            {{-- Imagem do card como fundo --}}
-                            <img loading="lazy" decoding="async" class="lp-card-img" src="{{ asset($cardImg) }}" alt=""
-                                 style="width: 100%; height: {{ $h }}; object-fit: fill; display: block;">
+                            {{-- Moldura do card como fundo esticado (100% 100%, igual ao object-fit: fill de antes).
+                                 Como <div> e não <img>, pra não acusar "imagem com proporção incorreta" no Lighthouse. --}}
+                            <div class="lp-card-img" aria-hidden="true"
+                                 style="width: 100%; height: {{ $h }}; display: block; background: url('{{ asset($cardImg) }}') center / 100% 100% no-repeat;"></div>
 
                             {{-- Foto do produto --}}
                             <img loading="lazy" decoding="async" class="lp-card-produto" data-produto-imagem="{{ $slot }}"
