@@ -50,6 +50,14 @@
                     </button>
                 </form>
             </div>
+
+            <p class="text-center text-zinc-500 text-[11px] mt-6">
+                Ainda não tem conta?
+                <a href="{{ route('register') }}" class="text-[#C9A84C] font-bold hover:underline">Criar conta</a>
+            </p>
+            <p class="text-center mt-3">
+                <a href="{{ url('/') }}" class="text-zinc-600 text-[10px] uppercase tracking-widest hover:text-zinc-400">Voltar ao site</a>
+            </p>
         </div>
     </div>
 </x-guest-layout>

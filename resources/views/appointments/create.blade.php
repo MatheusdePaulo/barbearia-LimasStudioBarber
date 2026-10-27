@@ -84,6 +84,11 @@
                         <p class="text-zinc-500 text-[10px] uppercase font-black tracking-widest mb-1 opacity-70">Agendando como</p>
                         <h4 class="text-base font-black text-zinc-300 uppercase">Visitante</h4>
                         <p class="text-zinc-600 text-[10px] mt-1 italic font-medium">Seus dados serão pedidos ao confirmar</p>
+                        <p class="text-zinc-500 text-[10px] mt-3">
+                            Tem conta? <a href="{{ route('login', ['voltar' => request()->getRequestUri()]) }}" class="text-[#C9A84C] font-bold hover:underline">Entrar</a>
+                            <span class="text-zinc-700">·</span>
+                            <a href="{{ route('register', ['voltar' => request()->getRequestUri()]) }}" class="text-[#C9A84C] font-bold hover:underline">Criar conta</a>
+                        </p>
                     </div>
                     @endguest
 

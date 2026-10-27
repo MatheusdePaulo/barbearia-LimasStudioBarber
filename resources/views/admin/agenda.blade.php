@@ -195,7 +195,7 @@
                                 </thead>
                                 <tbody class="text-zinc-300 text-[11px]">
                                 @forelse($reservas as $reserva)
-                                    <tr class="border-b border-zinc-800/30 hover:bg-zinc-900/10 transition-all {{ in_array($reserva->status, ['finished', 'canceled', 'expired']) ? 'row-finished' : '' }}">
+                                    <tr class="border-b border-zinc-800/30 hover:bg-zinc-900/10 transition-all {{ in_array($reserva->status, ['finished', 'canceled', 'client_canceled', 'expired']) ? 'row-finished' : '' }}">
                                         <td class="py-6 px-6 lg:px-10 font-mono text-[#C9A84C] font-black italic text-xs">{{ $reserva->time }}</td>
                                         <td class="py-6 font-black uppercase italic">{{ $reserva->user->name ?? $reserva->client_name }}</td>
                                         <td class="py-6 text-center text-zinc-500 font-bold uppercase tracking-tighter whitespace-nowrap">{{ $reserva->service_label }}</td>
@@ -276,6 +276,7 @@
                                                         $label = match($reserva->status) {
                                                             'finished' => ['text' => 'Finalizado', 'class' => 'text-zinc-600'],
                                                             'canceled' => ['text' => 'Faltou', 'class' => 'text-red-900'],
+                                                            'client_canceled' => ['text' => 'Cancelado pelo cliente', 'class' => 'text-zinc-500'],
                                                             'expired'  => ['text' => 'Pagamento Expirado', 'class' => 'text-orange-800'],
                                                             default    => ['text' => $reserva->status, 'class' => 'text-zinc-600'],
                                                         };

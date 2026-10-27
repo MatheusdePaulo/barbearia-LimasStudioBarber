@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
@@ -48,8 +50,16 @@ Route::prefix('agendar')->name('appointments.')->group(function () {
 // ─── Painel Admin ─────────────────────────────────────────────
 Route::middleware(['auth'])->group(function () {
 
-    // Rotas do Breeze (verificação de e-mail / confirmar senha) redirecionam pra "dashboard"
-    Route::get('/dashboard', fn () => redirect()->route('admin.dashboard'))->name('dashboard');
+    // Rotas do Breeze (verificação de e-mail / confirmar senha) redirecionam pra "dashboard":
+    // admin vai pro painel, cliente pra "Minha conta"
+    Route::get('/dashboard', fn () => redirect(AuthenticatedSessionController::destinoPadrao()))->name('dashboard');
+
+    // Área do cliente
+    Route::prefix('minha-conta')->name('cliente.')->controller(ClienteController::class)->group(function () {
+        Route::get('/', 'index')->name('conta');
+        Route::put('/dados', 'atualizar')->name('atualizar');
+        Route::post('/agendamentos/{appointment}/cancelar', 'cancelar')->name('cancelar');
+    });
 
     // Só entra quem tem is_admin = 1
     Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {

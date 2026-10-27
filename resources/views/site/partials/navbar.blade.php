@@ -3,9 +3,22 @@
     .nav-link { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 15px; color: #F5F0E8; text-decoration: none; transition: color 0.3s ease; letter-spacing: 0.02em; }
     .nav-link:hover { color: #C9A84C; }
 
+    /* Acesso à conta: discreto, ao lado do "Agendar agora" */
+    .nav-conta { display: inline-flex; align-items: center; gap: 7px; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 13px; letter-spacing: 0.04em; color: rgba(245,240,232,0.6); text-decoration: none; white-space: nowrap; transition: color 0.3s ease; }
+    .nav-conta:hover { color: #C9A84C; }
+    .nav-conta svg { width: 17px; height: 17px; flex-shrink: 0; }
+    .nav-drawer-conta { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 12px; letter-spacing: 0.06em; color: rgba(245,240,232,0.55); text-align: center; margin: 18px 0 0; }
+    .nav-drawer-conta a { color: #C9A84C; text-decoration: none; font-weight: 500; }
+
     /* Desktop: links visíveis, hambúrguer escondido */
     .nav-desktop { display: flex; }
     .nav-hamburger { display: none; }
+
+    /* Desktop estreito: o espaço de 140px entre links e botões não cabe junto com o "Entrar" */
+    @media (min-width: 1025px) and (max-width: 1200px) {
+        .nav-desktop { gap: 32px !important; }
+        #navbar { padding-left: 32px !important; padding-right: 32px !important; }
+    }
 
     /* Tablet e Mobile (≤1024px) */
     @media (max-width: 1024px) {
@@ -123,12 +136,26 @@
             <a href="{{ route('home') }}#contato"  class="nav-link">Contato</a>
         </div>
 
-        <a href="{{ route('appointments.create') }}"
-           style="flex-shrink: 0; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 22px; background: #C9A84C; color: #0A0A0A; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;"
-           onmouseover="this.style.background='#E2C97E'"
-           onmouseout="this.style.background='#C9A84C'">
-            Agendar agora
-        </a>
+        <div style="display: flex; align-items: center; gap: 22px; flex-shrink: 0;">
+            @auth
+                <a href="{{ auth()->user()->is_admin ? route('admin.dashboard') : route('cliente.conta') }}" class="nav-conta" title="Minha conta">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+                    {{ auth()->user()->is_admin ? 'Painel' : 'Olá, ' . \Illuminate\Support\Str::of(auth()->user()->name)->before(' ') }}
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="nav-conta" title="Entrar ou criar conta">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+                    Entrar
+                </a>
+            @endauth
+
+            <a href="{{ route('appointments.create') }}"
+               style="flex-shrink: 0; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 22px; background: #C9A84C; color: #0A0A0A; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;"
+               onmouseover="this.style.background='#E2C97E'"
+               onmouseout="this.style.background='#C9A84C'">
+                Agendar agora
+            </a>
+        </div>
 
     </div>
 
@@ -181,6 +208,15 @@
        style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; padding: 16px 32px; background: #C9A84C; color: #0A0A0A; border-radius: 8px; text-decoration: none; text-align: center; margin-top: 32px;">
         Agendar agora
     </a>
+
+    {{-- Acesso à conta, discreto embaixo do botão --}}
+    <p class="nav-drawer-conta">
+        @auth
+            <a href="{{ auth()->user()->is_admin ? route('admin.dashboard') : route('cliente.conta') }}">{{ auth()->user()->is_admin ? 'Abrir o painel' : 'Minha conta' }}</a>
+        @else
+            Já tem conta? <a href="{{ route('login') }}">Entrar</a> · <a href="{{ route('register') }}">Criar conta</a>
+        @endauth
+    </p>
 
     <hr style="margin: 32px 0; border: none; border-top: 1px solid rgba(255,255,255,0.1);">
 
