@@ -17,27 +17,39 @@ class Imagem
         return self::$cache[$caminho] ??= self::montar($caminho);
     }
 
+    // Pastas onde as imagens podem estar: a public/ do Laravel e, na hospedagem atual,
+    // a raiz do projeto (public_html), que é de onde o site serve as imagens de verdade.
+    private static function pastas(): array
+    {
+        return array_unique([public_path(), base_path()]);
+    }
+
     private static function montar(string $caminho): string
     {
-        $arquivo = public_path($caminho);
-        if (! is_file($arquivo)) {
-            return '';
-        }
-
         $base = preg_replace('/\.webp$/', '', $caminho);
-        $opcoes = [];
-        foreach (glob(public_path($base) . '-*w.webp') ?: [] as $variante) {
-            if (preg_match('/-(\d+)w\.webp$/', $variante, $m)) {
-                $opcoes[(int) $m[1]] = asset($base . '-' . $m[1] . 'w.webp');
+
+        foreach (self::pastas() as $pasta) {
+            $arquivo = $pasta . '/' . $caminho;
+            if (! is_file($arquivo)) {
+                continue;
             }
-        }
-        if (! $opcoes) {
-            return '';
+
+            $opcoes = [];
+            foreach (glob($pasta . '/' . $base . '-*w.webp') ?: [] as $variante) {
+                if (preg_match('/-(\d+)w\.webp$/', $variante, $m)) {
+                    $opcoes[(int) $m[1]] = asset($base . '-' . $m[1] . 'w.webp');
+                }
+            }
+            if (! $opcoes) {
+                continue;
+            }
+
+            $opcoes[getimagesize($arquivo)[0]] = asset($caminho);
+            ksort($opcoes);
+
+            return collect($opcoes)->map(fn ($url, $w) => "{$url} {$w}w")->join(', ');
         }
 
-        $opcoes[getimagesize($arquivo)[0]] = asset($caminho);
-        ksort($opcoes);
-
-        return collect($opcoes)->map(fn ($url, $w) => "{$url} {$w}w")->join(', ');
+        return '';
     }
 }

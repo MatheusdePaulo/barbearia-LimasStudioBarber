@@ -370,7 +370,7 @@
              bug de composição gráfica que já pegamos (mask-image + transform 3D no mesmo elemento). Aqui nem é
              3D, mas mantive a separação por segurança. pointer-events volta a "auto" pro :hover funcionar. --}}
         <div class="enos-photo" style="position: absolute; bottom: -59px; left: 50px; z-index: 20; pointer-events: auto; height: 459px; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 85%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 85%, transparent 100%);">
-            <img src="{{ asset('images/enos-barbeiro.webp') }}" srcset="{{ \App\Support\Imagem::srcset('images/enos-barbeiro.webp') }}" sizes="(max-width: 767px) 70vw, (max-width: 1100px) 42vw, 618px" alt="Enos Lima" width="687" height="600" loading="lazy" decoding="async" class="enos-photo__img"
+            <img src="{{ asset('images/enos-barbeiro.webp') }}" srcset="{{ \App\Support\Imagem::srcset('images/enos-barbeiro.webp') }}" sizes="(max-width: 767px) 66vw, (max-width: 1100px) 42vw, 618px" alt="Enos Lima" width="687" height="600" loading="lazy" decoding="async" class="enos-photo__img"
                  style="height: 540px; width: auto; object-fit: contain; display: block;">
         </div>
 
