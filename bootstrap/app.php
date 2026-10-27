@@ -12,9 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Libera o webhook do Mercado Pago do CSRF
+        // Libera o webhook da InfinitePay do CSRF
         $middleware->validateCsrfTokens(except: [
-            'webhooks/mercadopago',
+            'webhooks/infinitepay',
         ]);
 
         // Apelido do middleware do painel admin (is_admin)

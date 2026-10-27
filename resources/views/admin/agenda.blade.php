@@ -203,7 +203,18 @@
                                         <td class="py-6 text-center whitespace-nowrap">
                                             @if($reserva->status == 'pending')
                                                 <span class="px-3 py-1.5 rounded-full text-[9px] font-black uppercase bg-zinc-800 text-zinc-500 border border-zinc-700/50 animate-pulse">
-                                                    ⏳ Aguardando Pix...
+                                                    ⏳ Aguardando Pagamento...
+                                                </span>
+                                            @elseif($reserva->payment_type === 'presencial')
+                                                <span class="px-3 py-1.5 rounded-full text-[9px] font-black uppercase bg-zinc-800 text-zinc-300 border border-zinc-700">
+                                                    💵 Pagar no Local · R$ {{ number_format($reserva->valor_total, 2, ',', '.') }}
+                                                </span>
+                                                @if($reserva->coupon_code)
+                                                    <span class="block mt-1.5 text-[9px] font-black uppercase text-green-400 font-mono">Cupom {{ $reserva->coupon_code }}</span>
+                                                @endif
+                                            @elseif($reserva->payment_type === 'full')
+                                                <span class="px-3 py-1.5 rounded-full text-[9px] font-black uppercase bg-green-500/10 text-green-400 border border-green-500/20">
+                                                    ✅ Pago no Site · R$ {{ number_format($reserva->deposit_amount, 2, ',', '.') }}
                                                 </span>
                                             @elseif($reserva->user_id === null)
                                                 <span class="px-3 py-1.5 rounded-full text-[9px] font-black uppercase bg-zinc-800 text-zinc-400 border border-zinc-700">
@@ -265,7 +276,7 @@
                                                         $label = match($reserva->status) {
                                                             'finished' => ['text' => 'Finalizado', 'class' => 'text-zinc-600'],
                                                             'canceled' => ['text' => 'Faltou', 'class' => 'text-red-900'],
-                                                            'expired'  => ['text' => 'Pix Expirado', 'class' => 'text-orange-800'],
+                                                            'expired'  => ['text' => 'Pagamento Expirado', 'class' => 'text-orange-800'],
                                                             default    => ['text' => $reserva->status, 'class' => 'text-zinc-600'],
                                                         };
                                                     @endphp

@@ -35,6 +35,23 @@ return [
         ],
     ],
 
+    // Checkout da InfinitePay: o handle é a InfiniteTag do barbeiro, sem o "$"
+    'infinitepay' => [
+        'handle' => env('INFINITEPAY_HANDLE', 'enosbarbeiro'),
+        // E-mail usado no checkout quando o cliente não tem e-mail (recebe os comprovantes desses pagamentos)
+        'email_padrao' => env('INFINITEPAY_EMAIL_PADRAO'),
+        // Endereço da barbearia (onde o serviço é feito). Indo junto, o checkout pula a etapa
+        // "Entrega" e abre direto na escolha do pagamento.
+        'endereco' => [
+            'cep'          => '62850000',
+            'street'       => 'Rua Pedro Ciríaco',
+            'number'       => '909',
+            'neighborhood' => 'Mutirão',
+            'city'         => 'Cascavel',
+            'state'        => 'CE',
+        ],
+    ],
+
     'mercadopago' => [
         'token' => env('MERCADO_PAGO_ACCESS_TOKEN', env('MERCADO_PAGO_TOKEN')),
         'webhook_secret' => env('MERCADO_PAGO_WEBHOOK_SECRET'),

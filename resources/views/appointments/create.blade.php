@@ -52,10 +52,10 @@
         <form action="{{ route('appointments.store') }}" method="POST" id="formAgendamento">
             @csrf
 
-            @if(session('error'))
+            @if(session('error') || $errors->any())
                 <div class="bg-red-500/10 border border-red-500 text-red-500 p-5 rounded-2xl mb-8 font-black uppercase text-[10px] tracking-widest italic flex items-center gap-4 animate-pulse">
                     <i class="fas fa-exclamation-triangle text-lg"></i>
-                    <span>{{ session('error') }}</span>
+                    <span>{{ session('error') ?? $errors->first() }}</span>
                 </div>
             @endif
 
@@ -211,27 +211,14 @@
                         @endif
                     </div>
 
-                    <!-- 4. OPÇÃO DE PAGAMENTO PIX -->
+                    <!-- 4. FORMA DE PAGAMENTO -->
                     <div>
-                        <label class="block text-zinc-500 text-[11px] font-black uppercase tracking-[0.2em] italic opacity-60 mb-4">4. Opção de Pagamento Pix</label>
+                        <label class="block text-zinc-500 text-[11px] font-black uppercase tracking-[0.2em] italic opacity-60 mb-4">4. Forma de Pagamento</label>
                         <div class="grid grid-cols-2 gap-4">
                             <label class="cursor-pointer">
-                                <input type="radio" name="payment_type" value="signal" x-model="paymentType" class="hidden peer" checked>
+                                <input type="radio" name="payment_type" value="presencial" x-model="paymentType" class="hidden peer" checked>
                                 <div class="bg-[#141414] border border-zinc-800 p-5 rounded-2xl transition-all peer-checked:border-[#C9A84C] peer-checked:bg-[#C9A84C]/5 h-full flex flex-col justify-center shadow-md">
-                                    <p class="text-[10px] font-black uppercase text-zinc-600 mb-1">Pagar Sinal</p>
-                                    <p class="font-black text-xl tracking-tight transition-all duration-300"
-                                       :class="couponAnimating ? 'text-green-400 scale-110' : 'text-white'">
-                                        R$ <span x-text="signalPrice.toLocaleString('pt-BR', {minimumFractionDigits:2})"></span>
-                                    </p>
-                                    <p x-show="couponValid" x-cloak
-                                       class="text-zinc-600 text-[9px] mt-0.5 line-through">R$ 5,00</p>
-                                    <p class="text-zinc-600 text-[9px] mt-1 italic">Desconta no total</p>
-                                </div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="payment_type" value="full" x-model="paymentType" class="hidden peer">
-                                <div class="bg-[#141414] border border-zinc-800 p-5 rounded-2xl transition-all peer-checked:border-[#C9A84C] peer-checked:bg-[#C9A84C]/5 h-full flex flex-col justify-center shadow-md">
-                                    <p class="text-[10px] font-black uppercase text-zinc-600 mb-1">Pagar Inteiro</p>
+                                    <p class="text-[10px] font-black uppercase text-zinc-600 mb-1">Pagar no Dia</p>
                                     <p class="font-black text-xl tracking-tight font-mono transition-all duration-300"
                                        :class="couponAnimating ? 'text-green-400 scale-110' : 'text-white'">
                                         R$ <span x-text="discountedPrice.toLocaleString('pt-BR', {minimumFractionDigits:2})"></span>
@@ -239,7 +226,21 @@
                                     <p x-show="couponValid" x-cloak
                                        class="text-zinc-600 text-[9px] mt-0.5 line-through font-mono"
                                        x-text="'R$ ' + totalPrice.toLocaleString('pt-BR', {minimumFractionDigits:2})"></p>
-                                    <p class="text-zinc-600 text-[9px] mt-1 italic" x-text="selectedServices.length > 1 ? selectedServices.length + ' serviços' : 'valor total'"></p>
+                                    <p class="text-zinc-600 text-[9px] mt-1 italic">Presencial, na hora do corte</p>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="payment_type" value="full" x-model="paymentType" class="hidden peer">
+                                <div class="bg-[#141414] border border-zinc-800 p-5 rounded-2xl transition-all peer-checked:border-[#C9A84C] peer-checked:bg-[#C9A84C]/5 h-full flex flex-col justify-center shadow-md">
+                                    <p class="text-[10px] font-black uppercase text-zinc-600 mb-1">Pagar Agora no Site</p>
+                                    <p class="font-black text-xl tracking-tight font-mono transition-all duration-300"
+                                       :class="couponAnimating ? 'text-green-400 scale-110' : 'text-white'">
+                                        R$ <span x-text="discountedPrice.toLocaleString('pt-BR', {minimumFractionDigits:2})"></span>
+                                    </p>
+                                    <p x-show="couponValid" x-cloak
+                                       class="text-zinc-600 text-[9px] mt-0.5 line-through font-mono"
+                                       x-text="'R$ ' + totalPrice.toLocaleString('pt-BR', {minimumFractionDigits:2})"></p>
+                                    <p class="text-zinc-600 text-[9px] mt-1 italic">Valor inteiro, Pix ou cartão</p>
                                 </div>
                             </label>
                         </div>
@@ -275,7 +276,7 @@
                             :disabled="selectedServices.length === 0"
                             :class="selectedServices.length === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-[#E2C97E] hover:-translate-y-0.5'"
                             class="w-full py-5 bg-[#C9A84C] text-black font-black uppercase rounded-2xl transition-all tracking-[0.25em] text-xs shadow-2xl shadow-[#C9A84C]/10">
-                        Confirmar e Gerar Pix
+                        <span x-text="botaoConfirmar"></span>
                     </button>
                     @else
                     <button type="button"
@@ -283,7 +284,7 @@
                             :class="selectedServices.length === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-[#E2C97E] hover:-translate-y-0.5'"
                             @click="selectedServices.length > 0 && (showGuestModal = true)"
                             class="w-full py-5 bg-[#C9A84C] text-black font-black uppercase rounded-2xl transition-all tracking-[0.25em] text-xs shadow-2xl shadow-[#C9A84C]/10">
-                        Confirmar e Gerar Pix
+                        <span x-text="botaoConfirmar"></span>
                     </button>
                     @endauth
 
@@ -294,9 +295,9 @@
                             <div class="space-y-2 text-left">
                                 <h4 class="text-white font-black uppercase text-[10px] tracking-[0.2em] italic">Informações de Pagamento</h4>
                                 <ul class="text-zinc-400 text-[11px] leading-relaxed font-medium space-y-1.5">
-                                    <li class="flex gap-2"><span>•</span> <span>O valor do <strong>sinal</strong> é obrigatório para confirmar o horário e será <strong>descontado</strong> no valor total no estabelecimento.</span></li>
-                                    <li class="flex gap-2 text-red-400/80"><span>•</span> <span>Em caso de <strong>falta</strong>, o valor do sinal não será devolvido.</span></li>
-                                    <li class="flex gap-2"><span>•</span> <span>Pagamento <strong>integral</strong> com devolução total mediante aviso prévio.</span></li>
+                                    <li class="flex gap-2"><span>•</span> <span><strong>Pagar no dia:</strong> seu horário já fica reservado e você paga no estabelecimento, na hora do corte.</span></li>
+                                    <li class="flex gap-2"><span>•</span> <span><strong>Pagar agora:</strong> você paga o valor inteiro por <strong>Pix ou cartão</strong> na tela segura da InfinitePay e o horário é confirmado assim que o pagamento cair. Você tem 10 minutos pra pagar.</span></li>
+                                    <li class="flex gap-2"><span>•</span> <span>Não vai conseguir ir? Avise com antecedência pelo WhatsApp.</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -340,13 +341,19 @@
 
                 {{-- WHATSAPP --}}
                 <div class="space-y-1">
-                    <label class="text-[9px] font-black uppercase text-zinc-500 ml-2 italic tracking-widest">WhatsApp <span class="text-zinc-700">(opcional)</span></label>
+                    <label class="text-[9px] font-black uppercase text-zinc-500 ml-2 italic tracking-widest">WhatsApp
+                        <span class="text-[#C9A84C]">(obrigatório)</span>
+                    </label>
                     <input type="text"
                            x-model="guestWhatsapp"
                            x-mask="(99) 99999-9999"
                            placeholder="(85) 90000-0000"
-                           class="block w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl py-3.5 px-5 text-white text-sm focus:border-[#C9A84C] focus:ring-0 outline-none transition-all placeholder-zinc-700">
+                           :class="guestWhatsappError ? 'border-red-500/70' : 'border-zinc-800'"
+                           class="block w-full bg-zinc-900/50 border rounded-2xl py-3.5 px-5 text-white text-sm focus:border-[#C9A84C] focus:ring-0 outline-none transition-all placeholder-zinc-700">
+                    <p x-show="guestWhatsappError" x-cloak class="text-red-400 text-[10px] font-bold ml-2 mt-1">Informe seu WhatsApp com DDD</p>
+                    <p x-show="!guestWhatsappError" class="text-zinc-600 text-[10px] ml-2 mt-1">Pra falar com você sobre o seu horário.</p>
                 </div>
+
 
                 {{-- NASCIMENTO --}}
                 <div class="space-y-1">
@@ -369,7 +376,7 @@
             <button type="button"
                     @click="submitGuestForm()"
                     class="w-full py-4 bg-[#C9A84C] hover:bg-[#E2C97E] text-black font-black uppercase rounded-2xl transition-all tracking-[0.25em] text-[11px] shadow-2xl shadow-[#C9A84C]/10 active:scale-[0.98]">
-                Confirmar e Gerar Pix
+                <span x-text="botaoConfirmar"></span>
             </button>
         </div>
     </div>
@@ -380,7 +387,7 @@
 function agendamento() {
     return {
         mobileMenu: false,
-        paymentType: 'signal',
+        paymentType: 'presencial',
         selectedServices: [],
         maxServices: 3,
         showGuestModal: false,
@@ -389,6 +396,7 @@ function agendamento() {
         guestBirthday: '',
         rememberGuest: false,
         guestNameError: false,
+        guestWhatsappError: false,
 
         couponCode: '',
         couponValid: false,
@@ -441,12 +449,8 @@ function agendamento() {
             return this.selectedServices.reduce((sum, s) => sum + s.duration, 0);
         },
 
-        get signalPrice() {
-            const base = 5.00;
-            if (this.couponValid && this.couponDiscount > 0) {
-                return Math.max(parseFloat((base * (1 - this.couponDiscount / 100)).toFixed(2)), 0.01);
-            }
-            return base;
+        get botaoConfirmar() {
+            return this.paymentType === 'full' ? 'Confirmar e Pagar' : 'Confirmar Agendamento';
         },
 
         get discountedPrice() {
@@ -502,7 +506,9 @@ function agendamento() {
 
         submitGuestForm() {
             this.guestNameError = !this.guestName.trim();
-            if (this.guestNameError) return;
+            // WhatsApp (com DDD) sempre obrigatório
+            this.guestWhatsappError = this.guestWhatsapp.replace(/\D/g, '').length < 10;
+            if (this.guestNameError || this.guestWhatsappError) return;
 
             // Salva no localStorage apenas os campos preenchidos
             if (this.rememberGuest) {

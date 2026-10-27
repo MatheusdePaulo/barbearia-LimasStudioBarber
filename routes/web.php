@@ -10,7 +10,6 @@ use App\Http\Controllers\ScheduleOverrideController;
 use App\Http\Controllers\ServiceAdminController;
 use App\Http\Controllers\Site;
 use App\Http\Controllers\WebhookController;
-use App\Models\Appointment;
 use Illuminate\Support\Facades\Route;
 
 // ─── Site público ────────────────────────────────────────────
@@ -18,9 +17,9 @@ Route::get('/', [Site\HomeController::class, 'index'])->name('home');
 // Página com os tipos de corte de cabelo e barba (os cards de Serviços da home levam pra cá)
 Route::view('/cortes', 'site.cortes')->name('cortes');
 
-// Webhook do Mercado Pago (fora de qualquer middleware de autenticação)
-Route::post('/webhooks/mercadopago', [WebhookController::class, 'handleMercadoPago'])
-    ->name('webhooks.mercadopago');
+// Webhook da InfinitePay (fora de qualquer middleware de autenticação)
+Route::post('/webhooks/infinitepay', [WebhookController::class, 'handleInfinitePay'])
+    ->name('webhooks.infinitepay');
 
 // Avaliações e cupons (públicos)
 Route::get('/avaliar/cliente', [ReviewController::class, 'form'])->name('reviews.form')->middleware('signed');
@@ -35,12 +34,14 @@ Route::prefix('agendar')->name('appointments.')->group(function () {
         return view('appointments.success');
     })->name('success');
 
-    Route::get('/status/{id}', function ($id) {
-        $appointment = Appointment::find($id);
-        return response()->json(['status' => $appointment ? $appointment->status : 'not_found']);
-    })->name('status');
+    Route::get('/status/{appointment}', [AppointmentController::class, 'status'])
+        ->middleware('throttle:60,1')->name('status');
 
     Route::post('/confirmar', [AppointmentController::class, 'store'])->name('store');
+    Route::get('/pagamento/{appointment}', [AppointmentController::class, 'pagamento'])
+        ->middleware('signed')->name('pagamento');
+    // A InfinitePay devolve o cliente pra cá depois do pagamento (com order_nsu, transaction_nsu e slug na URL)
+    Route::get('/pagamento/{appointment}/retorno', [AppointmentController::class, 'retorno'])->name('retorno');
     Route::get('/{service?}', [AppointmentController::class, 'create'])->name('create');
 });
 

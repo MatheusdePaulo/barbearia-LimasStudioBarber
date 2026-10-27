@@ -10,11 +10,10 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\InfinitePay;
 use Carbon\Carbon;
-use MercadoPago\Client\Payment\PaymentClient;
-use MercadoPago\MercadoPagoConfig;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\URL;
 
 class AppointmentController extends Controller
 {
@@ -116,18 +115,27 @@ class AppointmentController extends Controller
             'service_ids.*' => 'exists:services,id',
             'date'          => 'required|date',
             'time'          => 'required',
-            'payment_type'  => 'required|in:signal,full',
+            'payment_type'  => 'required|in:presencial,full',
         ];
 
         if (! auth()->check()) {
             $rules['guest_name']     = 'required|string|max:255';
-            $rules['guest_whatsapp'] = 'nullable|string|max:20';
+            // WhatsApp obrigatório: no pagar no dia é pro barbeiro falar com o cliente se ele faltar,
+            // no pagar pelo site vai pré-preenchido no checkout da InfinitePay
+            $rules['guest_whatsapp'] = ['required', 'string', 'max:20',
+                function ($attribute, $value, $fail) {
+                    if (strlen(preg_replace('/\D/', '', (string) $value)) < 10) {
+                        $fail('Informe um WhatsApp válido, com DDD.');
+                    }
+                }];
             $rules['guest_birthday'] = 'nullable|date';
         }
 
         $rules['coupon_code'] = 'nullable|string|max:30';
 
-        $request->validate($rules);
+        $request->validate($rules, [
+            'guest_whatsapp.required'   => 'Informe seu WhatsApp com DDD.',
+        ]);
 
         $services      = Service::whereIn('id', $request->service_ids)->get();
         $totalDuration = $services->sum('duration');
@@ -194,60 +202,57 @@ class AppointmentController extends Controller
                 }
             }
 
-            $amount = $request->payment_type === 'signal'
-                ? 5.00
-                : $services->sum(fn($s) => (float) $s->active_price);
-
-            // Aplica desconto do cupom
+            // Valor do serviço com o desconto do cupom (no presencial é o que o cliente paga no dia)
+            $amount = $services->sum(fn($s) => (float) $s->active_price);
             if ($coupon) {
                 $amount = round($amount * (1 - $coupon->discount_percent / 100), 2);
-                $amount = max($amount, 0.01); // Mercado Pago exige valor mínimo
+                $amount = max($amount, 0.01);
             }
 
-            $displayName = $user ? $user->name : ($request->guest_name ?? 'Cliente');
-            $nameParts   = explode(' ', trim($displayName));
-            $firstName   = $nameParts[0];
-            $lastName    = count($nameParts) > 1 ? end($nameParts) : 'Silva';
+            $online = $request->payment_type === 'full';
 
-            $payerEmail = $user?->email ?? null;
-            if (! $payerEmail || ! filter_var($payerEmail, FILTER_VALIDATE_EMAIL)) {
-                $identifier = $user?->whatsapp ?? $user?->id ?? Str::slug($displayName) . '_' . time();
-                $payerEmail = 'cliente_' . preg_replace('/[^0-9a-z_]/', '', (string) $identifier) . '@limasstudiobarber.com';
-            }
-
-            MercadoPagoConfig::setAccessToken(config('services.mercadopago.token'));
-            $client = new PaymentClient();
-
-            $serviceLabel = $services->pluck('name')->join(', ');
-            $payment = $client->create([
-                'transaction_amount' => $amount,
-                'description'        => "Reserva Lima's Studio Barber: {$serviceLabel}",
-                'payment_method_id'  => 'pix',
-                'payer'              => [
-                    'email'      => $payerEmail,
-                    'first_name' => $firstName,
-                    'last_name'  => $lastName,
-                ],
-            ]);
-
-            if (! $payment->id) {
-                return redirect()->back()->with('error', 'Erro ao gerar pagamento no Mercado Pago.');
-            }
-
+            // Presencial já entra confirmado; pagamento pelo site fica pendente até o Pix ser aprovado
             $appointment = Appointment::create([
                 'user_id'        => $user?->id,
                 'client_name'    => $clientName,
                 'service_id'     => $services->first()->id,
                 'date'           => $request->date,
                 'time'           => $request->time,
-                'status'         => 'pending',
-                'deposit_amount' => $amount,
-                'payment_id'     => $payment->id,
-                'pix_code'       => $payment->point_of_interaction?->transaction_data?->qr_code,
-                'pix_qr_64'      => $payment->point_of_interaction?->transaction_data?->qr_code_base64,
+                'status'         => $online ? 'pending' : 'confirmed',
+                'payment_type'   => $request->payment_type,
+                'deposit_amount' => $online ? $amount : 0,
+                'coupon_code'    => $coupon?->code,
             ]);
 
             $appointment->services()->attach($request->service_ids);
+
+            if ($online) {
+                $displayName = $user ? $user->name : ($request->guest_name ?? 'Cliente');
+                // Muitos clientes não têm e-mail: o checkout da InfinitePay vai com o e-mail padrão da barbearia
+                // (pra pular a etapa "Contato"). Quem tem e-mail no cadastro recebe o comprovante no próprio.
+                $email = filter_var($user?->email, FILTER_VALIDATE_EMAIL) ? $user->email : config('services.infinitepay.email_padrao');
+
+                try {
+                    $paymentUrl = InfinitePay::createLink(
+                        $appointment,
+                        $amount,
+                        "Lima's Studio Barber: " . $services->pluck('name')->join(', '),
+                        [
+                            'name'         => $displayName,
+                            'email'        => $email,
+                            'phone_number' => $user?->whatsapp ? '+55' . $user->whatsapp : null,
+                        ],
+                        URL::signedRoute('appointments.retorno', $appointment),
+                    );
+                } catch (\Throwable $e) {
+                    // Sem link não tem como pagar: libera o horário
+                    $appointment->services()->detach();
+                    $appointment->forceDelete();
+                    throw $e;
+                }
+
+                $appointment->update(['payment_url' => $paymentUrl]);
+            }
 
             // Marca cupom como usado
             if ($coupon) {
@@ -257,29 +262,66 @@ class AppointmentController extends Controller
                 }
             }
 
-            $settings           = Setting::pluck('value', 'key');
-            $reviewCouponActive  = (bool) ($settings['review_coupon_active']  ?? true);
-            $reviewCouponPercent = (int)  ($settings['review_coupon_percent'] ?? 5);
+            // Redireciona (em vez de mostrar a tela no POST) pra um F5 não tentar agendar de novo
+            return redirect(URL::signedRoute('appointments.pagamento', $appointment));
 
-            return view('appointments.success', compact('appointment', 'reviewCouponActive', 'reviewCouponPercent'));
+        } catch (\Throwable $e) {
+            Log::error('Erro ao agendar: ' . $e->getMessage());
 
-        } catch (\Exception $e) {
-            $errorMsg = 'Erro ao processar pagamento.';
-
-            if (method_exists($e, 'getApiResponse') && $e->getApiResponse()) {
-                $content = $e->getApiResponse()->getContent();
-                Log::error('Erro Detalhado MP: ' . json_encode($content));
-                $errorMsg = $content['message']
-                    ?? $content['cause'][0]['description']
-                    ?? json_encode($content);
-            } else {
-                Log::error('Erro Geral MP: ' . $e->getMessage());
-                $errorMsg = $e->getMessage();
-            }
-
-            $final = config('app.debug') ? $errorMsg : 'Erro técnico ao processar transação.';
-            return redirect()->back()->with('error', 'Erro técnico: ' . $final);
+            $final = config('app.debug') ? $e->getMessage() : 'Tente novamente em instantes.';
+            return redirect()->back()->with('error', 'Erro ao processar o agendamento. ' . $final);
         }
+    }
+
+    /**
+     * TELA DO AGENDAMENTO: timer segurando a vaga + botão pro checkout da InfinitePay (pendente),
+     * ou horário confirmado. Link assinado, pra ninguém ver o agendamento dos outros trocando o número na URL.
+     */
+    public function pagamento(Appointment $appointment)
+    {
+        return $this->telaConfirmacao($appointment);
+    }
+
+    /**
+     * RETORNO DO CHECKOUT DA INFINITEPAY
+     * A InfinitePay devolve o cliente pra cá com order_nsu, transaction_nsu e slug na URL.
+     * Confere o pagamento na API antes de confirmar e manda pra tela do agendamento.
+     * Link assinado (ignorando os parâmetros que a InfinitePay acrescenta), senão daria pra abrir
+     * o agendamento de qualquer um trocando o número na URL.
+     */
+    public function retorno(Request $request, Appointment $appointment)
+    {
+        $paramsInfinitePay = ['receipt_url', 'order_nsu', 'slug', 'capture_method', 'transaction_nsu'];
+        abort_unless($request->hasValidSignatureWhileIgnoring($paramsInfinitePay), 403);
+
+        if ($request->filled(['transaction_nsu', 'slug']) && $request->order_nsu === InfinitePay::orderNsu($appointment)) {
+            try {
+                InfinitePay::confirmIfPaid($request->order_nsu, $request->transaction_nsu, $request->slug);
+            } catch (\Throwable $e) {
+                // O webhook ainda pode confirmar; a tela continua consultando o status
+                Log::warning("Retorno InfinitePay do agendamento {$appointment->id}: " . $e->getMessage());
+            }
+        }
+
+        return redirect(URL::signedRoute('appointments.pagamento', $appointment));
+    }
+
+    /**
+     * STATUS (consultado pela tela do agendamento a cada 3s): vira "confirmed" quando o webhook
+     * ou o retorno da InfinitePay confirmam o pagamento.
+     */
+    public function status(Appointment $appointment)
+    {
+        return response()->json(['status' => $appointment->status]);
+    }
+
+    private function telaConfirmacao(Appointment $appointment)
+    {
+        $settings            = Setting::pluck('value', 'key');
+        $reviewCouponActive  = (bool) ($settings['review_coupon_active']  ?? true);
+        $reviewCouponPercent = (int)  ($settings['review_coupon_percent'] ?? 5);
+
+        return view('appointments.success', compact('appointment', 'reviewCouponActive', 'reviewCouponPercent'));
     }
 
     /**

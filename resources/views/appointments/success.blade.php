@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagamento | Lima's Studio Barber</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-[#0A0A0A] text-white flex items-center justify-center min-h-screen p-6">
 
@@ -85,9 +85,23 @@
                 <span class="font-bold text-white">{{ $appointment->time }}</span>
             </div>
             <div class="flex justify-between items-center border-t border-zinc-800 pt-3 mt-1">
-                <span class="text-zinc-400 text-sm">Valor do PIX:</span>
-                <span class="font-black text-[#C9A84C] text-lg">R$ {{ number_format($appointment->deposit_amount, 2, ',', '.') }}</span>
+                <span class="text-zinc-400 text-sm">
+                    @if($appointment->payment_type === 'presencial')
+                        A pagar no dia:
+                    @elseif($appointment->payment_type === 'full')
+                        <span x-text="status === 'confirmed' ? 'Pago no site:' : 'Valor a pagar:'"></span>
+                    @else
+                        Valor do PIX:
+                    @endif
+                </span>
+                <span class="font-black text-[#C9A84C] text-lg">R$ {{ number_format($appointment->valor_total, 2, ',', '.') }}</span>
             </div>
+            @if($appointment->coupon_code)
+                <div class="flex justify-between items-center">
+                    <span class="text-zinc-400 text-sm">Cupom:</span>
+                    <span class="font-bold text-green-400 font-mono">{{ $appointment->coupon_code }}</span>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -100,37 +114,29 @@
                     <p class="text-yellow-500 font-black uppercase text-[10px] tracking-widest mb-1">Atenção — Tolerância de Atraso</p>
                     <p class="text-zinc-400 text-xs leading-relaxed">
                         O seu horário possui uma tolerância de <span class="text-white font-bold">15 minutos</span> de atraso.
-                        Após esse tempo, o horário poderá ser repassado e
-                        <span class="text-red-400 font-bold">o sinal não será devolvido</span>.
+                        Após esse tempo, o horário <span class="text-red-400 font-bold">poderá ser repassado</span>.
+                        Se não puder ir, avise com antecedência pelo WhatsApp.
                     </p>
                 </div>
             </div>
         </div>
     </template>
 
-    <!-- PIX (só quando pending) -->
+    <!-- PAGAR NA INFINITEPAY (só quando pending): o checkout já abre com nome, e-mail e telefone preenchidos -->
+    @if($appointment->payment_url)
     <template x-if="status === 'pending'">
-        <div class="border-t border-zinc-800 pt-6 mb-6">
-            <h4 class="text-[#C9A84C] font-bold text-xs uppercase mb-4 tracking-widest italic">Pague via PIX</h4>
-
-            <div class="bg-white p-3 rounded-xl inline-block mb-5 shadow-lg">
-                @if(isset($appointment->pix_qr_64))
-                    <img src="data:image/png;base64, {{ $appointment->pix_qr_64 }}" class="w-40 h-40">
-                @else
-                    <div class="w-40 h-40 flex items-center justify-center text-black text-[10px] font-bold">Gerando QR Code...</div>
-                @endif
-            </div>
-
-            <div x-data="{ copied: false }" class="relative">
-                <input type="text" readonly value="{{ $appointment->pix_code ?? 'Erro ao gerar código' }}"
-                       id="pixCode" class="w-full bg-black border border-zinc-800 text-zinc-500 text-[10px] p-4 pr-12 rounded-xl outline-none">
-                <button @click="navigator.clipboard.writeText(document.getElementById('pixCode').value); copied = true; setTimeout(() => copied = false, 2000)"
-                        type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-[#C9A84C]">
-                    <i class="fas" :class="copied ? 'fa-check text-green-500' : 'fa-copy'"></i>
-                </button>
-            </div>
+        <div class="border-t border-zinc-800 pt-6 mb-6 space-y-4">
+            <a href="{{ $appointment->payment_url }}"
+               class="flex items-center justify-center gap-3 w-full py-5 bg-[#C9A84C] text-black font-black uppercase rounded-2xl hover:bg-[#E2C97E] transition-all tracking-[0.2em] text-xs shadow-2xl shadow-[#C9A84C]/10">
+                <i class="fa-brands fa-pix text-base"></i> Pagar com Pix
+            </a>
+            <p class="text-zinc-500 text-[11px] leading-relaxed">
+                Você vai pra tela segura da <strong class="text-zinc-300">InfinitePay</strong> (também aceita cartão) com seus dados já preenchidos.
+                Depois de pagar, você volta pra cá e o horário aparece confirmado.
+            </p>
         </div>
     </template>
+    @endif
 
     <!-- SEÇÃO DE AVALIAÇÃO (só quando confirmed) -->
     <template x-if="status === 'confirmed'">

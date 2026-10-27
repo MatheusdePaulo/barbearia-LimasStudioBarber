@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 use App\Models\Service;
+use App\Models\Coupon;
 
 class Appointment extends Model
 {
@@ -19,8 +20,11 @@ class Appointment extends Model
         'date',
         'time',
         'status',
+        'payment_type',
         'deposit_amount',
         'payment_id',
+        'payment_url',
+        'coupon_code',
         'pix_code',
         'pix_qr_64',
     ];
@@ -60,6 +64,20 @@ class Appointment extends Model
             return $pivot->sum('duration');
         }
         return $this->service?->duration ?? 30;
+    }
+
+    // Valor total do agendamento: o que foi pago no site ou, no presencial, o que o cliente paga no dia (com cupom)
+    public function getValorTotalAttribute(): float
+    {
+        if ($this->payment_type !== 'presencial') {
+            return (float) $this->deposit_amount;
+        }
+        $total  = $this->services->sum(fn ($s) => (float) $s->active_price);
+        $coupon = $this->coupon_code ? Coupon::where('code', $this->coupon_code)->first() : null;
+        if ($coupon) {
+            $total = max(round($total * (1 - $coupon->discount_percent / 100), 2), 0.01);
+        }
+        return $total;
     }
 
     public function getWhatsAppLinkAttribute(): string
