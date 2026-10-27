@@ -4,17 +4,17 @@
     // com o fulano4 à esquerda e o fulano1 à direita. "flip" espelha a foto (o fulano5 olha pro outro lado).
     // "nome" e "texto" aparecem na parte de baixo do card.
     $blogItens = collect([
-        ['foto' => 'images/fulano4-depois.jpg', 'nome' => 'Degradê Social',
+        ['foto' => 'images/fulano4-depois.png', 'nome' => 'Degradê Social',
          'texto' => 'Laterais em degradê suave e topo mais cheio. Discreto e alinhado para o dia a dia.'],
-        ['foto' => 'images/fulano5-depois.jpg', 'flip' => true, 'nome' => 'Corte Italiano',
+        ['foto' => 'images/fulano5-depois.png', 'flip' => true, 'nome' => 'Corte Italiano',
          'texto' => 'Volume no topo penteado para trás, com acabamento natural. Elegância clássica com movimento.'],
-        ['foto' => 'images/fulano1-depois.jpg', 'nome' => 'Barba Desenhada',
+        ['foto' => 'images/fulano1-depois.png', 'nome' => 'Barba Desenhada',
          'texto' => 'Laterais baixas e barba alinhada com contorno marcado. Visual maduro e imponente.'],
-        ['foto' => 'images/fulano6-depois.jpg', 'nome' => 'Low Fade',
+        ['foto' => 'images/fulano6-depois.png', 'nome' => 'Low Fade',
          'texto' => 'Degradê baixo, rente à orelha, com topo médio. Moderno sem perder a sobriedade.'],
-        ['foto' => 'images/fulano2-depois.jpg', 'nome' => 'Topete Clássico',
+        ['foto' => 'images/fulano2-depois.png', 'nome' => 'Topete Clássico',
          'texto' => 'Topo com volume penteado para cima e laterais curtas. Um clássico que valoriza o rosto.'],
-        ['foto' => 'images/fulano3-depois.jpg', 'nome' => 'Risca Lateral',
+        ['foto' => 'images/fulano3-depois.png', 'nome' => 'Risca Lateral',
          'texto' => 'Risca marcada na navalha com degradê nas laterais. Acabamento preciso e estiloso.'],
     ])->map(fn ($item) => [
         'foto'  => asset($item['foto']),
@@ -194,7 +194,7 @@
                 @php
                     $cortes = [
                         [
-                            'foto'     => 'images/fulano4-depois.jpg',
+                            'foto'     => 'images/fulano4-depois.png',
                             'moldura'  => 'images/Rectangle-esquerda-blog.png',
                             // máscara preenchida (gerada a partir da moldura, via flood-fill)
                             // usada para recortar a foto exatamente no contorno da moldura
@@ -204,7 +204,7 @@
                             'mt'       => '15px',
                         ],
                         [
-                            'foto'     => 'images/fulano5-depois.jpg',
+                            'foto'     => 'images/fulano5-depois.png',
                             'moldura'  => 'images/Rectangle-centro-blog.png',
                             'mask'     => 'images/rectangle-centro-blog-mask.png',
                             'w'        => '270px',
@@ -214,7 +214,7 @@
                             'centro'   => true,
                         ],
                         [
-                            'foto'     => 'images/fulano1-depois.jpg',
+                            'foto'     => 'images/fulano1-depois.png',
                             'moldura'  => 'images/Rectangle-direita-blog.png',
                             'mask'     => 'images/rectangle-direita-blog-mask.png',
                             'w'        => '230px',
