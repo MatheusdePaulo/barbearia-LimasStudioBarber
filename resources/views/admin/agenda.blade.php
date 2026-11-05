@@ -31,7 +31,12 @@
         input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
         .row-finished { opacity: 0.3; filter: grayscale(1); }
  
-        .day-closed { color: #3f3f46 !important; text-decoration: line-through; cursor: not-allowed !important; }
+        .day-closed { color: #a1a1aa !important; text-decoration: line-through; cursor: not-allowed !important; }
+
+        /* Números do calendário: mais grossos e claros para enxergar bem no fundo escuro */
+        .cal-dia { font-size: 13px; font-weight: 800; color: #ffffff; }
+        .cal-dia-fechado { color: #f87171; text-decoration: line-through; }
+        .cal-dia-selecionado, .cal-dia-selecionado.day-closed { color: #000000 !important; font-weight: 900; }
     </style>
  
     <div class="flex flex-col main-container bg-[#0A0A0A] text-white">
@@ -142,10 +147,10 @@
                                 $fechadoPermanente = ($diaSemana === 0);
                             @endphp
                             <span @if(!$fechadoPermanente) onclick="window.location.href='?date={{ $dataIteracao->format('Y-m-d') }}'" @endif
-                            class="flex items-center justify-center text-[10px] w-7 h-7 rounded-lg transition-all
-                                  {{ $fechadoPermanente ? 'day-closed opacity-20' : 'cursor-pointer hover:bg-zinc-800' }}
-                                  {{ ($fechado && !$fechadoPermanente) ? 'text-red-500/60 line-through' : '' }}
-                                  {{ $ehHojeNoCalendario ? 'bg-[#C9A84C] text-black font-black shadow-lg' : ($fechadoPermanente ? '' : 'text-zinc-600') }}">
+                            class="cal-dia flex items-center justify-center w-7 h-7 rounded-lg transition-all
+                                  {{ $fechadoPermanente ? 'day-closed' : 'cursor-pointer hover:bg-zinc-800' }}
+                                  {{ ($fechado && !$fechadoPermanente) ? 'cal-dia-fechado' : '' }}
+                                  {{ $ehHojeNoCalendario ? 'cal-dia-selecionado bg-[#C9A84C] shadow-lg' : '' }}">
                                 {{ $dia }}
                             </span>
                         @endfor
