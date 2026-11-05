@@ -36,6 +36,7 @@
         /* Números do calendário: mais grossos e claros para enxergar bem no fundo escuro */
         .cal-dia { font-size: 13px; font-weight: 800; color: #ffffff; }
         .cal-dia-fechado { color: #f87171; text-decoration: line-through; }
+        .cal-semana { color: #d4d4d8; }
         .cal-dia-selecionado, .cal-dia-selecionado.day-closed { color: #000000 !important; font-weight: 900; }
     </style>
  
@@ -124,7 +125,7 @@
                     </div>
                     <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center;">
                         @foreach(['D', 'S', 'T', 'Q', 'Q', 'S', 'S'] as $diaSemana)
-                            <span class="text-[9px] font-black text-zinc-700 uppercase mb-2">{{ $diaSemana }}</span>
+                            <span class="cal-semana text-[9px] font-black uppercase mb-2">{{ $diaSemana }}</span>
                         @endforeach
  
                         @php
